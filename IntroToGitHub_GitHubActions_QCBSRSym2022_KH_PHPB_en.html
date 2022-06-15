@@ -14,10 +14,18 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # Introduction to GitHub and GitHub Actions
+]
+.author[
 ### <b>Pedro Henrique P. Braga</b> (Concordia University) <br><b>Katherine Hébert</b> (Université de Sherbrooke)<br><br>
+]
+.institute[
 ### 4th QCBS R Symposium<br>QCBS R Workshop Series <br>
+]
+.date[
 ### 2022-06-15<br> <span class="footnote"> Use arrow keys to navigate. Press <code>H</code> for help. </span>
+]
 
 ---
 
@@ -26,7 +34,7 @@ class: center, middle, inverse, title-slide
 
 class: middle
 
-## 1. Introduction to [Git]() and [GitHub](github.com)
+## 1. Brief introduction to [Git]() and [GitHub](github.com)
 
 ### a. What is GitHub and why should I use it?
 ### b. How can GitHub make research more open and collaborative?
@@ -39,111 +47,127 @@ class: middle
 ---
 class: center, middle
 
-### Why should I learn this?
+## Why should I learn this?
 
 ---
 class: inverse
-#### RMarkdown has the potential to facilitate scientific workflow
+### GitHub &amp; GitHub Actions are powerful tools for collaboration and open science
 
-**RMarkdown** documents allow you to combine your “data, code, and narrative” in a single file. Each of the components of your project can be tied together and easily re-run when data are updated or changes need to be made to other steps in the research workflow.
+GitHub is increasingly used by researchers as a tool to work on their research in an __open__ and __reproducible__ way. Like our science, GitHub is especially powerful in __collaborative__ contexts. 
 
+Today's workshop will discuss:
+
+- How GitHub can help you do open, transparent, and collaborative science
+- How automating tasks can improve your workflow
+- How to use GitHub Actions to automate some common tasks in research, to keep your work up to date as you (and your collaborators) contribute to a project
+  - Checking that code or documents work on a different system than your local computer
+  - Performing analyses and making visualizations  
+  - Rendering and deploying documents (presentations, webpages, Shiny apps) 
+- How to troubleshoot GitHub Actions when they don't work!
+
+&gt; _.small[Today, we will spend less time on _how to use GitHub_ - but don't worry! There are many resources available freely online to learn about GitHub (e.g. [Happy Git and GitHub for the useR](https://happygitwithr.com/) by Jennifer Bryan). ]_
+
+---
+class: inverse
+### A brief introduction to GitHub 
+
+**GitHub** allows you to manage documents and code in a __transparent, collaborative, and traceable way__.
 
 .pull-left[
-##### Project conception
+#### Version Control
 
-You can maintain a project notebook to track the development of your projets, which can be come very useful on to track history and progress of a project.
+GitHub keeps tracks of the _changes_ you make to your documents, and allows you to flip back to previous versions if you need to.
 
-##### Reproducible and collaborative research 
+#### Transparent &amp; Open
 
-It facilitates reproducible research (irreproducibility costs money), and a collaborative workflow (e.g., by integrating it with GitHub).
+You can work privately, but GitHub also allows you to open your repository (i.e. project folder) to the public. You can choose a [license](https://choosealicense.com/) to control how your documents can be used by others. 
 ]
+
 .pull-right[
-##### Publication
+#### Collaborative Workflow
 
-Most scientific journals accept `TeX` submissions, and `RMarkdown` has advanced article publication tools (such as `rticles` for manuscripts, and `bookdown` for books).
+Features like branching, issues, and pull requests help to coordinate collaborations dynamically, so you can keep track of all contributions to a project in one place.
 
-##### Blogs
+#### Automating Tasks 🌟
 
-Many blogging platforms support `markdown`. You can also use `blogdown` to create your own blog.
+GitHub Actions automate tasks like code checks, document rendering, deploying webpages, and more. This becomes powerful quickly, particularly when you need to continuously integrate contributions to your project. 
 ]
 
-.onfire[**Caution**: I am not telling you that you should concentrate **everything** within R and RMarkdown.]
+???
+
+Actions can also protect your project, by ensuring that changes are only integrated if they pass certain checks.
 
 ---
 class: center, middle
 
-# Part I: A brief background to `Markdown`
+# GitHub in biodiversity research
+
+GitHub is becoming popular among researchers in biodiversity but it is still not widely adopted.
+
+------
+
+## Q: Do you use GitHub for your research?
+
+Have you encountered obstacles when learning how to use it? &lt;br&gt;
+What are some reasons you would recommend it to others? &lt;br&gt;
+Why do you think it is not widely adopted in biodiversity research?
+
+---
+class: center, middle
+
+# Part I: A brief introduction to `GitHub`
 
 ---
 
-## What is Markdown?
+## How GitHub works (in a nutshell)
 
-**Markdown** is a light-weight **markup** language that one can use to add formatting elements to plain-text documents.
+repositories, files, directories, commits, pushes, pull requests, commit history, authors, cloning, and checkout. 
 
-It is different from **WYSIWYG**-like editors, such as Microsoft Word, Google Docs or Open Office.
-
-&gt; **WYSIWYG** (/ˈwɪziwɪɡ/ WIZ-ee-wig) stands for **W**hat **Y**ou **S**ee **I**s **W**hat **Y**ou **G**et and implies a user-interface that allows one to view something very similar to the end result — while the document is being created.
-
-Instead of clicking buttons to format words and phrases, you have to add Markdown syntax (mostly, punctuation characters) to see the same changes in the text. For instance, here is how part of this slide looks like in Markdown:
-
-````
-# What is Markdown?
-
-**Markdown** is a light-weight **markup** language that one can use to add formatting 
-elements to plain-text documents.
-
-&gt; **WYSIWYG** (_/ˈwɪziwɪɡ/ WIZ-ee-wig_) stands for **W**hat **Y**ou **S**ee **I**s
-W**hat **Y**ou **G**et and implies a user-interface that allows one to view something 
-very similar to the end result — while the document is being created.
-```` 
 ---
-## How does Markdown work?
+## Exercise: Set up a GitHub repository
+
+[Link to webpage with exercise]
 
 .pull-left[
-We can summarize how Markdown works in two processes:
+### If you are new to GitHub:
 
-1. When you write and export a Markdown document, the text is stored in a plaintext file that has an `.md` or `.markdown` extension;
+1. Create a GitHub account.
+2. Install GitHub Desktop.
+2. Create a repo.
+3. Commit a change and push to web.
 
-2. A **Markdown application** processes it using a **parser** and  renders an output in a desired format, _e.g._ `.html`, `.pdf`, `.pptx`, `.tex`, and many other options.
-
-Many websites and programming languages support and developed Markdown parsers or libraries:  Moodle, Slack, Reddit, GitHub, WordPress, StackExchange, and many other websites and applications.
 ]
 
 .pull-right[
-![a](imgs/process.png)
+### If you already use GitHub:
+
+1. Create a repo.
+2. Commit a change and push to web.
 ]
+
 
 ---
-### A short tale on Markdown
+class: center, middle
 
-**Markdown** was conceived as a **text-to-HTML converter** (by Mark Gruber, in 2004), to make it easy to read, write and edit webpages (`HTML` and `LaTeX` can be tedious and unreadable!).
-
-.pull-left[
-Some text in Markdown:
-```` 
- * Bird
- * Magic
-````
-]
-
-.pull-right[
-This is how that was converted to HTML:
-````
-&lt;ul&gt;
-&lt;li&gt;Bird&lt;/li&gt;
-&lt;li&gt;Magic&lt;/li&gt;
-&lt;/ul&gt;
-````
-]
-
-`Markdown` was deeply improved when **pandoc** - *an open source tool for broad-scale document conversion* - was released (by John MacFarlane; UC Berkley), providing a greater range of possibilities and a more enriched `Markdown` version for users.
-
-In the meanwhile, users were already creating dynamic and *somewhat* reproducible reports in `R` using `Sweave`.
-
-The `knitr` package was designed to be a transparent engine for dynamic report generation with `R`, solve some long-standing problems in Sweave and combine features in other add-on packages into one package.
+# Part 2: Introduction to `GitHub Actions`
 
 ---
-### `RMarkdown` (`.Rmd`) in a nutshell
+class: center, middle
+
+# Discussion
+
+----
+## What are some examples of some research tasks you would like to automate?
+
+???
+
+Changing data collected in the second season in the field and automatically updating documents and analyses;
+Automated literature mining ?;
+Automated website and presentation generation?
+
+---
+
+## GitHub Actions workflows
 
 `R` **Markdown** stands on the shoulders of `knitr` and `pandoc`.
 
@@ -799,6 +823,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable
