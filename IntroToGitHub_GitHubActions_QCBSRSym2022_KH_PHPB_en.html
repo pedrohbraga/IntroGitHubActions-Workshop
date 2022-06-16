@@ -24,7 +24,7 @@ class: center, middle, inverse, title-slide
 ### 4th QCBS R Symposium<br>QCBS R Workshop Series <br>
 ]
 .date[
-### 2022-06-15<br> <span class="footnote"> Use arrow keys to navigate. Press <code>H</code> for help. </span>
+### 2022-06-16<br> <span class="footnote"> Use arrow keys to navigate. Press <code>H</code> for help. </span>
 ]
 
 ---
@@ -57,13 +57,16 @@ GitHub is increasingly used by researchers as a tool to work on their research i
 
 Today's workshop will discuss:
 
-- How GitHub can help you do open, transparent, and collaborative science
-- How automating tasks can improve your workflow
+- How GitHub can help you do open, transparent, and collaborative science (_briefly_)
+
 - How to use GitHub Actions to automate some common tasks in research, to keep your work up to date as you (and your collaborators) contribute to a project
-  - Checking that code or documents work on a different system than your local computer
-  - Performing analyses and making visualizations  
-  - Rendering and deploying documents (presentations, webpages, Shiny apps) 
-- How to troubleshoot GitHub Actions when they don't work!
+  - **Code checking** on a different system than your local computer
+  - **Performing** analyses and making visualizations  
+  - **Rendering** and __deploying__ documents (presentations, webpages, Shiny apps) 
+  
+- How to __troubleshoot__ GitHub Actions when they don't work!
+
+???
 
 &gt; _.small[Today, we will spend less time on _how to use GitHub_ - but don't worry! There are many resources available freely online to learn about GitHub (e.g. [Happy Git and GitHub for the useR](https://happygitwithr.com/) by Jennifer Bryan). ]_
 
@@ -100,13 +103,9 @@ Actions can also protect your project, by ensuring that changes are only integra
 ---
 class: center, middle
 
-# GitHub in biodiversity research
+## Q: Do you use GitHub for your research?
 
 GitHub is becoming popular among researchers in biodiversity but it is still not widely adopted.
-
-------
-
-## Q: Do you use GitHub for your research?
 
 Have you encountered obstacles when learning how to use it? &lt;br&gt;
 What are some reasons you would recommend it to others? &lt;br&gt;
@@ -118,13 +117,79 @@ class: center, middle
 # Part I: A brief introduction to `GitHub`
 
 ---
-
 ## How GitHub works (in a nutshell)
 
+__Git__ is an open source version-control system.
+
+__GitHub__ is a platform for hosting and collaborating on Git repositories.
+
+You can think of Git as a tool that allows you to _track the changes_ you make in your documents on your local computer, and apply them to the same documents that are hosted in a _repository_ on GitHub. 
+
+Git also allows you to apply any changes that have been made on the GitHub repository (also called the _remote_) to the documents on your local computer.
+
+---
+class: center, middle
+
+## The GitHub workflow: A basic example
+
+---
+### Step 1: Setting up a repository
+
+![](imgs/1.png){width=50%}
+
+Let's say you have some project folder on your local computer that you want to publish as a repository on GitHub.
+
+Note: A repository can be set up in several ways. You can also _clone_ a repository from GitHub to your local computer. 
+
+???
+
 repositories, files, directories, commits, pushes, pull requests, commit history, authors, cloning, and checkout. 
+From GitHub Docs:
+git: an open source, distributed version-control system
+GitHub: a platform for hosting and collaborating on Git repositories
+commit: a Git object, a snapshot of your entire repository compressed into a SHA
+branch: a lightweight movable pointer to a commit
+clone: a local version of a repository, including all commits and branches
+remote: a common repository on GitHub that all team member use to exchange their changes
+fork: a copy of a repository on GitHub owned by a different user
+pull request: a place to compare and discuss the differences introduced on a branch with reviews, comments, integrated
+tests, and more
+
+---
+### Step 2: Pull the _remote_ repository to your local computer.
+
+![](imgs/2.png){width=50%}
+
+This ensures that the documents on your local computer match up with the versions on the _remote_ repository on GitHub.
+
+---
+### Step 3: _Commit_ changes to your local documents.
+
+![](imgs/3.png)
+
+Let's say you need to edit your R script on your local computer. When you save your changes, Git will track them. More specifically, Git tracks the _addition_ and _deletion_ of any characters in your file. 
+
+When you are ready to confirm this new version of your document, you stage and _commit_ your changes.
+
+---
+### Step 4: Push your committed changes to the _remote_ repository.
+
+![](imgs/4.png)
+
+This _pushes_ your local changes to the remote repository.
+
+Note: You can flip back and forth between these _commits_ to work on different versions of your documents. That means you don't have to keep saving files with ever-increasing file names (e.g. Final_draft_May2022_comments_June2022_finaledits.pdf).
+
+---
+
+## A basic _collaborative_ GitHub workflow
+
+to do: same workflow diagrams, but with branches and pull requests
 
 ---
 ## Exercise: Set up a GitHub repository
+
+Let's make a repository that we will use to play with GitHub Actions later in this workshop!
 
 [Link to webpage with exercise]
 
@@ -133,7 +198,7 @@ repositories, files, directories, commits, pushes, pull requests, commit history
 
 1. Create a GitHub account.
 2. Install GitHub Desktop.
-2. Create a repo.
+2. Create a repository.
 3. Commit a change and push to web.
 
 ]
@@ -141,7 +206,7 @@ repositories, files, directories, commits, pushes, pull requests, commit history
 .pull-right[
 ### If you already use GitHub:
 
-1. Create a repo.
+1. Create a repository.
 2. Commit a change and push to web.
 ]
 
@@ -169,607 +234,6 @@ Automated website and presentation generation?
 
 ## GitHub Actions workflows
 
-`R` **Markdown** stands on the shoulders of `knitr` and `pandoc`.
-
-![A diagram illustrating how an R Markdown document is converted to the final output document.](imgs/workflow.png)
-
----
-## Getting started with `RMarkdown`
-
-**RStudio** already comes with stable and recent versions of `rmarkdown` and `pandoc`. You do not need to install or load them. But, if you want to use `rmarkdown` outside RStudio, you can install it:
-
-```
-install.packages("rmarkdown")
-```
-
-This is the easiest way to make a new R Markdown document: go to *File &gt; New File &gt; R Markdown*.
-
-
-If you would like to produce `.pdf` reports, you will need a LaTeX compiler. You can try `tinytex`:
-
-```
-install.packages('tinytex')
-
-tinytex::install_tinytex()
-```
-&lt;br&gt; 
-
-.center[Now that we are all set, let us take a look at the components of a `RMarkdown` document.]
-
----
-## Structure of a RMarkdown document (`.Rmd`)
-
-.pull-left[
-A RMarkdown document usually looks like this:
-1. An YAML (originally, **Y**et **A**nother **M**arkup **L**anguage) header, surrounded by `---`; 
-2. The body of the document containing prose in `Markdown` formatting; and,
-3. Code chunks, delimited by ` ``` `.
-]
-.pull-right[
-
-
-
-````markdown
----
-title: "Hello R Markdown"
-author: "Awesome Me"
-date: "2018-02-14"
-output: html_document
----
-
-This is a paragraph in an R Markdown 
-document. Below is a code chunk:
-
-```{r}
-fit = lm(dist ~ speed, data = cars)
-b   = coef(fit)
-plot(cars)
-abline(fit)
-```
-
-The regression's slope is `r b[1]`.
-
-````
-]
----
-### YAML (YAML Ain’t Markup Language)
-
-The YAML (originally, *Yet Another Markup Language*) header (or metadata) is very important in determining the outcome of your document. By modifying it, you can change, for example:
-
-.pull-left[
-1. The **title** and the **subtitle** of your document;
-2. The **author** information;
-3. The **date**; and,
-4. The type, the template and other characteristics of the **output** document (_e.g._, `html_document`, `pdf_document`, `word_document`).
-]
-.pull-right[
-````markdown
- ---
-title: "Hello R Markdown"
-subtitle: "My first document"
-author: "Awesome Me"
-date: "2018-02-14"
-output: 
- html_document:
-  toc: true
- ---
-````
-]
-
-
-The YAML metadata depends on the template you are using, causing some YAML fields to not work in some templates.
-
-&gt; For instance, defining `latex_engine: xelatex` only works if your `output` is `pdf_document`. Many templates do not include a table of content, _i.e._ defining  `toc: true` and `toc_depth: 2` will not change your document.
-
-You will find the YAML information in the guide of your template of interest.
-
----
-### Body of the document: Markdown syntax
-
-The text in an RMarkdown document is written in **pandoc**'s `Markdown` syntax.
-
-I recommend that you read [**pandoc**'s `Markdown` manual](https://pandoc.org/MANUAL.html) and the [Definitive Guide to RMarkdown](https://bookdown.org/yihui/rmarkdown/) to know more about the possibilities we have. Here are a few  examples:
-
-.pull-left[
-* `_text_` or `*text*` makes your text *italic*;
-* `**text**` makes it **bold**;
-* Inline code is delimited by a pair of backticks ` `hello` `, while code blocks are determined by three pairs of backticks ``` ``` ``` ````;
-* Hyperlinks work as `[text](link)`, _e.g._, [RStudio](https://www.rstudio.com).
-]
-
-.pull-right[
-* Dolar signs (`$`) translate LaTeX equations, *e.g.*, `$f(k) = {n \choose k} p^{k} (1-p)^{n-k}$` gives us `$$f(k) = {n \choose k} p^{k} (1-p)^{n-k}$$`
-* A caret followed by brackets determine footnotes `^[]`, _e.g._, `^[This is a footnote.]`.footnote[&lt;sup&gt;1&lt;/sup&gt;This is a footnote.].&lt;sup&gt;1&lt;/sup&gt;
-
-]
-
-You can also use a [cheatsheet](https://rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf) as quick-reference guide! 
-
----
-### Body of the document: Figures
-
-You can also include figures from your directories (or from the Internet) within your `RMarkdown` document using `![caption](figure_directory.extension)`.
-
-.center[![caption](https://kembellab.ca/wp-content/uploads/2014/10/assembly_figC.jpg)]
-
----
-### Code chunks and inline `R` code
-
-As you have seen, code can be written using backticks. A code chunk usually starts with ` ```{} and ends with ``` `. 
-
-You can also write inline code using one backtick, instead of three, _e.g._ ` `pi * x^2` `.
-
-You can also control the behaviour of the code you write! 
-
-.center[*Do you want it to be executed? Do you want to show both the code and the output or just the output? Do you want it to be displayed? Do you want to resize the output?*]
-
-.pull-left[
-````markdown
-```{r}
-x &lt;- 5  # radius of a circle
-```
-For a circle with the radius `r x`,
-its area is `r pi * x^2`.
-````
-]
-
-.pull-right[
-
-```r
-x &lt;- 5  # radius of a circle
-```
-
-For a circle with the radius 5, its area is 78.5398163.
-]
-
----
-## Code chunks and inline `R` code
-
-You can also create a code chunk using the `Insert` button or using the keyboard shortcut `Ctrl + Alt + I` (or `Cmd + Option + I` on macOS).
-
-Code chunks have their own arguments, which are determined within `knitr`. The first argument determines the language of the code block (in this case, `r`), and the following ones determine the chunk's behaviour.
-
-.pull-left[
-For instance the one below implies that the figure height is set to four inches and that we are hiding the text output of the code chunk.
-
-````markdown
-```{r, chunk-label, results='hide', fig.height=4}
-```
-````
-]
-
-.pull-right[
-In the following one, we are echoing the source code in the output document. If you set it to `FALSE`, only the output of the code chunk will be shown.
-
-````markdown
-```{r, chunk-label-2, echo = TRUE}
-```
-````
-]
-
-.shout[Note that code chunks must have different labels within the same document. Also, exercise using informative chunk labels. We'll get into that soon!]
-
----
-### Code chunks and inline `R` code: other languages and engines
-
-R Markdown supports (through `knitr`) many other languages, such as Python, Julia, C++, and SQL. 
-
-.pull-left[
-
-The chunk below uses the `python` engine:
-
-```python
-x = 'hello, python world!'
-print(x.split(' '))
-```
-
-Or, in `Rcpp`:
-
-```cpp
-#include &lt;iostream&gt;
-using namespace std;
-
-int main() {
-  cout &lt;&lt; "Hello World!" &lt;&lt; endl;
-  return 0;
-}
-```
-]
-
-.pull-right[
-You can also work in one language and use its output within R!
-
-Let's use the `stan` engine to create a `stanmodel` object in one chunk and represent it in another `R` chunk:
-
-
-```stan
-parameters {
-  real y[2];
-}
-model {
-  y[1] ~ normal(0, 1);
-  y[2] ~ double_exponential(0, 2);
-}
-```
-
-
-```r
-rstan::sampling(ex1)
-```
-]
-
-&gt; Run `names(knitr::knit_engines$get())` to list the names of all available engines.
-
----
-### Code chunks and inline `R` code: Options
-
-The many chunk options in `knitr` are documented at https://yihui.name/knitr/options. Here are a few of them:
-
-.pull-left[
-`eval`: whether to evaluate a code chunk.
-
-`echo`: whether to echo the source code in the output document.
-
-`results`: whether to hide or show the results as-is.
-
-`warning`, `message`, and `error`: whether to show warnings, messages, and errors in the output document.
-
-`cache`: whether to evaluate the code block everytime the document is compiled.
-]
-
-.pull-right[
-
-`fig.width` and `fig.height`, or `fig.dim`: to define the (graphical device) size of R plots in inches.
-
-`fig.align`: `left`, `center`, or `right` align the figure.
-
-`fig.cap`: to define a figure caption in a string.
-
-`dev`: to define the graphical device to record R plots (default: 'pdf' for LaTeX output, and 'png' for HTML output)
-
-`...` and many other options.
-]
-
----
-### Code chunks and inline `R` code: Global settings
-
-If a certain option needs to be frequently set to a value in multiple code chunks, you can set it globally in the first code chunk of your document, *e.g.*:
-
-````markdown
-```{r, setup, include=FALSE}
-knitr::opts_chunk$set(fig.width = 8, collapse = TRUE)
-```
-````
-
-I also prefer to include all packages that I am loading within the setup chunk, _e.g._:
-
-````markdown
-```{r setup, include=FALSE}
-options(htmltools.dir.version = FALSE)
-
-# Include packages to be loaded below here:
-library(knitr)    # For knitting document and include_graphics function
-library(ggplot2)  # For plotting
-library(sf)
-library(png)      # For grabbing the dimensions of png files
-```
-````
-.shout[Note: `RMarkdown` documents work as "self-contained" sessions, in a way that you need to include needed libraries and objects in your document, *i.e.* you cannot fetch them from your `R` environment.]
----
-### Code chunks and inline `R` code: Figures and Tables
-
-.pull-left[
-By default, figures produced by `R` code will be placed immediately after the code chunk they were generated from. For example:
-````markdown
-```{r mtcars-drat-qsec-plot, echo = TRUE,  fig.align = "center", out.width='50%', include=TRUE}
-ggplot(mtcars, aes(drat, qsec)) +
-  geom_point() +
-  theme_classic()
-```
-````
-&lt;img src="IntroToGitHub_GitHubActions_QCBSRSym2022_KH_PHPB_en_files/figure-html/mtcars-drat-qsec-plot-1.jpeg" width="50%" style="display: block; margin: auto;" /&gt;
-]
-
-.pull-right[
-And, you can use both `kable` and `kableExtra` to output tables after the code chunks:
-````markdown
-```{r tables-mtcars}
-knitr::kable(iris[1:5, ], caption = 'A caption')
-```
-````
-
-
-Table: A caption
-
-| Sepal.Length| Sepal.Width| Petal.Length| Petal.Width|Species |
-|------------:|-----------:|------------:|-----------:|:-------|
-|          5.1|         3.5|          1.4|         0.2|setosa  |
-|          4.9|         3.0|          1.4|         0.2|setosa  |
-|          4.7|         3.2|          1.3|         0.2|setosa  |
-|          4.6|         3.1|          1.5|         0.2|setosa  |
-|          5.0|         3.6|          1.4|         0.2|setosa  |
-]
-
-
----
-class: middle
-
-### We have just covered the basics of Markdown and RMarkdown!
-
-### Now, let's work on a few RMarkdown documents!
-
----
-class: middle
-
-### Let's start by:
-
-1. Creating a `RMarkdown` document (*File &gt; New File &gt; R Markdown document*);
-2. Knitting (or rendering) it; and,
-3. Changing its template.
-
----
-## `RMarkdown` templates
-
-There are many templates for `RMarkdown` documents:
-
-* `rmdformats` 
-* `prettydocs`
-* `tufte`
-
-As well as extensions to write articles, books and blogs:
-
-* `rticles`
-* `bookdown`
-* `blogdown`
-
----
-
-## Creating manuscripts with `rticles`
-
-You can install and use rticles from `CRAN` as follows:
-
-```
-install.packages("rticles")
-```
-
-In a nutshell, `rticles` contain `LaTeX` templates that conform precisely to submission standards. At the same time, one can write the manuscript in `markdown` syntax, `R` code and seamless `knit` a submission-ready manuscript. 
-
-.pull-left[
-You can obtain the current implemented templates using `getNamespaceExports("rticles")`. Here are the first 15:
-]
-
-.pull-right[
-
-```
-##  [1] "ctex_article"           "bioinformatics_article" "glossa_article"        
-##  [4] "sage_article"           "ieee_article"           "oup_article"           
-##  [7] "plos_article"           "sim_article"            "copernicus_article"    
-## [10] "tf_article"             "springer_article"       "biometrics_article"    
-## [13] "amq_article"            "peerj_article"          "rss_article"
-```
-]
-
-&lt;br&gt; 
-To use `rticles` outside of RStudio, you can create manuscripts using `rmarkdown::draft()`
-
-``` 
-rmarkdown::draft("MyJSSArticle.Rmd", template = "jss_article", package = "rticles")
-rmarkdown::draft("MyRJournalArticle", template = "rjournal_article", package = "rticles")
-```
-
----
-## Creating manuscripts with `rticles`
-
-`rticles` templates have an extended YAML, which allows you to specify details on your paper. For instance, this is the `Springer` one:
-.pull-left[
-````markdown
-title: Title here
-subtitle: Do you have a subtitle? If so, write it here
-titlerunning: Short form of title
-authorrunning:
-  Short form of author list if too long for running head
-thanks: |
-  Grants or other notes about the article that should go
-  on the front page should be placed here. General
-  acknowledgments should be placed at the end.
-authors:
-  - name: Author 1
-    address: Department of YYY, University of XXX
-    email: abc@def
-  - name: Author 2
-    address: Department of ZZZ, University of WWW
-    email: djf@wef
-keywords:
-  - key
-  - dictionary
-  - word
-````
-]
-
-.pull-right[
-````markdown
-MSC:
-  - MSC code 1
-  - MSC code 2    
-abstract: |
-  The text of your abstract.  150 -- 250 words.
-bibliography: bibliography.bib
-output: 
-  rticles::springer_article
-````
-]
-
----
-### Writing very long RMarkdown documents can be a problem
-
-.pull-left[
-Tip #1: You can either adopt "mother- and child-RMarkdown documents":
-]
-
-.pull-right[
-```
-/
-data/ – where I save my raw data
-  output/ – where I save my analysis and plot
-  RMarkdown/ – save all Rmd scripts here
-    main_analysis_file.Rmd [mother]
-    analysis-part1.Rmd [child]
-    analysis-part2.Rmd [child]
-    analysis-part3.Rmd [child]
-    analysis-part4.Rmd [child]
-  functions/ – save functions here
-```
-]
-
-.pull-left[
-Tip #2: Use [`bookdown`](https://github.com/rstudio/bookdown):
-
-]
-
-.pull-right[
-````markdown
-index.Rmd
-01-intro.Rmd
-02-literature.Rmd
-03-method.Rmd
-04-application.Rmd
-05-summary.Rmd
-````
-
-]
-
----
-### A few advantages and disadvantages (in my opinion):
-.pull-left[
-#### Advantages
-
-`rmarkdown` helps you create dynamic analysis documents that combine code, rendered output (such as figures), and prose. You can use its rendered content to:
-
-1. Do data science interactively (within the RStudio IDE);
-1. Reproduce your analyses;
-1. Collaborate and share code with others; and
-1. Communicate your results to others.
-
-]
-
-.pull-right[
-
-#### Disadvantages
-
-1. Getting your collaborative network to work on `RMarkdown` can be challenging. Someone not willing to work with it can translate into extra work to you;
-
-2. There is now a grammatical proofreading implementation within `RStudio` and `RMarkdown`. Nevertheless, it does not seem to work very well. A potential strategy still involves *Exporting* or *Pasting* the manuscript to an application that has better proofreading (such as Word).
-
-3. *And, how about you? What are your thoughts about this?*.
-
-]
-
----
-
-### Other applications: websites with `blogdown`
-
-I have built my website using `blogdown` and `Hugo`. I embeded it below, but you should check other examples.
-
-
-```r
-knitr::include_url("https://pedrohbraga.github.io/")
-```
-
-&lt;iframe src="https://pedrohbraga.github.io/" width="100%" height="400px" data-external="1"&gt;&lt;/iframe&gt;
-
----
-### Building your own CV
-
-Using the `vitae` package:
-
-```r
-knitr::include_graphics("https://jooyoungseo.com/jy_CV/JooYoung_Seo_CV.pdf")
-```
-
-![](https://jooyoungseo.com/jy_CV/JooYoung_Seo_CV.pdf)&lt;!-- --&gt;
-
-Using a `LaTeX` template (in this case, [friggeri](https://www.overleaf.com/latex/templates/friggeri-cv-template/hmnchbfmjgqh)):
-
-```r
-knitr::include_graphics("https://github.com/pedrohbraga/my-curriculum-vitae-friggeri/raw/master/braga_php-cv.pdf")
-```
-
-![](https://github.com/pedrohbraga/my-curriculum-vitae-friggeri/raw/master/braga_php-cv.pdf)&lt;!-- --&gt;
-
----
-
-## What about avoiding issues?
-
-In the first place, I recommend the following: 
-
-1. Develop code in chunks and execute the chunks until they work, then move on;
-2. `knit` the document regularly to check for errors.
-
-.pull-left[
-Error messages usually are informative:
-
-````markdown
-```{r title-one}
-```
-````
-
-````markdown
-```{r title-one}
-```
-````
-]
-
-.pull-right[
-R Markdown output:
-
-```
-processing file: common-problems.Rmd
-Error in parse_block(g[-1], g[1], params.src) : 
-  duplicate label 'title-one'
-```
-]
-
-.pull-down[.onfire[Tip: Having adequate chunk labels help tracking errors.]]
-
----
-# Advanced customization
-
-Many `RMarkdown` packages were originally designed to have some flexibility in terms of customization, meaning that if you know CSS, HTML and LaTeX, you should be able to freely customize the style of your document.
-
-This presentation has a modified CSS theme (`phpb-theme.css`):
-
-````markdown
-output:
-  xaringan::moon_reader:
-    css: ["default",  "css/phpb-theme.css"]
-````
-
-.pull-left[
-
-A very simple example: everytime time I want to *shout* something in a different font and in bold, I can write `.shout[This is a special text!]`, which will display:
-
-.shout[This is a special text!]
-]
-
-.pull-right[
-Within the `CSS` theme `phpb-theme.css`, there are a few lines defining what `.shout[]` will do:
-
-```
-.shout { color: #1c5253; 
-font-family: 'Lato', sans-serif;
-font-weight: bold;
-}
-```
-]
-
-.onfire[This can be fun and rewarding, but it can also take a lot of your time!]
-
----
-class: inverse, middle, center
-
-# This is all for today! Questions?
-
-.pull-right[.pull-down[.onfire[Thank you all!]]]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
