@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: pres-en
+        working-directory: /
     env:
       GITHUB_PAT: ${{ secrets.ACCESS_TOKEN }}
       ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}    
@@ -34,10 +34,9 @@ jobs:
       - name: 💻 Install pandoc and pandoc citeproc
         uses: r-lib/actions/setup-pandoc@v1
     
-      - name: Install cURL Headers
-        run: 
-          sudo apt-get update
-          sudo apt-get install libcurl4-openssl-dev
+      - name: Install cURL Headers, UNITS, SSL, SSH2, PQ, 1g, GDAL, PROJ, Units, Magick, snapd
+        run: |
+          sudo apt-get install -y libssl-dev libcurl4-openssl-dev zlib1g-dev libproj-dev libgdal-dev gdal-bin libssh2-1-dev libpq-dev libudunits2-0 libudunits2-dev libmagick++-dev snapd
 
       - name: Install TinyTeX
         uses: r-lib/actions/setup-tinytex@v1
