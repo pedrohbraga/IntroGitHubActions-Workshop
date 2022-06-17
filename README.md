@@ -4,7 +4,7 @@ Collaborations are rarely static: when people work on projects together, it is a
 
 In this workshop, we will demonstrate and discuss how GitHub - a common platform for version control and collaboration - can help to manage collaborations dynamically, with transparency and traceability. We will begin by briefly demonstrating how GitHub can be used to collect, address and track feedback and contributions to code and documents through issues and pull requests. We will then demonstrate and discuss GitHub Actions, which can automate workflows to build, test, and publish content in your repositories. We will review how to implement and troubleshoot actions that perform R code testing, Rmarkdown document rendering, and website publishing to ensure that all contributions are safely and continuously integrated into your project.
 
---=
+---
 
 Les collaborations sont rarement statiques : lorsque des personnes travaillent ensemble sur des projets, il s’agit d’un processus de développement continu qui consiste à apporter des idées, à donner et à recevoir des commentaires, et à répondre à ces recommandations par des modifications jusqu’à ce que l’objectif soit atteint. Ces étapes se chevauchent souvent, les personnes qui collaborent modifiant simultanément les fichiers du projet. Cette dynamique rend très difficile (et très déroutant !) le travail sur des documents qui circulent dans le groupe, les versions des changements étant suivies en mettant à jour les noms de fichiers avec des initiales, des dates ou “document_version_finale_233”. C’est là que GitHub entre en jeu !
 
