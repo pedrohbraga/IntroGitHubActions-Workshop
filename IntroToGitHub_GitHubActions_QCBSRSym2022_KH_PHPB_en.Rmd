@@ -31,6 +31,20 @@ knitr::opts_chunk$set(
   interval = 1/15
 )
 
+
+required.libraries <- c("ggplot2", "plotly", "RColorBrewer", # for visualisation
+                        "devtools", "reticulate", "png", "knitr", "JuliaCall", "png"
+)
+
+needed.libraries <- required.libraries[!(required.libraries %in% 
+                                           installed.packages()[ ,"Package"])]
+
+if(length(needed.libraries)) install.packages(needed.libraries)
+
+# Load all required libraries at once
+lapply(required.libraries, library, character.only = TRUE, quietly = TRUE)
+
+
 # Include packages to be loaded below here:
 library(knitr)    # For knitting document and include_graphics function
 library(ggplot2)  # For plotting
