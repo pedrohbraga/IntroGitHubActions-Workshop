@@ -9,9 +9,9 @@ jobs:
   presentation-en-job:
     name: Render the presentation for this workshop
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: /
+#    defaults:
+#      run:
+#        working-directory: /
     env:
       GITHUB_PAT: ${{ secrets.ACCESS_TOKEN }}
       ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}    
