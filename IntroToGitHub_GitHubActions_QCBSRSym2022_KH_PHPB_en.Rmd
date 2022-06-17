@@ -125,6 +125,12 @@ class: center, middle
 # Part I: A brief introduction to `GitHub`
 
 ---
+
+![](imgs/github-illustrated-series/github_compare_text.png)
+.cite[Artwork by @allison_horst].
+
+---
+
 ## How GitHub works (in a nutshell)
 
 __Git__ is an open source version-control system.
@@ -141,15 +147,18 @@ class: center, middle
 ## The GitHub workflow: A basic example
 
 ---
-### Step 1: Setting up a repository
+### Step 1: Setting up a repository.
 
-![](imgs/1.png){width=50%}
+Often, you have some project folder on your local computer that you want to __publish__ as a repository on GitHub.
 
-Let's say you have some project folder on your local computer that you want to publish as a repository on GitHub.
+```{r, echo = FALSE, eval = TRUE, out.width="75%"}
+knitr::include_graphics("imgs/github_workflow/2.png")
+```
 
-Note: A repository can be set up in several ways. You can also _clone_ a repository from GitHub to your local computer. 
 
 ???
+
+Note: A repository can be set up in several ways. You can also _clone_ a repository from GitHub to your local computer. 
 
 repositories, files, directories, commits, pushes, pull requests, commit history, authors, cloning, and checkout. 
 From GitHub Docs:
@@ -164,35 +173,108 @@ pull request: a place to compare and discuss the differences introduced on a bra
 tests, and more
 
 ---
+### Step 1: Setting up a repository.
+
+You can also _clone_ or _fork_ a repository from GitHub to your local computer. 
+
+```{r, echo = FALSE, eval = TRUE, out.width="75%"}
+knitr::include_graphics("imgs/github_workflow/1.png")
+```
+
+
+
+---
 ### Step 2: Pull the _remote_ repository to your local computer.
 
-![](imgs/2.png){width=50%}
+Once a repository is set up, you usually want to get to work. __Pulling__ ensures that the documents on your local computer match up with the versions on the _remote_ repository on GitHub.
 
-This ensures that the documents on your local computer match up with the versions on the _remote_ repository on GitHub.
-
----
-### Step 3: _Commit_ changes to your local documents.
-
-![](imgs/3.png)
-
-Let's say you need to edit your R script on your local computer. When you save your changes, Git will track them. More specifically, Git tracks the _addition_ and _deletion_ of any characters in your file. 
-
-When you are ready to confirm this new version of your document, you stage and _commit_ your changes.
+```{r, echo = FALSE, eval = TRUE, out.width="75%"}
+knitr::include_graphics("imgs/github_workflow/3.png")
+```
 
 ---
-### Step 4: Push your committed changes to the _remote_ repository.
+### Step 3: Make changes to the files on your local computer.
 
-![](imgs/4.png)
+Now that everything matches up, you can start making some changes in your files. When you save changes to a file, Git tracks the _addition_ and _deletion_ of any characters. 
 
-This _pushes_ your local changes to the remote repository.
+```{r, echo = FALSE, eval = TRUE, out.width="75%"}
+knitr::include_graphics("imgs/github_workflow/4.png")
+```
+
+---
+### Step 4: __Commit__ your changes.
+
+When you are ready to confirm this new version of your document, you stage and _commit_ your changes. This essentially makes a _snapshot_ of the repository, from which you can flip back and forth.
+
+```{r, echo = FALSE, eval = TRUE, out.width="75%"}
+knitr::include_graphics("imgs/github_workflow/5.png")
+```
+
+---
+### Step 5: __Push__ your committed changes to the _remote_ repository.
+
+You then __push__ the changes that you committed on your local computer to the _remote_ repository. 
+<br><br>
+
+```{r, echo = FALSE, eval = TRUE, out.width="75%"}
+knitr::include_graphics("imgs/github_workflow/6.png")
+```
+
+???
 
 Note: You can flip back and forth between these _commits_ to work on different versions of your documents. That means you don't have to keep saving files with ever-increasing file names (e.g. Final_draft_May2022_comments_June2022_finaledits.pdf).
 
 ---
 
-## A basic _collaborative_ GitHub workflow
+![](imgs/github-illustrated-series/github_wickham_bryan_git_quote.png)
+.cite[Artwork by @allison_horst].
 
-to do: same workflow diagrams, but with branches and pull requests
+---
+![](imgs/github-illustrated-series/github_fall.png)
+.cite[Artwork by @allison_horst].
+
+---
+## A __collaborative__ GitHub workflow
+
+GitHub becomes even more powerful when you are working collaboratively in a repository. 
+
+When working on a project with a collaborator, they can start a __new branch__ from the main repository. 
+
+Branches are essentially a _working copy_ of the repository, where you can commit changes _without affecting the main repository_. 
+
+Branches can be __merged __ into the main repository through a __pull request__, which can be reviewed and approved by the owner of the repository (or other authorized contributors). 
+
+This is very helpful to manage contributions from different collaborators who are working on the same files at the same time!
+
+Let's walk through an example of this workflow.
+
+---
+## Step 1: Make a new branch
+
+```{r, echo = FALSE, eval = TRUE, out.width="75%"}
+knitr::include_graphics("imgs/github_workflow/7.png")
+```
+
+---
+## Step 2: Commit changes in the files
+
+```{r, echo = FALSE, eval = TRUE, out.width="75%"}
+knitr::include_graphics("imgs/github_workflow/9.png")
+```
+
+---
+## Step 3: Make a pull request
+
+```{r, echo = FALSE, eval = TRUE, out.width="75%"}
+knitr::include_graphics("imgs/github_workflow/10.png")
+```
+
+---
+## Step 4: Merge the branch into the remote repository
+
+```{r, echo = FALSE, eval = TRUE, out.width="75%"}
+knitr::include_graphics("imgs/github_workflow/11.png")
+```
 
 ---
 ## Exercise: Set up a GitHub repository
