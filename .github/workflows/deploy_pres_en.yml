@@ -88,7 +88,7 @@ jobs:
          # Artifact name
          name: pres-en # optional
          # Destination path
-         path: pres-en/ # optional
+         path: IntroGitHubActions-Workshop/ # optional
 
       - name: 💎 Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.4
