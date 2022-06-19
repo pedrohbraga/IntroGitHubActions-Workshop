@@ -62,10 +62,10 @@ jobs:
         run: Rscript -e 'rmarkdown::render("IntroToGitHub_GitHubActions_QCBSRSym2022_KH_PHPB_en.Rmd")'
         
       - name: 🔺 Upload artifact containing the presentation
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v3
         with:
           name: pres-en
-          path: /
+          path: IntroGitHubActions-Workshop
   
 # Need to first create an empty gh-pages branch
 # see https://pkgdown.r-lib.org/reference/deploy_site_github.html
