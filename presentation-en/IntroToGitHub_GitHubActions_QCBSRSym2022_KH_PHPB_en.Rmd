@@ -1,0 +1,340 @@
+---
+title: "Introduction to GitHub and GitHub Actions"
+subtitle:
+author: '<b>Pedro Henrique P. Braga</b> (Concordia University) <br><b>Katherine Hébert</b> (Université de Sherbrooke)<br><br>'
+institute: "4th QCBS R Symposium<br>QCBS R Workshop Series <br>"
+date: "`r Sys.Date()`<br> <span class=footnote> Use arrow keys to navigate. Press `H` for help. </span>"
+output:
+  xaringan::moon_reader:
+    css: ["default",  "css/phpb-fonts.css", "css/phpb-theme.css"]
+    lib_dir: libs
+    self-contained: false
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: true
+      ratio: '16:9'
+      beforeInit: ["macro.js", "https://platform.twitter.com/widgets.js"]
+      navigation:
+        scroll: true   # disable slide transitions by scrolling
+    includes:
+      in_header: header.html
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  dev = 'jpeg',
+  ffmpeg.format='gif',
+  interval = 1/15
+)
+
+
+required.libraries <- c("ggplot2", "plotly", "RColorBrewer", # for visualisation
+                        "devtools", "reticulate", "png", "knitr", "JuliaCall", "png"
+)
+
+needed.libraries <- required.libraries[!(required.libraries %in% 
+                                           installed.packages()[ ,"Package"])]
+
+if(length(needed.libraries)) install.packages(needed.libraries)
+
+# Load all required libraries at once
+lapply(required.libraries, library, character.only = TRUE, quietly = TRUE)
+
+
+# Include packages to be loaded below here:
+library(knitr)    # For knitting document and include_graphics function
+library(ggplot2)  # For plotting
+library(JuliaCall)
+library(reticulate)
+library(ggplot2)
+library(png)      # For grabbing the dimensions of png files
+```
+
+class: middle
+
+## 1. Brief introduction to [Git]() and [GitHub](github.com)
+
+### a. What is GitHub and why should I use it?
+### b. How can GitHub make research more open and collaborative?
+<br>
+## 2. Introduction to [GitHub Actions]()
+
+### a. What are GitHub Actions and how do they work?
+### b. How can my research benefit from GitHub Actions?
+
+---
+class: center, middle
+
+## Why should I learn this?
+
+---
+class: inverse
+### GitHub & GitHub Actions are powerful tools for collaboration and open science
+
+GitHub is increasingly used by researchers as a tool to work on their research in an __open__ and __reproducible__ way. Like our science, GitHub is especially powerful in __collaborative__ contexts. 
+
+Today's workshop will discuss:
+
+- How GitHub can help you do open, transparent, and collaborative science (_briefly_)
+
+- How to use GitHub Actions to automate some common tasks in research, to keep your work up to date as you (and your collaborators) contribute to a project
+  - **Code checking** on a different system than your local computer
+  - **Performing** analyses and making visualizations  
+  - **Rendering** and __deploying__ documents (presentations, webpages, Shiny apps) 
+  
+- How to __troubleshoot__ GitHub Actions when they don't work!
+
+???
+
+> _.small[Today, we will spend less time on _how to use GitHub_ - but don't worry! There are many resources available freely online to learn about GitHub (e.g. [Happy Git and GitHub for the useR](https://happygitwithr.com/) by Jennifer Bryan). ]_
+
+---
+class: inverse
+### A brief introduction to GitHub 
+
+**GitHub** allows you to manage documents and code in a __transparent, collaborative, and traceable way__.
+
+.pull-left[
+#### Version Control
+
+GitHub keeps tracks of the _changes_ you make to your documents, and allows you to flip back to previous versions if you need to.
+
+#### Transparent & Open
+
+You can work privately, but GitHub also allows you to open your repository (i.e. project folder) to the public. You can choose a [license](https://choosealicense.com/) to control how your documents can be used by others. 
+]
+
+.pull-right[
+#### Collaborative Workflow
+
+Features like branching, issues, and pull requests help to coordinate collaborations dynamically, so you can keep track of all contributions to a project in one place.
+
+#### Automating Tasks 🌟
+
+GitHub Actions automate tasks like code checks, document rendering, deploying webpages, and more. This becomes powerful quickly, particularly when you need to continuously integrate contributions to your project. 
+]
+
+???
+
+Actions can also protect your project, by ensuring that changes are only integrated if they pass certain checks.
+
+---
+class: center, middle
+
+## Q: Do you use GitHub for your research?
+
+GitHub is becoming popular among researchers in biodiversity but it is still not widely adopted.
+
+Have you encountered obstacles when learning how to use it? <br>
+What are some reasons you would recommend it to others? <br>
+Why do you think it is not widely adopted in biodiversity research?
+
+---
+class: center, middle
+
+# Part I: A brief introduction to `GitHub`
+
+---
+
+![](imgs/github-illustrated-series/github_compare_text.png)
+.cite[Artwork by @allison_horst].
+
+---
+
+## How GitHub works (in a nutshell)
+
+__Git__ is an open source version-control system.
+
+__GitHub__ is a platform for hosting and collaborating on Git repositories.
+
+You can think of Git as a tool that allows you to _track the changes_ you make in your documents on your local computer, and apply them to the same documents that are hosted in a _repository_ on GitHub. 
+
+Git also allows you to apply any changes that have been made on the GitHub repository (also called the _remote_) to the documents on your local computer.
+
+---
+class: center, middle
+
+## The GitHub workflow: A basic example
+
+---
+### Step 1: Setting up a repository.
+
+Often, you have some project folder on your local computer that you want to __publish__ as a repository on GitHub.
+
+```{r, echo = FALSE, eval = TRUE, out.width="75%"}
+knitr::include_graphics("imgs/github_workflow/2.png")
+```
+
+
+???
+
+Note: A repository can be set up in several ways. You can also _clone_ a repository from GitHub to your local computer. 
+
+repositories, files, directories, commits, pushes, pull requests, commit history, authors, cloning, and checkout. 
+From GitHub Docs:
+git: an open source, distributed version-control system
+GitHub: a platform for hosting and collaborating on Git repositories
+commit: a Git object, a snapshot of your entire repository compressed into a SHA
+branch: a lightweight movable pointer to a commit
+clone: a local version of a repository, including all commits and branches
+remote: a common repository on GitHub that all team member use to exchange their changes
+fork: a copy of a repository on GitHub owned by a different user
+pull request: a place to compare and discuss the differences introduced on a branch with reviews, comments, integrated
+tests, and more
+
+---
+### Step 1: Setting up a repository.
+
+You can also _clone_ or _fork_ a repository from GitHub to your local computer. 
+
+```{r, echo = FALSE, eval = TRUE, out.width="75%"}
+knitr::include_graphics("imgs/github_workflow/1.png")
+```
+
+
+
+---
+### Step 2: Pull the _remote_ repository to your local computer.
+
+Once a repository is set up, you usually want to get to work. __Pulling__ ensures that the documents on your local computer match up with the versions on the _remote_ repository on GitHub.
+
+```{r, echo = FALSE, eval = TRUE, out.width="75%"}
+knitr::include_graphics("imgs/github_workflow/3.png")
+```
+
+---
+### Step 3: Make changes to the files on your local computer.
+
+Now that everything matches up, you can start making some changes in your files. When you save changes to a file, Git tracks the _addition_ and _deletion_ of any characters. 
+
+```{r, echo = FALSE, eval = TRUE, out.width="75%"}
+knitr::include_graphics("imgs/github_workflow/4.png")
+```
+
+---
+### Step 4: __Commit__ your changes.
+
+When you are ready to confirm this new version of your document, you stage and _commit_ your changes. This essentially makes a _snapshot_ of the repository, from which you can flip back and forth.
+
+```{r, echo = FALSE, eval = TRUE, out.width="75%"}
+knitr::include_graphics("imgs/github_workflow/5.png")
+```
+
+---
+### Step 5: __Push__ your committed changes to the _remote_ repository.
+
+You then __push__ the changes that you committed on your local computer to the _remote_ repository. 
+<br><br>
+
+```{r, echo = FALSE, eval = TRUE, out.width="75%"}
+knitr::include_graphics("imgs/github_workflow/6.png")
+```
+
+???
+
+Note: You can flip back and forth between these _commits_ to work on different versions of your documents. That means you don't have to keep saving files with ever-increasing file names (e.g. Final_draft_May2022_comments_June2022_finaledits.pdf).
+
+---
+
+![](imgs/github-illustrated-series/github_wickham_bryan_git_quote.png)
+.cite[Artwork by @allison_horst].
+
+---
+![](imgs/github-illustrated-series/github_fall.png)
+.cite[Artwork by @allison_horst].
+
+---
+## A __collaborative__ GitHub workflow
+
+GitHub becomes even more powerful when you are working collaboratively in a repository. 
+
+When working on a project with a collaborator, they can start a __new branch__ from the main repository. 
+
+Branches are essentially a _working copy_ of the repository, where you can commit changes _without affecting the main repository_. 
+
+Branches can be __merged __ into the main repository through a __pull request__, which can be reviewed and approved by the owner of the repository (or other authorized contributors). 
+
+This is very helpful to manage contributions from different collaborators who are working on the same files at the same time!
+
+Let's walk through an example of this workflow.
+
+---
+## Step 1: Make a new branch
+
+```{r, echo = FALSE, eval = TRUE, out.width="75%"}
+knitr::include_graphics("imgs/github_workflow/7.png")
+```
+
+---
+## Step 2: Commit changes in the files
+
+```{r, echo = FALSE, eval = TRUE, out.width="75%"}
+knitr::include_graphics("imgs/github_workflow/9.png")
+```
+
+---
+## Step 3: Make a pull request
+
+```{r, echo = FALSE, eval = TRUE, out.width="75%"}
+knitr::include_graphics("imgs/github_workflow/10.png")
+```
+
+---
+## Step 4: Merge the branch into the remote repository
+
+```{r, echo = FALSE, eval = TRUE, out.width="75%"}
+knitr::include_graphics("imgs/github_workflow/11.png")
+```
+
+---
+## Exercise: Set up a GitHub repository
+
+Let's make a repository that we will use to play with GitHub Actions later in this workshop!
+
+[Link to webpage with exercise]
+
+.pull-left[
+### If you are new to GitHub:
+
+1. Create a GitHub account.
+2. Install GitHub Desktop.
+2. Create a repository.
+3. Commit a change and push to web.
+
+]
+
+.pull-right[
+### If you already use GitHub:
+
+1. Create a repository.
+2. Commit a change and push to web.
+]
+
+
+---
+class: center, middle
+
+# Part 2: Introduction to `GitHub Actions`
+
+---
+class: center, middle
+
+# Discussion
+
+----
+## What are some examples of some research tasks you would like to automate?
+
+???
+
+Changing data collected in the second season in the field and automatically updating documents and analyses;
+Automated literature mining ?;
+Automated website and presentation generation?
+
+---
+
+## GitHub Actions workflows
+
