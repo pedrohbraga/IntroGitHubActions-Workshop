@@ -45,7 +45,7 @@ class: center, middle
 class: inverse
 ### GitHub &amp; GitHub Actions are powerful tools for collaboration and open science
 
-GitHub is increasingly used by researchers as a tool to work on their research in an __open__ and __reproducible__ way. Like our science, GitHub is especially powerful in __collaborative__ contexts.
+GitHub is increasingly used by researchers as a tool to work on their research in an __open__ and __reproducible__ way. Like our science, GitHub is especially powerful in __collaborative__ contexts. 
 
 Today's workshop will discuss:
 
@@ -53,9 +53,9 @@ Today's workshop will discuss:
 
 - How to use GitHub Actions to automate some common tasks in research, to keep your work up to date as you (and your collaborators) contribute to a project
   - **Code checking** on a different system than your local computer
-  - **Performing** analyses and making visualizations
-  - **Rendering** and __deploying__ documents (presentations, webpages, Shiny apps)
-
+  - **Performing** analyses and making visualizations  
+  - **Rendering** and __deploying__ documents (presentations, webpages, Shiny apps) 
+  
 - How to __troubleshoot__ GitHub Actions when they don't work!
 
 ???
@@ -64,7 +64,7 @@ Today's workshop will discuss:
 
 ---
 class: inverse
-### A brief introduction to GitHub
+### A brief introduction to GitHub 
 
 **GitHub** allows you to manage documents and code in a __transparent, collaborative, and traceable way__.
 
@@ -75,7 +75,7 @@ GitHub keeps tracks of the _changes_ you make to your documents, and allows you 
 
 #### Transparent &amp; Open
 
-You can work privately, but GitHub also allows you to open your repository (i.e. project folder) to the public. You can choose a [license](https://choosealicense.com/) to control how your documents can be used by others.
+You can work privately, but GitHub also allows you to open your repository (i.e. project folder) to the public. You can choose a [license](https://choosealicense.com/) to control how your documents can be used by others. 
 ]
 
 .pull-right[
@@ -85,7 +85,7 @@ Features like branching, issues, and pull requests help to coordinate collaborat
 
 #### Automating Tasks 🌟
 
-GitHub Actions automate tasks like code checks, document rendering, deploying webpages, and more. This becomes powerful quickly, particularly when you need to continuously integrate contributions to your project.
+GitHub Actions automate tasks like code checks, document rendering, deploying webpages, and more. This becomes powerful quickly, particularly when you need to continuously integrate contributions to your project. 
 ]
 
 ???
@@ -121,7 +121,7 @@ __Git__ is an open source version-control system.
 
 __GitHub__ is a platform for hosting and collaborating on Git repositories.
 
-You can think of Git as a tool that allows you to _track the changes_ you make in your documents on your local computer, and apply them to the same documents that are hosted in a _repository_ on GitHub.
+You can think of Git as a tool that allows you to _track the changes_ you make in your documents on your local computer, and apply them to the same documents that are hosted in a _repository_ on GitHub. 
 
 Git also allows you to apply any changes that have been made on the GitHub repository (also called the _remote_) to the documents on your local computer.
 
@@ -140,9 +140,9 @@ Often, you have some project folder on your local computer that you want to __pu
 
 ???
 
-Note: A repository can be set up in several ways. You can also _clone_ a repository from GitHub to your local computer.
+Note: A repository can be set up in several ways. You can also _clone_ a repository from GitHub to your local computer. 
 
-repositories, files, directories, commits, pushes, pull requests, commit history, authors, cloning, and checkout.
+repositories, files, directories, commits, pushes, pull requests, commit history, authors, cloning, and checkout. 
 From GitHub Docs:
 git: an open source, distributed version-control system
 GitHub: a platform for hosting and collaborating on Git repositories
@@ -157,7 +157,7 @@ tests, and more
 ---
 ### Step 1: Setting up a repository.
 
-You can also _clone_ or _fork_ a repository from GitHub to your local computer.
+You can also _clone_ or _fork_ a repository from GitHub to your local computer. 
 
 &lt;img src="imgs/github_workflow/1.png" width="75%" /&gt;
 
@@ -173,7 +173,7 @@ Once a repository is set up, you usually want to get to work. __Pulling__ ensure
 ---
 ### Step 3: Make changes to the files on your local computer.
 
-Now that everything matches up, you can start making some changes in your files. When you save changes to a file, Git tracks the _addition_ and _deletion_ of any characters.
+Now that everything matches up, you can start making some changes in your files. When you save changes to a file, Git tracks the _addition_ and _deletion_ of any characters. 
 
 &lt;img src="imgs/github_workflow/4.png" width="75%" /&gt;
 
@@ -187,7 +187,7 @@ When you are ready to confirm this new version of your document, you stage and _
 ---
 ### Step 5: __Push__ your committed changes to the _remote_ repository.
 
-You then __push__ the changes that you committed on your local computer to the _remote_ repository.
+You then __push__ the changes that you committed on your local computer to the _remote_ repository. 
 &lt;br&gt;&lt;br&gt;
 
 &lt;img src="imgs/github_workflow/6.png" width="75%" /&gt;
@@ -208,13 +208,13 @@ Note: You can flip back and forth between these _commits_ to work on different v
 ---
 ## A __collaborative__ GitHub workflow
 
-GitHub becomes even more powerful when you are working collaboratively in a repository.
+GitHub becomes even more powerful when you are working collaboratively in a repository. 
 
-When working on a project with a collaborator, they can start a __new branch__ from the main repository.
+When working on a project with a collaborator, they can start a __new branch__ from the main repository. 
 
-Branches are essentially a _working copy_ of the repository, where you can commit changes _without affecting the main repository_.
+Branches are essentially a _working copy_ of the repository, where you can commit changes _without affecting the main repository_. 
 
-Branches can be __merged __ into the main repository through a __pull request__, which can be reviewed and approved by the owner of the repository (or other authorized contributors).
+Branches can be __merged __ into the main repository through a __pull request__, which can be reviewed and approved by the owner of the repository (or other authorized contributors). 
 
 This is very helpful to manage contributions from different collaborators who are working on the same files at the same time!
 
@@ -279,7 +279,7 @@ Research in ecology and evolution often involves the processing and merging of d
 
 We commonly combine, clean multiple data files (usually, types of spreadsheets) for subsequent analysis (in the form of code).
 
-This process is rarely done just once in a project's lifetime: we add and remove information, and adjust our analysis.
+This process is rarely done just once in a project's lifetime: we add and remove information, and adjust our analysis. 
 
 .onfire[This increases output generation and errors.]
 ]
@@ -289,42 +289,135 @@ This process is rarely done just once in a project's lifetime: we add and remove
 _Include diagram._
 
 ]
+
+---
+class: inverse
+
+## Errors can be costly.
+
+.pull-left[
+.font90[
+Humans, even diligent, meticulous and highly trained professionals, make mistakes.
+
+Unsurprisingly, errors increase with lines of code [_e.g._, 15 to 50 errors to 1000 from professional software engineers; McConnell, 2044].
+
+A sign error, a missing semicolon, an off-by-one error in matching columns of data may render the results complete noise (_e.g._, Chang _et al_. 2006, retraction from Science).
+
+Rampant software errors may undermine scientific results (Soergel, 2015), cost money (_CITE_), and even imply in retractions (_CITE_).
+]
+]
+
+.pull-right[
+
+
+]
+
+---
+### Mitigating errors: no 'blind trust', and test early, test often
+
+.pull-left[
+Long-term recommendations (Joppa et al. 2013, Science):
+
+1. Formal training in statistics, computational methods, mathematics, and software engineering;
+2. Scientific publication of software and code, so it can be peer-reviewed.
+
+Practical recommendations:
+1. No 'blind trust': verify;
+2. Test, test, test, and test early.
+
+]
+
+.pull-right[
+![%](https://azevedorafaela.files.wordpress.com/2018/04/fire-your-qa-team-blog-post-3.png)
+]
+
+???
+
+In 2013, only 30% of researchers using SDMs reported that they used particular software because it had been "validated against other methods in peer-review publications. This rose to 57% for those who used "click-and-run" software with easy-to-manipulate user interfaces and dropped to 11% for those who used "syntax-driven" platforms. Further, 7, 9, and 18% of scientists cited "the developer is well-respected," "personal recommendation," and "recommendation from a close colleague," respectively, as reasons for using software. Only 8% claimed they had validated software against other methods as a primary reason for choice; 79% expressed a desire to learn additional software and programming skills.
+
+---
+### A structured computing workflow can help with reproducibility
+
+A **computing workflow** can help strategically reproducing results every time data or code is modified.
+
+.pull-left[
+#### Primary criterion 
+1. Reproducibility
+]
+
+.pull-right[
+#### Secondary criteria
+
+1. Accurate
+2. Efficient
+3. Scalable
+4. Adaptable
+5. Accessible
+
+]
+
+_Exemplify with GitHub_
+
+Automated data and software management can help reduce the time and effort required by researchers (Yenni _et al_., 2018).
+
+
 ---
 
 ### Adopting automated research workflows in ecology and evolution
 
-Continuous integration (CI) is a software development practice in which small adjustments to the underlying code in an application are tested every time a team member makes changes.
+**Continuous integration (CI)** is a software development practice in which small adjustments to code are tested every time modifications happen or at user-specified times.
+
+_Include diagram_
 
 CI decreases integration problems [3], ensures
 rapid feedback [4], increases software quality [2], and improves developer productivity [5].
 
 .footnote[
-Vasilescu _et al_. “Quality and productivity outcomes relating to continuous integration in GitHub,” in Proc. 2015 10th Joint Meet. on Found. of Soft. Engineering, 2015, pp. 805–816.
 
-Stahl _et al_., “Big bangs and small pops: on critical cyclomatic complexity and developer integration behavior,” in 2019 IEEE/ACM 41st Int. Conf. Software Engineering: Software Engineering in Practice (ICSE-SEIP). IEEE, 2019, pp. 81–90
+1. Vasilescu _et al_. “Quality and productivity outcomes relating to continuous integration in GitHub,” in Proc. 2015 10th Joint Meet. on Found. of Soft. Engineering, 2015, pp. 805–816.
 
-Rossi _et al_., “Continuous deployment of mobile software at facebook (showcase),” in Proceedings of the 2016 24th ACM SIGSOFT International
+2. Stahl _et al_., “Big bangs and small pops: on critical cyclomatic complexity and developer integration behavior,” in 2019 IEEE/ACM 41st Int. Conf. Software Engineering: Software Engineering in Practice (ICSE-SEIP). IEEE, 2019, pp. 81–90
+
+3. Rossi _et al_., “Continuous deployment of mobile software at facebook (showcase),” in Proceedings of the 2016 24th ACM SIGSOFT International
 Symposium on Foundations of Software Engineering, 2016, pp. 12–23
 
-M. Hilton, T. Tunnell, K. Huang, D. Marinov, and D. Dig, “Usage, costs, and benefits of continuous integration in open-source
-projects,” in 2016 31st IEEE/ACM International Conference on Automated Software Engineering (ASE). IEEE, 2016, pp. 426–437
+4. M. Hilton, T. Tunnell, K. Huang, D. Marinov, and D. Dig, “Usage, costs, and benefits of continuous integration in open-source projects,” in 2016 31st IEEE/ACM International Conference on Automated Software Engineering (ASE). IEEE, 2016, pp. 426–437
 
 ]
 
 
 ---
 
-#
+#### Example 1: **[The Portal Project: a long-term study of a Chihuahuan desert ecosystem](https://www.biorxiv.org/content/10.1101/332783v3.full)**
+
+.pull-right-35[
+![](https://www.biorxiv.org/content/biorxiv/early/2020/06/13/332783/F1.large.jpg?width=800&amp;height=600&amp;carousel=1)
+.small[Location of 24 experimental plots from a long-term (1977-) ecological study of rodents, plants, and ants in Portal, AZ, USA.]
+]
+
+--
+
+.pull-left-65[
+
+![](https://www.biorxiv.org/content/biorxiv/early/2018/07/24/344804/F1.large.jpg?width=800&amp;height=600&amp;carousel=1)
+
+.small[[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6672075.svg)](https://doi.org/10.5281/zenodo.6672075)] : [weecology/PortalData](https://zenodo.org/record/6672075)
+
+]
 
 ---
-class: inverse
 
-## Test early, test often
+### Example 2: **Automated integration in collaborative manuscripts**
 
-Humans, even diligent, meticulous and highly trained professionals, make mistakes.
+.pull-left-35[
+**Manubot** 
 
-![](https://azevedorafaela.files.wordpress.com/2018/04/fire-your-qa-team-blog-post-3.png)
+]
 
+.pull-right-65[
+
+![](imgs/manubot-workflow.png)
+]
 
 
 ---
@@ -363,7 +456,7 @@ YAML is a human-readable programming language. It is important to remember that 
 
 ## GitHub Actions workflows: __Jobs__
 
-A workflow is an automated process that runs one or more __jobs__.
+A workflow is an automated process that runs one or more __jobs__. 
 
 You can think of jobs as one or more tasks to complete, like running an R script to do some analysis, or building a PDF document from an RMarkdown file.
 
@@ -384,7 +477,7 @@ These steps can run a _script_ that you write or define yourself, or can run an 
 
 ## GitHub Actions workflows: __Triggers__
 
-Workflows run when they are __triggered__ by an event.
+Workflows run when they are __triggered__ by an event. 
 
 To trigger a workflow, you can:
 
