@@ -56,12 +56,12 @@ library(png)      # For grabbing the dimensions of png files
 
 class: middle
 
-## 1. Brief introduction to [Git]() and [GitHub](github.com)
+## 1. Brief introduction to [Git](https://git-scm.com/) and [GitHub](github.com)
 
 ### a. What is GitHub and why should I use it?
 ### b. How can GitHub make research more open and collaborative?
 <br>
-## 2. Introduction to [GitHub Actions]()
+## 2. Introduction to [GitHub Actions](https://docs.github.com/en/actions)
 
 ### a. What are GitHub Actions and how do they work?
 ### b. How can my research benefit from GitHub Actions?
@@ -321,6 +321,64 @@ class: center, middle
 # Part 2: Introduction to `GitHub Actions`
 
 ---
+
+### Common research workflows in ecology and evolution
+
+.pull-left[
+Research in ecology and evolution often involves the processing and merging of data from multiple sources.
+
+We commonly combine, clean multiple data files (usually, types of spreadsheets) for subsequent analysis (in the form of code).
+
+This process is rarely done just once in a project's lifetime: we add and remove information, and adjust our analysis. 
+
+.onfire[This increases output generation and errors.]
+]
+
+.pull-right[
+
+_Include diagram._
+
+]
+---
+
+### Adopting automated research workflows in ecology and evolution
+
+Continuous integration (CI) is a software development practice in which small adjustments to the underlying code in an application are tested every time a team member makes changes.
+
+CI decreases integration problems [3], ensures
+rapid feedback [4], increases software quality [2], and improves developer productivity [5].
+
+.footnote[
+Vasilescu _et al_. “Quality and productivity outcomes relating to continuous integration in GitHub,” in Proc. 2015 10th Joint Meet. on Found. of Soft. Engineering, 2015, pp. 805–816.
+
+Stahl _et al_., “Big bangs and small pops: on critical cyclomatic complexity and developer integration behavior,” in 2019 IEEE/ACM 41st Int. Conf. Software Engineering: Software Engineering in Practice (ICSE-SEIP). IEEE, 2019, pp. 81–90
+
+Rossi _et al_., “Continuous deployment of mobile software at facebook (showcase),” in Proceedings of the 2016 24th ACM SIGSOFT International
+Symposium on Foundations of Software Engineering, 2016, pp. 12–23
+
+M. Hilton, T. Tunnell, K. Huang, D. Marinov, and D. Dig, “Usage, costs, and benefits of continuous integration in open-source
+projects,” in 2016 31st IEEE/ACM International Conference on Automated Software Engineering (ASE). IEEE, 2016, pp. 426–437
+
+]
+
+
+---
+
+# 
+
+---
+class: inverse
+
+## Test early, test often
+
+Humans, even diligent, meticulous and highly trained professionals, make mistakes.
+
+![](https://azevedorafaela.files.wordpress.com/2018/04/fire-your-qa-team-blog-post-3.png)
+
+
+
+---
+
 class: center, middle
 
 # Discussion
