@@ -14,18 +14,10 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-.title[
 # Introduction to GitHub and GitHub Actions
-]
-.author[
 ### <b>Pedro Henrique P. Braga</b> (Concordia University) <br><b>Katherine Hébert</b> (Université de Sherbrooke)<br><br>
-]
-.institute[
 ### 4th QCBS R Symposium<br>QCBS R Workshop Series <br>
-]
-.date[
 ### 2022-06-20<br> <span class="footnote"> Use arrow keys to navigate. Press <code>H</code> for help. </span>
-]
 
 ---
 
@@ -34,12 +26,12 @@ class: center, middle, inverse, title-slide
 
 class: middle
 
-## 1. Brief introduction to [Git]() and [GitHub](github.com)
+## 1. Brief introduction to [Git](https://git-scm.com/) and [GitHub](github.com)
 
 ### a. What is GitHub and why should I use it?
 ### b. How can GitHub make research more open and collaborative?
 &lt;br&gt;
-## 2. Introduction to [GitHub Actions]()
+## 2. Introduction to [GitHub Actions](https://docs.github.com/en/actions)
 
 ### a. What are GitHub Actions and how do they work?
 ### b. How can my research benefit from GitHub Actions?
@@ -53,7 +45,7 @@ class: center, middle
 class: inverse
 ### GitHub &amp; GitHub Actions are powerful tools for collaboration and open science
 
-GitHub is increasingly used by researchers as a tool to work on their research in an __open__ and __reproducible__ way. Like our science, GitHub is especially powerful in __collaborative__ contexts. 
+GitHub is increasingly used by researchers as a tool to work on their research in an __open__ and __reproducible__ way. Like our science, GitHub is especially powerful in __collaborative__ contexts.
 
 Today's workshop will discuss:
 
@@ -61,9 +53,9 @@ Today's workshop will discuss:
 
 - How to use GitHub Actions to automate some common tasks in research, to keep your work up to date as you (and your collaborators) contribute to a project
   - **Code checking** on a different system than your local computer
-  - **Performing** analyses and making visualizations  
-  - **Rendering** and __deploying__ documents (presentations, webpages, Shiny apps) 
-  
+  - **Performing** analyses and making visualizations
+  - **Rendering** and __deploying__ documents (presentations, webpages, Shiny apps)
+
 - How to __troubleshoot__ GitHub Actions when they don't work!
 
 ???
@@ -72,7 +64,7 @@ Today's workshop will discuss:
 
 ---
 class: inverse
-### A brief introduction to GitHub 
+### A brief introduction to GitHub
 
 **GitHub** allows you to manage documents and code in a __transparent, collaborative, and traceable way__.
 
@@ -83,7 +75,7 @@ GitHub keeps tracks of the _changes_ you make to your documents, and allows you 
 
 #### Transparent &amp; Open
 
-You can work privately, but GitHub also allows you to open your repository (i.e. project folder) to the public. You can choose a [license](https://choosealicense.com/) to control how your documents can be used by others. 
+You can work privately, but GitHub also allows you to open your repository (i.e. project folder) to the public. You can choose a [license](https://choosealicense.com/) to control how your documents can be used by others.
 ]
 
 .pull-right[
@@ -93,7 +85,7 @@ Features like branching, issues, and pull requests help to coordinate collaborat
 
 #### Automating Tasks 🌟
 
-GitHub Actions automate tasks like code checks, document rendering, deploying webpages, and more. This becomes powerful quickly, particularly when you need to continuously integrate contributions to your project. 
+GitHub Actions automate tasks like code checks, document rendering, deploying webpages, and more. This becomes powerful quickly, particularly when you need to continuously integrate contributions to your project.
 ]
 
 ???
@@ -129,7 +121,7 @@ __Git__ is an open source version-control system.
 
 __GitHub__ is a platform for hosting and collaborating on Git repositories.
 
-You can think of Git as a tool that allows you to _track the changes_ you make in your documents on your local computer, and apply them to the same documents that are hosted in a _repository_ on GitHub. 
+You can think of Git as a tool that allows you to _track the changes_ you make in your documents on your local computer, and apply them to the same documents that are hosted in a _repository_ on GitHub.
 
 Git also allows you to apply any changes that have been made on the GitHub repository (also called the _remote_) to the documents on your local computer.
 
@@ -148,9 +140,9 @@ Often, you have some project folder on your local computer that you want to __pu
 
 ???
 
-Note: A repository can be set up in several ways. You can also _clone_ a repository from GitHub to your local computer. 
+Note: A repository can be set up in several ways. You can also _clone_ a repository from GitHub to your local computer.
 
-repositories, files, directories, commits, pushes, pull requests, commit history, authors, cloning, and checkout. 
+repositories, files, directories, commits, pushes, pull requests, commit history, authors, cloning, and checkout.
 From GitHub Docs:
 git: an open source, distributed version-control system
 GitHub: a platform for hosting and collaborating on Git repositories
@@ -165,7 +157,7 @@ tests, and more
 ---
 ### Step 1: Setting up a repository.
 
-You can also _clone_ or _fork_ a repository from GitHub to your local computer. 
+You can also _clone_ or _fork_ a repository from GitHub to your local computer.
 
 &lt;img src="imgs/github_workflow/1.png" width="75%" /&gt;
 
@@ -181,7 +173,7 @@ Once a repository is set up, you usually want to get to work. __Pulling__ ensure
 ---
 ### Step 3: Make changes to the files on your local computer.
 
-Now that everything matches up, you can start making some changes in your files. When you save changes to a file, Git tracks the _addition_ and _deletion_ of any characters. 
+Now that everything matches up, you can start making some changes in your files. When you save changes to a file, Git tracks the _addition_ and _deletion_ of any characters.
 
 &lt;img src="imgs/github_workflow/4.png" width="75%" /&gt;
 
@@ -195,7 +187,7 @@ When you are ready to confirm this new version of your document, you stage and _
 ---
 ### Step 5: __Push__ your committed changes to the _remote_ repository.
 
-You then __push__ the changes that you committed on your local computer to the _remote_ repository. 
+You then __push__ the changes that you committed on your local computer to the _remote_ repository.
 &lt;br&gt;&lt;br&gt;
 
 &lt;img src="imgs/github_workflow/6.png" width="75%" /&gt;
@@ -216,13 +208,13 @@ Note: You can flip back and forth between these _commits_ to work on different v
 ---
 ## A __collaborative__ GitHub workflow
 
-GitHub becomes even more powerful when you are working collaboratively in a repository. 
+GitHub becomes even more powerful when you are working collaboratively in a repository.
 
-When working on a project with a collaborator, they can start a __new branch__ from the main repository. 
+When working on a project with a collaborator, they can start a __new branch__ from the main repository.
 
-Branches are essentially a _working copy_ of the repository, where you can commit changes _without affecting the main repository_. 
+Branches are essentially a _working copy_ of the repository, where you can commit changes _without affecting the main repository_.
 
-Branches can be __merged __ into the main repository through a __pull request__, which can be reviewed and approved by the owner of the repository (or other authorized contributors). 
+Branches can be __merged __ into the main repository through a __pull request__, which can be reviewed and approved by the owner of the repository (or other authorized contributors).
 
 This is very helpful to manage contributions from different collaborators who are working on the same files at the same time!
 
@@ -279,6 +271,64 @@ class: center, middle
 # Part 2: Introduction to `GitHub Actions`
 
 ---
+
+### Common research workflows in ecology and evolution
+
+.pull-left[
+Research in ecology and evolution often involves the processing and merging of data from multiple sources.
+
+We commonly combine, clean multiple data files (usually, types of spreadsheets) for subsequent analysis (in the form of code).
+
+This process is rarely done just once in a project's lifetime: we add and remove information, and adjust our analysis.
+
+.onfire[This increases output generation and errors.]
+]
+
+.pull-right[
+
+_Include diagram._
+
+]
+---
+
+### Adopting automated research workflows in ecology and evolution
+
+Continuous integration (CI) is a software development practice in which small adjustments to the underlying code in an application are tested every time a team member makes changes.
+
+CI decreases integration problems [3], ensures
+rapid feedback [4], increases software quality [2], and improves developer productivity [5].
+
+.footnote[
+Vasilescu _et al_. “Quality and productivity outcomes relating to continuous integration in GitHub,” in Proc. 2015 10th Joint Meet. on Found. of Soft. Engineering, 2015, pp. 805–816.
+
+Stahl _et al_., “Big bangs and small pops: on critical cyclomatic complexity and developer integration behavior,” in 2019 IEEE/ACM 41st Int. Conf. Software Engineering: Software Engineering in Practice (ICSE-SEIP). IEEE, 2019, pp. 81–90
+
+Rossi _et al_., “Continuous deployment of mobile software at facebook (showcase),” in Proceedings of the 2016 24th ACM SIGSOFT International
+Symposium on Foundations of Software Engineering, 2016, pp. 12–23
+
+M. Hilton, T. Tunnell, K. Huang, D. Marinov, and D. Dig, “Usage, costs, and benefits of continuous integration in open-source
+projects,” in 2016 31st IEEE/ACM International Conference on Automated Software Engineering (ASE). IEEE, 2016, pp. 426–437
+
+]
+
+
+---
+
+#
+
+---
+class: inverse
+
+## Test early, test often
+
+Humans, even diligent, meticulous and highly trained professionals, make mistakes.
+
+![](https://azevedorafaela.files.wordpress.com/2018/04/fire-your-qa-team-blog-post-3.png)
+
+
+
+---
+
 class: center, middle
 
 # Discussion
@@ -313,7 +363,7 @@ YAML is a human-readable programming language. It is important to remember that 
 
 ## GitHub Actions workflows: __Jobs__
 
-A workflow is an automated process that runs one or more __jobs__. 
+A workflow is an automated process that runs one or more __jobs__.
 
 You can think of jobs as one or more tasks to complete, like running an R script to do some analysis, or building a PDF document from an RMarkdown file.
 
@@ -334,7 +384,7 @@ These steps can run a _script_ that you write or define yourself, or can run an 
 
 ## GitHub Actions workflows: __Triggers__
 
-Workflows run when they are __triggered__ by an event. 
+Workflows run when they are __triggered__ by an event.
 
 To trigger a workflow, you can:
 
@@ -398,19 +448,6 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
-// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
-// screen reader (see PR #262)
-(function(d) {
-  let res = {};
-  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
-    const t = tr.querySelector('td:nth-child(2)').innerText;
-    tr.querySelectorAll('td:first-child .key').forEach(key => {
-      const k = key.innerText;
-      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
-    });
-  });
-  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
-})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable
