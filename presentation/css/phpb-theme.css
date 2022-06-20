@@ -127,6 +127,17 @@ a:active {
   width: 35%;
 }
 
+
+.pull-left-35 {
+  float: left;
+  width: 63%;
+}
+.pull-right-65 {
+  float: right;
+  width: 32%;
+}
+
+
 /* use to position text at the bottom */
 .pull-down {
   position: absolute;
