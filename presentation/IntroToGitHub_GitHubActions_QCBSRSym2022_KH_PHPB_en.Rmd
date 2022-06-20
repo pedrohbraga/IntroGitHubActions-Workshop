@@ -33,7 +33,7 @@ knitr::opts_chunk$set(
 
 
 required.libraries <- c("ggplot2", "plotly", "RColorBrewer", # for visualisation
-                        "devtools", "reticulate", "png", "knitr", "JuliaCall", "png"
+                        "devtools", "reticulate", "png", "knitr", "JuliaCall", "here"
 )
 
 needed.libraries <- required.libraries[!(required.libraries %in% 
@@ -336,5 +336,55 @@ Automated website and presentation generation?
 
 ---
 
-## GitHub Actions workflows
+## GitHub Actions workflows: __YAML__
+
+.pull-left[
+To make a workflow, you write a __YAML__ file that is stored in your repository, in a directory called `.github/workflows`.
+
+YAML is a human-readable programming language. It is important to remember that _indentation matters_ in YAML!
+]
+
+.pull-right[
+```{r, echo = FALSE, eval = TRUE, out.width="60%", fig.cap="An example of a YAML file containing a workflow."}
+knitr::include_graphics("imgs/yaml_example.png")
+```
+]
+
+---
+
+## GitHub Actions workflows: __Jobs__
+
+A workflow is an automated process that runs one or more __jobs__. 
+
+You can think of jobs as one or more tasks to complete, like running an R script to do some analysis, or building a PDF document from an RMarkdown file.
+
+You can run a single job, but often you will need to configure your workflow to run several jobs. Jobs can run sequentially or in parallel.
+
+---
+## GitHub Actions workflows: __Jobs__
+
+Each jobs runs inside its own _runner_ or container. Jobs include one or more _steps_ to achieve some objective (checking code, producing a document, etc.).
+
+These steps can run a _script_ that you write or define yourself, or can run an _action_. _Actions_ are reusable extensions that you can use to simplify your workflow.
+
+```{r, echo = FALSE, eval = TRUE, out.width="75%", fig.align = "center"}
+knitr::include_graphics("imgs/overview-actions-simple.png") 
+```
+
+.cite[image from [GitHub Docs]((https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions?learn=getting_started&learnProduct=actions)]
+
+---
+
+## GitHub Actions workflows: __Triggers__
+
+Workflows run when they are __triggered__ by an event. 
+
+To trigger a workflow, you can:
+
+- __Manually__ start the workflow
+- Define certain __events__ as triggers in your repository (e.g. _pushes_ to your `main` repository branch, a submitted _pull request_, someone posting a new _issue_, etc.)
+- Set a __schedule__ to regularly trigger the workflow.
+
+---
+
 
