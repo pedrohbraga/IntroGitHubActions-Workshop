@@ -2,9 +2,10 @@ body {
   color: #585E60;
 }
 
+
 /* headers */
 
-h1, h2, h3 {
+h1, h2, h3, h4 {
   font-weight: normal;
   color: #126180;
 }
@@ -48,6 +49,10 @@ a:active {
     color: #ee5863;
 }
 
+.remark-slide-content {
+  font-size: 24px;
+}
+
 .remark-code {
   color: #126180;
 }
@@ -68,7 +73,7 @@ a:active {
   /*text-shadow: 0 0 20px #333;*/
 }
 
-.inverse h1, .inverse h2, .inverse h3 {
+.inverse h1, .inverse h2, .inverse h3, .inverse h4 {
   color: #FFFFFF;
   line-height: 1.0em;
 }
