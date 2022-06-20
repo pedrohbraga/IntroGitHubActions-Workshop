@@ -444,12 +444,20 @@ Automated website and presentation generation?
 
 ---
 
-## GitHub Actions workflows: __YAML__
+class: center, middle
+
+# GitHub Actions: Workflows
+
+
+---
+
+## Workflows are written in __YAML__.
 
 .pull-left[
 To make a workflow, you write a __YAML__ file that is stored in your repository, in a directory called `.github/workflows`.
 
 YAML is a human-readable programming language. It is important to remember that _indentation matters_ in YAML!
+
 ]
 
 .pull-right[
@@ -461,38 +469,543 @@ YAML is a human-readable programming language. It is important to remember that 
 
 ---
 
-## GitHub Actions workflows: __Jobs__
+## __Events__ trigger the workflow.
 
-A workflow is an automated process that runs one or more __jobs__. 
-
-You can think of jobs as one or more tasks to complete, like running an R script to do some analysis, or building a PDF document from an RMarkdown file.
-
-You can run a single job, but often you will need to configure your workflow to run several jobs. Jobs can run sequentially or in parallel.
-
----
-## GitHub Actions workflows: __Jobs__
-
-Each jobs runs inside its own _runner_ or container. Jobs include one or more _steps_ to achieve some objective (checking code, producing a document, etc.).
-
-These steps can run a _script_ that you write or define yourself, or can run an _action_. _Actions_ are reusable extensions that you can use to simplify your workflow.
-
-&lt;img src="imgs/overview-actions-simple.png" width="75%" style="display: block; margin: auto;" /&gt;
-
-.cite[image from [GitHub Docs]((https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions?learn=getting_started&amp;learnProduct=actions)]
-
----
-
-## GitHub Actions workflows: __Triggers__
+.pull-left[
 
 Workflows run when they are __triggered__ by an event. 
 
 To trigger a workflow, you can:
 
 - __Manually__ start the workflow
-- Define certain __events__ as triggers in your repository (e.g. _pushes_ to your `main` repository branch, a submitted _pull request_, someone posting a new _issue_, etc.)
+- Define triggers `on` __events__ in your repository (e.g. _pushes_ to your `main` repository branch, a _pull request_, a new _issue_, etc.)
 - Set a __schedule__ to regularly trigger the workflow.
 
+]
+
+.pull-right[
+.scroll-box-20[
+
+```yaml
+*on: 
+*  push: 
+*     branches: 
+*       - main 
+
+name: render-presentation-en
+
+jobs:
+  presentation-en-job:
+    name: Render the presentation for this workshop
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: presentation/
+    env:
+      GITHUB_PAT: ${{ secrets.ACCESS_TOKEN }}
+      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}    
+        
+    steps:
+      - name: 🛎️ Checkout repository
+        uses: actions/checkout@v2
+
+      - name: 💻 Setup R
+        uses: r-lib/actions/setup-r@v1
+        with:
+          r-version: latest
+```
+
+]
+]
+
 ---
+
+## The workflow runs __jobs__.
+
+.pull-left[
+A workflow is an automated process that runs one or more __jobs__. 
+
+Jobs include one or more _steps_ to achieve some objective (checking code, producing a document, etc.).
+
+You can run a single job, but often you will need to configure your workflow to run several jobs. 
+
+Jobs can run sequentially or in parallel.
+
+]
+
+.pull-right[
+.scroll-box-20[
+
+```yaml
+on: 
+  push: 
+     branches: 
+       - main
+
+name: render-presentation-en
+
+*jobs:
+*  presentation-en-job:
+*    name: Render the presentation for this workshop
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: presentation/
+    env:
+      GITHUB_PAT: ${{ secrets.ACCESS_TOKEN }}
+      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}  
+
+    steps:
+      - name: 🛎️Checkout repository
+        uses: actions/checkout@v2
+
+      - name: 💻 Setup R
+        uses: r-lib/actions/setup-r@v1
+        with:
+          r-version: latest
+```
+
+]
+]
+
+---
+
+## Jobs are run by __runners__.
+
+.pull-left[
+A _runner_ is a server that runs your workflows in a __*fresh* virtual machine__ each time it is triggered. 
+
+Each runner runs one job at a time.
+
+GitHub offers __Ubuntu Linux, Microsoft Windows, and macOS__ runners. This means you can test your scripts and documents on different systems, to ensure your files work the same for everyone else!
+
+]
+
+.pull-right[
+.scroll-box-20[
+
+```yaml
+on: 
+  push: 
+     branches: 
+       - main
+
+name: render-presentation-en
+
+jobs:
+  presentation-en-job:
+    name: Render the presentation for this workshop
+*   runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: presentation/
+    env:
+      GITHUB_PAT: ${{ secrets.ACCESS_TOKEN }}
+      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}  
+
+    steps:
+      - name: 🛎️ Checkout repository
+        uses: actions/checkout@v2
+
+      - name: 💻 Setup R 
+        uses: r-lib/actions/setup-r@v1
+        with:
+          r-version: latest
+        
+       - name: 💻 Install R packages and dependencies if needed
+        run: |
+          Rscript -e 'install.packages("palmerpenguins", dependencies = TRUE)'
+        
+        - name: 🧶 Render presentation
+        run: Rscript -e 'rmarkdown::render("IntroToGitHub_GitHubActions_QCBSRSym2022_KH_PHPB_en.Rmd")'
+        
+        - name: 🔺 Upload artifact containing the presentation
+        uses: actions/upload-artifact@v3
+        with:
+          name: presentation-en
+          path: presentation
+
+  checkout-and-deploy:
+   name: Checkout and deploy the presentation within the gh-pages repository
+*   runs-on: ubuntu-latest
+   needs: presentation-en-job
+   
+   steps:
+      - name: 🛎️ Checkout again
+        uses: actions/checkout@v2.3.1 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
+        with:
+          persist-credentials: false
+          
+     - name: 🔻 Download artifact containing the presentation
+        uses: actions/download-artifact@v1
+        with:
+         # Artifact name
+         name: presentation-en # optional
+         # Destination path
+         path: presentation/ # optional
+
+      - name: 💎 Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          token: ${{ secrets.ACCESS_TOKEN }}
+          branch: gh-pages # The branch the action should deploy to.
+          folder: presentation/
+          target-folder: presentation-en # The folder the action should deploy
+          clean: true
+```
+
+]
+]
+
+---
+## Jobs are run in a __working directory__.
+
+.pull-left[
+Text here
+
+]
+
+.pull-right[
+.scroll-box-20[
+
+```yaml
+on: 
+  push: 
+     branches: 
+       - main
+
+name: render-presentation-en
+
+jobs:
+  presentation-en-job:
+    name: Render the presentation for this workshop
+   runs-on: ubuntu-latest
+    defaults:
+      run:
+*        working-directory: presentation/
+    env:
+      GITHUB_PAT: ${{ secrets.ACCESS_TOKEN }}
+      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}  
+
+    steps:
+      - name: 🛎️ Checkout repository
+        uses: actions/checkout@v2
+
+      - name: 💻 Setup R 
+        uses: r-lib/actions/setup-r@v1
+        with:
+          r-version: latest
+        
+       - name: 💻 Install R packages and dependencies if needed
+        run: |
+          Rscript -e 'install.packages("palmerpenguins", dependencies = TRUE)'
+        
+        - name: 🧶 Render presentation
+        run: Rscript -e 'rmarkdown::render("IntroToGitHub_GitHubActions_QCBSRSym2022_KH_PHPB_en.Rmd")'
+        
+        - name: 🔺 Upload artifact containing the presentation
+        uses: actions/upload-artifact@v3
+        with:
+          name: presentation-en
+          path: presentation
+
+  checkout-and-deploy:
+   name: Checkout and deploy the presentation within the gh-pages repository
+   runs-on: ubuntu-latest
+   needs: presentation-en-job
+   
+   steps:
+      - name: 🛎️ Checkout again
+        uses: actions/checkout@v2.3.1 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
+        with:
+          persist-credentials: false
+          
+     - name: 🔻 Download artifact containing the presentation
+        uses: actions/download-artifact@v1
+        with:
+         # Artifact name
+         name: presentation-en # optional
+         # Destination path
+         path: presentation/ # optional
+
+      - name: 💎 Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          token: ${{ secrets.ACCESS_TOKEN }}
+          branch: gh-pages # The branch the action should deploy to.
+          folder: presentation/
+          target-folder: presentation-en # The folder the action should deploy
+          clean: true
+```
+
+]
+]
+
+---
+## Jobs can use __environmental variables__. 
+
+.pull-left[
+Environmental variables are then accessible for all steps within a job.
+
+]
+
+.pull-right[
+.scroll-box-20[
+
+```yaml
+on: 
+  push: 
+     branches: 
+       - main
+
+name: render-presentation-en
+
+jobs:
+  presentation-en-job:
+    name: Render the presentation for this workshop
+   runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: presentation/
+*    env:
+*      GITHUB_PAT: ${{ secrets.ACCESS_TOKEN }}
+*      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+
+    steps:
+      - name: 🛎️ Checkout repository
+        uses: actions/checkout@v2
+
+      - name: 💻 Setup R 
+        uses: r-lib/actions/setup-r@v1
+        with:
+          r-version: latest
+        
+       - name: 💻 Install R packages and dependencies if needed
+        run: |
+          Rscript -e 'install.packages("palmerpenguins", dependencies = TRUE)'
+        
+        - name: 🧶 Render presentation
+        run: Rscript -e 'rmarkdown::render("IntroToGitHub_GitHubActions_QCBSRSym2022_KH_PHPB_en.Rmd")'
+        
+        - name: 🔺 Upload artifact containing the presentation
+        uses: actions/upload-artifact@v3
+        with:
+          name: presentation-en
+          path: presentation
+
+  checkout-and-deploy:
+   name: Checkout and deploy the presentation within the gh-pages repository
+   runs-on: ubuntu-latest
+   needs: presentation-en-job
+   
+   steps:
+      - name: 🛎️ Checkout again
+        uses: actions/checkout@v2.3.1 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
+        with:
+          persist-credentials: false
+          
+     - name: 🔻 Download artifact containing the presentation
+        uses: actions/download-artifact@v1
+        with:
+         # Artifact name
+         name: presentation-en # optional
+         # Destination path
+         path: presentation/ # optional
+
+      - name: 💎 Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          token: ${{ secrets.ACCESS_TOKEN }}
+          branch: gh-pages # The branch the action should deploy to.
+          folder: presentation/
+          target-folder: presentation-en # The folder the action should deploy
+          clean: true
+```
+]
+]
+
+---
+
+## Each job runs a series of __steps__.
+
+.pull-left[
+You usually need to combine several _steps_ to complete a job.
+
+A step can run a _script_ that you write or can run an _action_. 
+]
+
+.pull-right[
+.scroll-box-20[
+
+```yaml
+on: 
+  push: 
+     branches: 
+       - main
+
+name: render-presentation-en
+
+jobs:
+  presentation-en-job:
+    name: Render the presentation for this workshop
+   runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: presentation/
+    env:
+      GITHUB_PAT: ${{ secrets.ACCESS_TOKEN }}
+      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+
+*    steps:
+*      - name: 🛎️ Checkout repository
+        uses: actions/checkout@v2
+
+*      - name: 💻 Setup R 
+        uses: r-lib/actions/setup-r@v1
+        with:
+          r-version: latest
+        
+*        - name: 💻 Install R packages and dependencies if needed
+        run: |
+          Rscript -e 'install.packages("palmerpenguins", dependencies = TRUE)'
+        
+*        - name: 🧶 Render presentation
+        run: Rscript -e 'rmarkdown::render("IntroToGitHub_GitHubActions_QCBSRSym2022_KH_PHPB_en.Rmd")'
+        
+*        - name: 🔺 Upload artifact containing the presentation
+        uses: actions/upload-artifact@v3
+        with:
+          name: presentation-en
+          path: presentation
+
+  checkout-and-deploy:
+   name: Checkout and deploy the presentation within the gh-pages repository
+   runs-on: ubuntu-latest
+   needs: presentation-en-job
+   
+*   steps:
+*      - name: 🛎️ Checkout again
+        uses: actions/checkout@v2.3.1 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
+        with:
+          persist-credentials: false
+          
+*      - name: 🔻 Download artifact containing the presentation
+        uses: actions/download-artifact@v1
+        with:
+         # Artifact name
+         name: presentation-en # optional
+         # Destination path
+         path: presentation/ # optional
+
+*      - name: 💎 Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          token: ${{ secrets.ACCESS_TOKEN }}
+          branch: gh-pages # The branch the action should deploy to.
+          folder: presentation/
+          target-folder: presentation-en # The folder the action should deploy
+          clean: true
+```
+
+]
+]
+
+---
+
+## GitHub Actions workflows: __Actions__
+
+An _action_ is an application that performs a task. 
+
+This task is usually something that is __repeated__ often, such as setting up an environment to build your documents, installing R, and building documents like presentations or websites.
+
+Actions help to _simplify_ your workflow.
+
+You can find Actions in the [__GitHub Marketplace__](https://github.com/marketplace?category=&amp;query=&amp;type=actions&amp;verification=). 
+
+.whisper[You can also [create](https://docs.github.com/en/actions/creating-actions/about-custom-actions?learn=create_actions&amp;learnProduct=actions) your own Action, but you can usually find Actions that do what you need them to do!]
+
+.pull-right[
+.scroll-box-20[
+
+```yaml
+on: 
+  push: 
+     branches: 
+       - main
+
+name: render-presentation-en
+
+jobs:
+  presentation-en-job:
+    name: Render the presentation for this workshop
+   runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: presentation/
+    env:
+      GITHUB_PAT: ${{ secrets.ACCESS_TOKEN }}
+      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+
+   steps:
+      - name: 🛎️ Checkout repositor}
+        uses: actions/checkout@v2
+
+      - name: 💻 Setup R
+        uses: r-lib/actions/setup-r@v1
+        with:
+          r-version: latest
+        
+        - name: 💻 Install R packages and dependencies if needed
+        run: |
+          Rscript -e 'install.packages("palmerpenguins", dependencies = TRUE)'
+        
+        - name: 🧶 Render presentation
+        run: Rscript -e 'rmarkdown::render("IntroToGitHub_GitHubActions_QCBSRSym2022_KH_PHPB_en.Rmd")'
+        
+        - name: 🔺 Upload artifact containing the presentation
+        uses: actions/upload-artifact@v3
+        with:
+          name: presentation-en
+          path: presentation
+
+  checkout-and-deploy:
+   name: Checkout and deploy the presentation within the gh-pages repository
+   runs-on: ubuntu-latest
+   needs: presentation-en-job
+   
+   steps:
+      - name: 🛎️ Checkout again
+        uses: actions/checkout@v2.3.1 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
+        with:
+          persist-credentials: false
+          
+      - name: 🔻 Download artifact containing the presentation
+        uses: actions/download-artifact@v1
+        with:
+         # Artifact name
+         name: presentation-en # optional
+         # Destination path
+         path: presentation/ # optional
+
+      - name: 💎 Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          token: ${{ secrets.ACCESS_TOKEN }}
+          branch: gh-pages # The branch the action should deploy to.
+          folder: presentation/
+          target-folder: presentation-en # The folder the action should deploy
+          clean: true
+```
+
+]
+]
+
+---
+## GitHub Actions workflow: Recap
+
+&lt;img src="imgs/overview-actions-simple.png" width="75%" style="display: block; margin: auto;" /&gt;
+
+.cite[image from [GitHub Docs]((https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions?learn=getting_started&amp;learnProduct=actions)]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
