@@ -907,14 +907,106 @@ name: render-presentation-en
 
 ---
 
-## Jobs are run by __runners__.
+## Workflows are run by __runners__.
 
 .pull-left[
-A _runner_ is a server that runs your workflows in a __*fresh* virtual machine__ each time it is triggered. 
+A _runner_ is a server that runs your workflows (<= 31 days) in a __*fresh* virtual machine__ (VM) each time it is triggered. 
 
-Each runner runs one job at a time.
+Each runner runs one job at a time (<= 6h).
 
-GitHub offers __Ubuntu Linux, Microsoft Windows__, and __macOS__ runners. This means you can test your scripts and documents on different systems, to ensure your processes are cross-platform compatible!
+GitHub offers VM with the latest __Ubuntu Linux, Microsoft Windows__, and __macOS__ distributions. This means you can test your scripts and documents on different systems and ensure your processes work cross-platforms!
+
+Win/Linux: 2-core CPU, 7 GB RAM, 14 GB SSD
+macOS: 3-core CPU, 14 GB RAM, 14 GB SSD
+
+]
+
+.pull-right[
+.scroll-box-20[
+```{r, eval = FALSE}
+on: 
+  push: 
+     branches: 
+       - main
+
+name: render-presentation-en
+
+jobs:
+  presentation-en-job:
+    name: Render the presentation for this workshop
+{{   runs-on: ubuntu-latest}}
+    defaults:
+      run:
+        working-directory: presentation/
+    env:
+      GITHUB_PAT: ${{ secrets.ACCESS_TOKEN }}
+      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}  
+
+    steps:
+      - name: 🛎️ Checkout repository
+        uses: actions/checkout@v2
+
+      - name: 💻 Setup R 
+        uses: r-lib/actions/setup-r@v1
+        with:
+          r-version: latest
+        
+       - name: 💻 Install R packages and dependencies if needed
+        run: |
+          Rscript -e 'install.packages("palmerpenguins", dependencies = TRUE)'
+        
+        - name: 🧶 Render presentation
+        run: Rscript -e 'rmarkdown::render("IntroToGitHub_GitHubActions_QCBSRSym2022_KH_PHPB_en.Rmd")'
+        
+        - name: 🔺 Upload artifact containing the presentation
+        uses: actions/upload-artifact@v3
+        with:
+          name: presentation-en
+          path: presentation
+
+  checkout-and-deploy:
+   name: Checkout and deploy the presentation within the gh-pages repository
+{{   runs-on: ubuntu-latest}}
+   needs: presentation-en-job
+   
+   steps:
+      - name: 🛎️ Checkout again
+        uses: actions/checkout@v2.3.1 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
+        with:
+          persist-credentials: false
+          
+     - name: 🔻 Download artifact containing the presentation
+        uses: actions/download-artifact@v1
+        with:
+         # Artifact name
+         name: presentation-en # optional
+         # Destination path
+         path: presentation/ # optional
+
+      - name: 💎 Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          token: ${{ secrets.ACCESS_TOKEN }}
+          branch: gh-pages # The branch the action should deploy to.
+          folder: presentation/
+          target-folder: presentation-en # The folder the action should deploy
+          clean: true
+```
+
+]
+]
+
+
+---
+
+## Workflows are run by __runners__.
+
+.pull-left[
+**What if GitHub-hosted runners are too limiting for my purposes?**
+
+No problem! 
+
+You can install GitHub's REST API in your preferred machine (cloud-based, institutional or own server), assign it to your repository, and use GitHub Actions with fewer usage limitations.
 
 ]
 
@@ -997,9 +1089,11 @@ jobs:
 ## __Jobs__ run in a working directory
 
 .pull-left[
-Each job is run in a specific __working directory__.
+Jobs can run in specific __working directories__.
 
 Here, our __working directory__ is the `presentation` folder in our repository, where we are storing the RMarkdown document that generates this presentation.
+
+When you do not specify a working directory, the job runs in the root of your repository.
 
 ]
 
@@ -1172,7 +1266,7 @@ jobs:
 .pull-left[
 You usually need to combine several _steps_ to complete a job.
 
-A step can run a _script_ that you write or can run an _action_. 
+A step can **run** a _script_ that you write or can **use** an existing _action_ to achieve an objective. 
 ]
 
 .pull-right[
