@@ -627,9 +627,78 @@ YAML is a human-readable programming language. It is important to remember that 
 ]
 
 .pull-right[
-```{r, echo = FALSE, eval = TRUE, out.width="60%", fig.cap="An example of a YAML file containing a workflow."}
-knitr::include_graphics("imgs/yaml_example.png")
+.scroll-box-20[
+```{r, eval = FALSE}
+on: 
+  push: 
+     branches: 
+       - main
+
+name: render-presentation-en
+
+jobs:
+  presentation-en-job:
+    name: Render the presentation for this workshop
+   runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: presentation/
+    env:
+      GITHUB_PAT: ${{ secrets.ACCESS_TOKEN }}
+      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+
+    steps:
+      - name: 🛎️ Checkout repository
+        uses: actions/checkout@v2
+
+      - name: 💻 Setup R 
+        uses: r-lib/actions/setup-r@v1
+        with:
+          r-version: latest
+        
+        - name: 💻 Install R packages and dependencies if needed
+        run: |
+          Rscript -e 'install.packages("palmerpenguins", dependencies = TRUE)'
+        
+        - name: 🧶 Render presentation
+        run: Rscript -e 'rmarkdown::render("IntroToGitHub_GitHubActions_QCBSRSym2022_KH_PHPB_en.Rmd")'
+        
+        - name: 🔺 Upload artifact containing the presentation
+        uses: actions/upload-artifact@v3
+        with:
+          name: presentation-en
+          path: presentation
+
+  checkout-and-deploy:
+   name: Checkout and deploy the presentation within the gh-pages repository
+   runs-on: ubuntu-latest
+   needs: presentation-en-job
+   
+   steps:
+      - name: 🛎️ Checkout again
+        uses: actions/checkout@v2.3.1 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
+        with:
+          persist-credentials: false
+          
+      - name: 🔻 Download artifact containing the presentation
+        uses: actions/download-artifact@v1
+        with:
+         # Artifact name
+         name: presentation-en # optional
+         # Destination path
+         path: presentation/ # optional
+
+      - name: 💎 Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          token: ${{ secrets.ACCESS_TOKEN }}
+          branch: gh-pages # The branch the action should deploy to.
+          folder: presentation/
+          target-folder: presentation-en # The folder the action should deploy
+          clean: true
 ```
+
+]
 ]
 
 ---
@@ -677,6 +746,47 @@ jobs:
         uses: r-lib/actions/setup-r@v1
         with:
           r-version: latest
+        
+       - name: 💻 Install R packages and dependencies if needed
+        run: |
+          Rscript -e 'install.packages("palmerpenguins", dependencies = TRUE)'
+        
+        - name: 🧶 Render presentation
+        run: Rscript -e 'rmarkdown::render("IntroToGitHub_GitHubActions_QCBSRSym2022_KH_PHPB_en.Rmd")'
+        
+        - name: 🔺 Upload artifact containing the presentation
+        uses: actions/upload-artifact@v3
+        with:
+          name: presentation-en
+          path: presentation
+
+  checkout-and-deploy:
+   name: Checkout and deploy the presentation within the gh-pages repository
+   runs-on: ubuntu-latest
+   needs: presentation-en-job
+   
+   steps:
+      - name: 🛎️ Checkout again
+        uses: actions/checkout@v2.3.1 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
+        with:
+          persist-credentials: false
+          
+     - name: 🔻 Download artifact containing the presentation
+        uses: actions/download-artifact@v1
+        with:
+         # Artifact name
+         name: presentation-en # optional
+         # Destination path
+         path: presentation/ # optional
+
+      - name: 💎 Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          token: ${{ secrets.ACCESS_TOKEN }}
+          branch: gh-pages # The branch the action should deploy to.
+          folder: presentation/
+          target-folder: presentation-en # The folder the action should deploy
+          clean: true
 ```
 
 ]
@@ -691,9 +801,7 @@ A workflow is an automated process that runs one or more __jobs__.
 
 Jobs include one or more _steps_ to achieve some objective (checking code, producing a document, etc.).
 
-You can run a single job, but often you will need to configure your workflow to run several jobs. 
-
-Jobs can run sequentially or in parallel.
+Jobs can run sequentially or in parallel. Here, we specify that our second job `needs: presentation-en-job` to make the jobs run sequentially. More on this later!
 
 ]
 
@@ -726,6 +834,47 @@ name: render-presentation-en
         uses: r-lib/actions/setup-r@v1
         with:
           r-version: latest
+        
+       - name: 💻 Install R packages and dependencies if needed
+        run: |
+          Rscript -e 'install.packages("palmerpenguins", dependencies = TRUE)'
+        
+        - name: 🧶 Render presentation
+        run: Rscript -e 'rmarkdown::render("IntroToGitHub_GitHubActions_QCBSRSym2022_KH_PHPB_en.Rmd")'
+        
+        - name: 🔺 Upload artifact containing the presentation
+        uses: actions/upload-artifact@v3
+        with:
+          name: presentation-en
+          path: presentation
+
+{{  checkout-and-deploy:}}
+{{   name: Checkout and deploy the presentation within the gh-pages repository}}
+   runs-on: ubuntu-latest
+{{   needs: presentation-en-job }}
+   
+   steps:
+      - name: 🛎️ Checkout again
+        uses: actions/checkout@v2.3.1 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
+        with:
+          persist-credentials: false
+          
+     - name: 🔻 Download artifact containing the presentation
+        uses: actions/download-artifact@v1
+        with:
+         # Artifact name
+         name: presentation-en # optional
+         # Destination path
+         path: presentation/ # optional
+
+      - name: 💎 Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          token: ${{ secrets.ACCESS_TOKEN }}
+          branch: gh-pages # The branch the action should deploy to.
+          folder: presentation/
+          target-folder: presentation-en # The folder the action should deploy
+          clean: true
 ```
 
 ]
@@ -826,10 +975,12 @@ jobs:
 ]
 
 ---
-## Jobs are run in a __working directory__.
+## __Jobs__ run in a working directory
 
 .pull-left[
-Text here
+Each job is run in a specific __working directory__.
+
+Here, our __working directory__ is the `presentation` folder in our repository, where we are storing the RMarkdown document that generates this presentation.
 
 ]
 
@@ -909,11 +1060,16 @@ jobs:
 ]
 
 ---
-## Jobs can use __environmental variables__. 
+## Jobs sometimes require [__environment variables__](https://docs.github.com/en/actions/learn-github-actions/environment-variables). 
 
 .pull-left[
-Environmental variables are then accessible for all steps within a job.
+Environment variables store information that can be referenced in a step of your workflow.
 
+Here, we have two environment variables, which are both __encrypted tokens__ that give the workflow permission to access and write files in our repository. 
+
+You could set API keys as environment variables in a workflow that routinely pulls a dataset using an API, for example. 
+
+_More on environment variables on [GitHub Docs](https://docs.github.com/en/actions/learn-github-actions/environment-variables)._
 ]
 
 .pull-right[
@@ -1087,7 +1243,6 @@ jobs:
 
 ## GitHub Actions Workflow: Recap
 
-
 <br><br>
 ```{r, echo = FALSE, eval = TRUE, out.width="75%", fig.align = "center"}
 knitr::include_graphics("imgs/overview-actions-simple.png") 
@@ -1142,7 +1297,10 @@ Actions help to _simplify_ your workflow.
 .pull-right-65[
 .shout[The [__r-lib/actions__](https://github.com/r-lib/actions) repository also lists several Actions for R.]
 
-![](imgs/rlib_actions.png)
+
+```{r, echo = FALSE, eval = TRUE, out.width="75%", fig.align = "center"}
+knitr::include_graphics("imgs/rlib_actions.png") 
+```
 
 ]
 
