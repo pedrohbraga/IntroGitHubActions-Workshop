@@ -123,15 +123,26 @@ class: center, middle, inverse
 
 ---
 
-## How GitHub works (in a nutshell)
+.pull-left-65[
 
-__Git__ is an open source version-control system.
+### How GitHub works (in a nutshell)
 
-__GitHub__ is a platform for hosting and collaborating on Git repositories.
+__GitHub__ is a platform for hosting and collaborating on __Git__ repositories.
 
-You can think of Git as a tool that allows you to _track the changes_ you make in your documents on your local computer, and apply them to the same documents that are hosted in a _repository_ on GitHub. 
+Git is a __version-control system__ that _tracks changes_ made to documents hosted in your local computer, and apply them to the same documents hosted in a _repository_ on GitHub. 
 
-Git also allows you to apply any changes that have been made on the GitHub repository (also called the _remote_) to the documents on your local computer.
+Git also allows you to __pull__ any changes that have been made on the GitHub _remote_ repository to the documents on your local computer.
+
+]
+
+.pull-right-35[
+
+.center[
+![](imgs/ad_hoc_versioning.png)
+
+![](imgs/git_versioning.png)
+]
+]
 
 ---
 class: center, middle, inverse
@@ -217,13 +228,18 @@ knitr::include_graphics("imgs/github_workflow/6.png")
 Note: You can flip back and forth between these _commits_ to work on different versions of your documents. That means you don't have to keep saving files with ever-increasing file names (e.g. Final_draft_May2022_comments_June2022_finaledits.pdf).
 
 ---
+background-color: #F4FFE7
 
 ![](imgs/github-illustrated-series/github_wickham_bryan_git_quote.png)
 .cite[Artwork by @allison_horst].
 
 ---
-![](imgs/github-illustrated-series/github_fall.png)
-.cite[Artwork by @allison_horst].
+background-color: #A7E3FF
+background-image: url("imgs/github-illustrated-series/github_fall.png")
+background-position: center
+background-size: contain
+
+.footnote[Artwork by @allison_horst].
 
 ---
 ## A __collaborative__ GitHub workflow
@@ -233,6 +249,8 @@ GitHub becomes even more powerful when you are working collaboratively in a repo
 When working on a project with a collaborator, they can start a __new branch__ from the main repository. 
 
 Branches are essentially a _working copy_ of the repository, where you can commit changes _without affecting the main repository_. 
+
+--
 
 Branches can be __merged __ into the main repository through a __pull request__, which can be reviewed and approved by the owner of the repository (or other authorized contributors). 
 
@@ -262,7 +280,7 @@ knitr::include_graphics("imgs/github_workflow/10.png")
 ```
 
 ---
-### Step 4: Merge the branch into the remote repository
+## .font80[Step 4: Merge the branch into the remote repository]
 
 ```{r, echo = FALSE, eval = TRUE, out.width="75%"}
 knitr::include_graphics("imgs/github_workflow/11.png")
@@ -277,26 +295,25 @@ class: middle, center, inverse
 ---
 class: center, middle, inverse
 
-# Part 2: Introduction to `GitHub Actions`
+# Part 2: Introduction to **GitHub Actions**
 
 ---
 
 ### Common research workflows in ecology and evolution
 
-.pull-left[
+.pull-left-35[
 Research in ecology and evolution often involves the processing and merging of data from multiple sources.
 
-We commonly combine, clean multiple data files (usually, types of spreadsheets) for subsequent analysis (in the form of code).
+We commonly modify multiple data files for subsequent analysis.
 
 This process is rarely done just once in a project's lifetime: we add and remove information, and adjust our analysis. 
 
 .onfire[This increases output generation and errors.]
 ]
 
-.pull-right[
+.pull-right-65[
 
-_Include diagram._
-
+![](https://www.dlib.org/dlib/january17/nuest/nuest-fig2.png)
 ]
 
 ---
@@ -312,7 +329,7 @@ Unsurprisingly, errors increase with lines of code [_e.g._, 15 to 50 errors to 1
 
 A sign error, a missing semicolon, an off-by-one error in matching columns of data may render the results complete noise (_e.g._, Chang _et al_. 2006, retraction from Science).
 
-Rampant software errors may undermine scientific results (Soergel, 2015), cost money (_CITE_), and even imply in retractions (_CITE_).
+Rampant software errors may undermine scientific results (Soergel, 2015), cost money (_CITE_), and even imply in the retraction of scientific publications (e.g., ).
 ]
 ]
 
