@@ -123,15 +123,26 @@ class: center, middle, inverse
 
 ---
 
-## How GitHub works (in a nutshell)
+.pull-left[
 
-__Git__ is an open source version-control system.
+### How GitHub works (in a nutshell)
 
-__GitHub__ is a platform for hosting and collaborating on Git repositories.
+__GitHub__ is a platform for hosting and collaborating on __Git__ repositories.
 
-You can think of Git as a tool that allows you to _track the changes_ you make in your documents on your local computer, and apply them to the same documents that are hosted in a _repository_ on GitHub. 
+Git is a __version-control system__ that _tracks changes_ made to documents hosted in your local computer, and apply them to the same documents hosted in a _repository_ on GitHub. 
 
-Git also allows you to apply any changes that have been made on the GitHub repository (also called the _remote_) to the documents on your local computer.
+Git also allows you to __pull__ any changes that have been made on the GitHub _remote_ repository to the documents on your local computer.
+
+]
+
+.pull-right[
+
+.center[
+![scale:40%](imgs/ad_hoc_versioning.png)
+
+![](imgs/git_versioning.png)
+]
+]
 
 ---
 class: center, middle
