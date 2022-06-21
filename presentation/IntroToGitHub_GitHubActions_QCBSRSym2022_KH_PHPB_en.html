@@ -14,18 +14,10 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-.title[
 # Introduction to GitHub and GitHub Actions
-]
-.author[
 ### <b>Pedro Henrique P. Braga</b> (Concordia University) <br><b>Katherine Hébert</b> (Université de Sherbrooke)<br><br>
-]
-.institute[
 ### 4th QCBS R Symposium<br>QCBS R Workshop Series <br>
-]
-.date[
 ### 2022-06-21<br> <span class="footnote"> Use arrow keys to navigate. Press <code>H</code> for help. </span>
-]
 
 ---
 
@@ -101,15 +93,26 @@ class: center, middle, inverse
 
 ---
 
-## How GitHub works (in a nutshell)
+.pull-left-65[
 
-__Git__ is an open source version-control system.
+### How GitHub works (in a nutshell)
 
-__GitHub__ is a platform for hosting and collaborating on Git repositories.
+__GitHub__ is a platform for hosting and collaborating on __Git__ repositories.
 
-You can think of Git as a tool that allows you to _track the changes_ you make in your documents on your local computer, and apply them to the same documents that are hosted in a _repository_ on GitHub. 
+Git is a __version-control system__ that _tracks changes_ made to documents hosted in your local computer, and apply them to the same documents hosted in a _repository_ on GitHub. 
 
-Git also allows you to apply any changes that have been made on the GitHub repository (also called the _remote_) to the documents on your local computer.
+Git also allows you to __pull__ any changes that have been made on the GitHub _remote_ repository to the documents on your local computer.
+
+]
+
+.pull-right-35[
+
+.center[
+![](imgs/ad_hoc_versioning.png)
+
+![](imgs/git_versioning.png)
+]
+]
 
 ---
 class: center, middle
@@ -143,7 +146,7 @@ tests, and more
 ---
 ### Step 1: Setting up a repository.
 
-You can also _clone_ a repository from GitHub to your local computer, which stays linked to the remote repository. _Forking_ a repository copies the repository without staying linked to the remote. 
+You can also _clone_ or _fork_ a repository from GitHub to your local computer. 
 
 &lt;img src="imgs/github_workflow/1.png" width="75%" /&gt;
 
@@ -183,13 +186,18 @@ You then __push__ the changes that you committed on your local computer to the _
 Note: You can flip back and forth between these _commits_ to work on different versions of your documents. That means you don't have to keep saving files with ever-increasing file names (e.g. Final_draft_May2022_comments_June2022_finaledits.pdf).
 
 ---
+background-color: #F4FFE7
 
 ![](imgs/github-illustrated-series/github_wickham_bryan_git_quote.png)
 .cite[Artwork by @allison_horst].
 
 ---
-![](imgs/github-illustrated-series/github_fall.png)
-.cite[Artwork by @allison_horst].
+background-color: #A7E3FF
+background-image: url("imgs/github-illustrated-series/github_fall.png")
+background-position: center
+background-size: contain
+
+.footnote[Artwork by @allison_horst].
 
 ---
 ## A __collaborative__ GitHub workflow
@@ -199,6 +207,8 @@ GitHub becomes even more powerful when you are working collaboratively in a repo
 When working on a project with a collaborator, they can start a __new branch__ from the main repository. 
 
 Branches are essentially a _working copy_ of the repository, where you can commit changes _without affecting the main repository_. 
+
+--
 
 Branches can be __merged __ into the main repository through a __pull request__, which can be reviewed and approved by the owner of the repository (or other authorized contributors). 
 
@@ -222,12 +232,12 @@ Let's walk through an example of this workflow.
 &lt;img src="imgs/github_workflow/10.png" width="75%" /&gt;
 
 ---
-## Step 4: Merge the branch into the remote repository
+## .font80[Step 4: Merge the branch into the remote repository]
 
 &lt;img src="imgs/github_workflow/11.png" width="75%" /&gt;
 
 ---
-## Exercise: Set up a GitHub repository
+## Exercise 1: Set up a GitHub repository
 
 Let's make a repository that we will use to play with GitHub Actions later in this workshop!
 
@@ -254,26 +264,25 @@ Let's make a repository that we will use to play with GitHub Actions later in th
 ---
 class: center, middle, inverse
 
-# Part 2: Introduction to `GitHub Actions`
+# Part 2: Introduction to **GitHub Actions**
 
 ---
 
 ### Common research workflows in ecology and evolution
 
-.pull-left[
+.pull-left-35[
 Research in ecology and evolution often involves the processing and merging of data from multiple sources.
 
-We commonly combine, clean multiple data files (usually, types of spreadsheets) for subsequent analysis (in the form of code).
+We commonly modify multiple data files for subsequent analysis.
 
 This process is rarely done just once in a project's lifetime: we add and remove information, and adjust our analysis. 
 
 .onfire[This increases output generation and errors.]
 ]
 
-.pull-right[
+.pull-right-65[
 
-_Include diagram._
-
+![](https://www.dlib.org/dlib/january17/nuest/nuest-fig2.png)
 ]
 
 ---
@@ -289,7 +298,7 @@ Unsurprisingly, errors increase with lines of code [_e.g._, 15 to 50 errors to 1
 
 A sign error, a missing semicolon, an off-by-one error in matching columns of data may render the results complete noise (_e.g._, Chang _et al_. 2006, retraction from Science).
 
-Rampant software errors may undermine scientific results (Soergel, 2015), cost money (_CITE_), and even imply in retractions (_CITE_).
+Rampant software errors may undermine scientific results (Soergel, 2015), cost money (_CITE_), and even imply in the retraction of scientific publications (e.g., ).
 ]
 ]
 
@@ -1018,27 +1027,11 @@ Actions help to _simplify_ your workflow.
 
 ]
 
----
+???
 
-## __GitHub Actions__ perform tasks 
+You can also [create](https://docs.github.com/en/actions/creating-actions/about-custom-actions?learn=create_actions&amp;learnProduct=actions) your own Action, but you can usually find Actions that do what you need them to do!
 
-.pull-left-35[
-
-A __GitHub Action__ is an application that performs a task. 
-
-This task is usually something that is __repeated__ often, such as setting up an environment to build your documents, installing R, and building documents like presentations or websites.
-
-Actions help to _simplify_ your workflow.
-
-]
-
-.pull-right-65[
-.shout[The [__r-lib/actions__](https://github.com/r-lib/actions) repository also lists several Actions for R.]
-
-![](imgs/rlib_actions.png)
-
-]
-
+https://github.com/r-lib/actions
 ---
 
 ## __GitHub Actions__: checkout
@@ -1385,19 +1378,6 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
-// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
-// screen reader (see PR #262)
-(function(d) {
-  let res = {};
-  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
-    const t = tr.querySelector('td:nth-child(2)').innerText;
-    tr.querySelectorAll('td:first-child .key').forEach(key => {
-      const k = key.innerText;
-      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
-    });
-  });
-  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
-})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable
