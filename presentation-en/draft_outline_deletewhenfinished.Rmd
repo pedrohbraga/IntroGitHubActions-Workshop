@@ -1,0 +1,19 @@
+class: inverse
+### GitHub & GitHub Actions are powerful tools for collaboration and open science
+
+GitHub is increasingly used by researchers as a tool to work on their research in an __open__ and __reproducible__ way. Like our science, GitHub is especially powerful in __collaborative__ contexts. 
+
+Today's workshop will discuss:
+
+- How GitHub can help you do open, transparent, and collaborative science (_briefly_)
+
+- How to use GitHub Actions to automate some common tasks in research, to keep your work up to date as you (and your collaborators) contribute to a project
+  - **Code checking** on a different system than your local computer
+  - **Performing** analyses and making visualizations  
+  - **Rendering** and __deploying__ documents (presentations, webpages, Shiny apps) 
+  
+- How to __troubleshoot__ GitHub Actions when they don't work!
+
+???
+
+> _.small[Today, we will spend less time on _how to use GitHub_ - but don't worry! There are many resources available freely online to learn about GitHub (e.g. [Happy Git and GitHub for the useR](https://happygitwithr.com/) by Jennifer Bryan). ]_
