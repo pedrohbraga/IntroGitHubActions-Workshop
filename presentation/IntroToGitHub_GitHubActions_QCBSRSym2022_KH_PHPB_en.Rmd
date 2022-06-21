@@ -637,7 +637,9 @@ class: center, middle, inverse
 .pull-left[
 To make a workflow, you write a __YAML__ file that is stored in your repository, in a directory called `.github/workflows`.
 
-YAML (originally, **y**et **a**nother **m**arkup **l**anguage) is a human-readable programming language. It is important to remember that _indentation matters_ in YAML!
+YAML (originally, **y**et **a**nother **m**arkup **l**anguage) is a human-readable programming language.
+
+It is important to remember that _indentation matters_ in YAML!
 
 ]
 
@@ -727,7 +729,7 @@ Workflows run when they are __triggered__ by an event.
 To trigger a workflow, you can:
 
 - __Manually__ start the workflow
-- Define triggers `on` __events__ in your repository (e.g. _pushes_ to your `main` repository branch, a _pull request_, a new _issue_, etc.)
+- Define triggers `on` __events__ in your repository (_e.g._, _pushes_ to your `main` repository branch, a _pull request_, a new _issue_)
 - Set a __schedule__ to regularly trigger the workflow.
 
 ]
@@ -814,9 +816,11 @@ jobs:
 .pull-left[
 A workflow is an automated process that runs one or more __jobs__. 
 
-Jobs include one or more _steps_ to achieve some objective (checking code, producing a document, etc.).
+Jobs include one or more _steps_ to achieve an objective (checking code, producing a document, etc.).
 
-Jobs can run sequentially or in parallel. Here, we specify that our second job `needs: presentation-en-job` to make the jobs run sequentially. More on this later!
+Jobs can run sequentially or in parallel. 
+
+Here, we specify that our second job `needs: presentation-en-job` to sequentially run the jobs. _More on this later!_
 
 ]
 
@@ -910,7 +914,7 @@ A _runner_ is a server that runs your workflows in a __*fresh* virtual machine__
 
 Each runner runs one job at a time.
 
-GitHub offers __Ubuntu Linux, Microsoft Windows, and macOS__ runners. This means you can test your scripts and documents on different systems, to ensure your files work the same for everyone else!
+GitHub offers __Ubuntu Linux, Microsoft Windows__, and __macOS__ runners. This means you can test your scripts and documents on different systems, to ensure your processes are cross-platform compatible!
 
 ]
 
@@ -1082,7 +1086,7 @@ Environment variables store information that can be referenced in a step of your
 
 Here, we have two environment variables, which are both __encrypted tokens__ that give the workflow permission to access and write files in our repository. 
 
-You could set API keys as environment variables in a workflow that routinely pulls a dataset using an API, for example. 
+You could set API _credentials_ as environment variables in a workflow that routinely pulls a data set using an API, for example. 
 
 _More on environment variables on [GitHub Docs](https://docs.github.com/en/actions/learn-github-actions/environment-variables)._
 ]
