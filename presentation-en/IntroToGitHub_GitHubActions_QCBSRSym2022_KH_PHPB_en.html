@@ -256,9 +256,14 @@ class: center, middle, inverse
 
 ---
 
+### 
+
+---
+
 ### Common research workflows in ecology and evolution
 
 .pull-left-35[
+.small[
 Research in ecology and evolution often involves the processing and merging of data from multiple sources.
 
 We commonly modify multiple data files for subsequent analysis.
@@ -267,6 +272,7 @@ This process is rarely done just once in a project's lifetime: we add and remove
 
 .onfire[This increases output generation and errors.]
 ]
+]
 
 .pull-right-65[
 
@@ -274,7 +280,9 @@ This process is rarely done just once in a project's lifetime: we add and remove
 ]
 
 ---
-class: inverse
+
+---
+class: middle
 
 ## Errors can be costly.
 
@@ -286,16 +294,19 @@ Unsurprisingly, errors increase with lines of code [_e.g._, 15 to 50 errors to 1
 
 A sign error, a missing semicolon, an off-by-one error in matching columns of data may render the results complete noise (_e.g._, Chang _et al_. 2006, retraction from Science).
 
-Rampant software errors may undermine scientific results (Soergel, 2015), cost money (_CITE_), and even imply in the retraction of scientific publications (e.g., ).
+Rampant software errors undermine scientific results (Soergel, 2015), cost money and time ($1.11 trillion in 2018 for the US, CISQ), and even imply in the retraction of scientific publications.
 ]
 ]
 
 .pull-right[
-
+![](imgs/retractions-science.jpeg)
 
 ]
 
 ---
+class: middle, inverse
+background-color: #00A7BD
+
 ### Mitigating errors: no 'blind trust', and test early, test often
 
 .pull-left[
@@ -319,16 +330,64 @@ Practical recommendations:
 In 2013, only 30% of researchers using SDMs reported that they used particular software because it had been "validated against other methods in peer-review publications. This rose to 57% for those who used "click-and-run" software with easy-to-manipulate user interfaces and dropped to 11% for those who used "syntax-driven" platforms. Further, 7, 9, and 18% of scientists cited "the developer is well-respected," "personal recommendation," and "recommendation from a close colleague," respectively, as reasons for using software. Only 8% claimed they had validated software against other methods as a primary reason for choice; 79% expressed a desire to learn additional software and programming skills.
 
 ---
-### A structured computing workflow can help with reproducibility
+
+### Traditional and modern research(ers)*
+
+--
+
+.column-left[
+.center[
+.bolder[.font400[τ]]
+]
+- broad knowledge: cross-discipline, collaboration
+- deep knowledge (skills and expersite):
+  - domain: _ecology_
+] 
+
+--
+
+.column-centre[
+.center[
+.bolder[.font400[π]]
+]
+- broad knowledge: cross-discipline, collaboration
+- deep knowledge (skills and expersite):
+  - domain: _ecology_
+  - domain: _stats + computation_
+]
+
+--
+
+.column-right[
+.center[
+.bolder[.font400[Μ]]
+]
+- broad knowledge: cross-discipline, collaboration
+- deep knowledge
+  - domain: _ecology_
+  - domain: _stats + computation_
+  - domain: _reproducibility_
+  - **ninja**
+]
+
+
+.footnote[.tiny[Metaphor from fields in organizational development; _e.g._ [Lee &amp; Choi, 2003](doi.org/10.1080/07421222.2003.11045756)]]
+
+
+---
+### A structured computing workflow can help with reproducibility.
 
 A **computing workflow** can help strategically reproducing results every time data or code is modified.
 
-.pull-left[
+.column-left[
+
 #### Primary criterion 
 1. Reproducibility
+
 ]
 
-.pull-right[
+.column-centre[
+
 #### Secondary criteria
 
 1. Accurate
@@ -336,12 +395,21 @@ A **computing workflow** can help strategically reproducing results every time d
 3. Scalable
 4. Adaptable
 5. Accessible
+]
+
+--
+
+.column-right[
+Ideally, we are looking for an efficient organization of data and code, that allows us to reproduce the same results of our study with the minimal number of manual processes.
 
 ]
 
-_Exemplify with GitHub_
 
-Automated data and software management can help reduce the time and effort required by researchers (Yenni _et al_., 2018).
+Data + Code + Metadata --&gt; VCS --&gt; Analysis --&gt; Report --&gt; Submission
+
+--
+
+**Automated data and software management** can help reduce the time and effort required by researchers (Yenni _et al_., 2018).
 
 
 ---

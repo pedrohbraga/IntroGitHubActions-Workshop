@@ -134,6 +134,7 @@ h1, h2, h3, h4 {
 .font180, .code180 .remark-code, .code180 .remark-inline-code{ font-size: 180%; }
 .font190, .code190 .remark-code, .code190 .remark-inline-code{ font-size: 190%; }
 .font200, .code200 .remark-code, .code200 .remark-inline-code{ font-size: 200%; }
+.font400, .code400 .remark-code, .code400 .remark-inline-code{ font-size: 400%; }
 
 .brand-red { color: #e64626; }
 .brand-blue { color: #0148A4; }
