@@ -274,6 +274,8 @@ class: middle, center, inverse
 
 ### Let's make a GitHub repository that we will use to play with GitHub Actions later in this workshop!
 
+[__Click here to open the exercise!__](https://pedrohbraga.github.io/IntroGitHubActions-Workshop/exercises/Exercise1.html#1)
+
 ---
 class: center, middle, inverse
 
