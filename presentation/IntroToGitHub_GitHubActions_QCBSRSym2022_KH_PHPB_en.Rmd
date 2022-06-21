@@ -1537,7 +1537,13 @@ Rscript -e 'code here'
 
 .pull-left[
 
-TEXT HERE
+__Artifacts__ are temporary files (or several files) generated during a workflow run.
+
+You can __share__ artifacts between jobs within a workflow. 
+
+For example, you can build an output, save the artifact, and pass it into a job that tests it.
+
+GitHub stores workflow artifacts for __90 days__ by default.
 
 ]
 
@@ -1560,11 +1566,11 @@ TEXT HERE
         - name: 🧶 Render presentation
           run: Rscript -e 'rmarkdown::render("IntroToGitHub_GitHubActions_QCBSRSym2022_KH_PHPB_en.Rmd")'
         
-        - name: 🔺 Upload artifact containing the presentation
-          uses: actions/upload-artifact@v3
-          with:
-            name: presentation-en
-            path: presentation
+          {{- name: 🔺 Upload artifact containing the presentation}}
+          {{uses: actions/upload-artifact@v3}}
+          {{with:}}
+            {{name: presentation-en}}
+            {{path: presentation}}
 
   checkout-and-deploy:
    name: Checkout and deploy the presentation within the gh-pages repository
@@ -1577,13 +1583,86 @@ TEXT HERE
         with:
           persist-credentials: false
           
-      - name: 🔻 Download artifact containing the presentation
-        uses: actions/download-artifact@v1
-        with:
-         # Artifact name
-         name: presentation-en # optional
+      {{- name: 🔻 Download artifact containing the presentation}}
+        {{uses: actions/download-artifact@v1}}
+        {{with:}}
+         # Artifact name 
+         {{name: presentation-en}} # optional
          # Destination path
-         path: presentation/ # optional
+         {{path: presentation/}} # optional
+
+      - name: 💎 Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          token: ${{ secrets.ACCESS_TOKEN }}
+          branch: gh-pages # The branch the action should deploy to.
+          folder: presentation/
+          target-folder: presentation-en # The folder the action should deploy
+          clean: true
+```
+
+]
+]
+
+---
+
+## __GitHub Actions__: [Artifacts](https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts)
+
+.pull-left[
+
+Our first job __renders__ the presentation from RMarkdown to HTML. 
+
+The presentation is __uploaded__ as an artifact during this first job, becoming available for the next step in our workflow.
+
+To deploy the presentation as a webpage, we need to __download__ the artifact from the previous job. 
+
+Once the presentation is deployed, we do not need this artifact anymore.  
+
+]
+
+.pull-right[
+.scroll-box-20[
+```{r, eval = FALSE}
+...
+   steps:
+      - name: 🛎️ Checkout repository 
+      uses: actions/checkout@v2 
+
+      - name: 💻 Setup R
+        uses: r-lib/actions/setup-r@v1
+        with:
+          r-version: latest
+        
+        - name: 💻 Install R packages and dependencies if needed
+          run: Rscript -e 'install.packages("palmerpenguins", dependencies = TRUE)'
+        
+        - name: 🧶 Render presentation
+          run: Rscript -e 'rmarkdown::render("IntroToGitHub_GitHubActions_QCBSRSym2022_KH_PHPB_en.Rmd")'
+        
+          {{- name: 🔺 Upload artifact containing the presentation}}
+          {{uses: actions/upload-artifact@v3}}
+          {{with:}}
+            {{name: presentation-en}}
+            {{path: presentation}}
+
+  checkout-and-deploy:
+   name: Checkout and deploy the presentation within the gh-pages repository
+   runs-on: ubuntu-latest
+   needs: presentation-en-job
+   
+   steps:
+      - name: 🛎️ Checkout again
+        uses: actions/checkout@v2.3.1 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
+        with:
+          persist-credentials: false
+          
+      {{- name: 🔻 Download artifact containing the presentation}}
+        {{uses: actions/download-artifact@v1}}
+        {{with:}}
+         # Artifact name 
+         {{name: presentation-en}} # optional
+         # Destination path
+         {{path: presentation/}} # optional
 
       - name: 💎 Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.4
@@ -1602,11 +1681,98 @@ TEXT HERE
 
 ## __GitHub Actions__: Deployment
 
+.pull-left[
+
+To deploy your output, you will need to:
+- Create a new branch on your repository, called `gh-pages`.
+- Write the [Deploy to GitHub Pages](https://github.com/JamesIves/github-pages-deploy-action) Action into your workflow
+
+This action will take care of deploying the artifact you have created to a [GitHub Page*](https://pages.github.com/). It can be used for many types of outputs!
+
+*GitHub Pages are websites that are hosted directly from your repository. 
+
+]
+
+.pull-right[
+.scroll-box-20[
+```{r, eval = FALSE}
+...
+   steps:
+      - name: 🛎️ Checkout repository 
+      uses: actions/checkout@v2 
+
+      - name: 💻 Setup R
+        uses: r-lib/actions/setup-r@v1
+        with:
+          r-version: latest
+        
+        - name: 💻 Install R packages and dependencies if needed
+          run: Rscript -e 'install.packages("palmerpenguins", dependencies = TRUE)'
+        
+        - name: 🧶 Render presentation
+          run: Rscript -e 'rmarkdown::render("IntroToGitHub_GitHubActions_QCBSRSym2022_KH_PHPB_en.Rmd")'
+        
+          - name: 🔺 Upload artifact containing the presentation}}
+          uses: actions/upload-artifact@v3}}
+          with:
+            name: presentation-en
+            path: presentation
+
+  checkout-and-deploy:
+   name: Checkout and deploy the presentation within the gh-pages repository
+   runs-on: ubuntu-latest
+   needs: presentation-en-job
+   
+   steps:
+      - name: 🛎️ Checkout again
+        uses: actions/checkout@v2.3.1 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
+        with:
+          persist-credentials: false
+          
+      - name: 🔻 Download artifact containing the presentation
+        uses: actions/download-artifact@v1
+        with:
+         # Artifact name 
+         name: presentation-en # optional
+         # Destination path
+         path: presentation/ # optional
+
+      {{- name: 💎 Deploy to GitHub Pages}}
+        {{uses: JamesIves/github-pages-deploy-action@4.1.4}}
+        with:
+          token: ${{ secrets.ACCESS_TOKEN }}
+          {{branch: gh-pages}} # The branch the action should deploy to.
+          folder: presentation/
+          target-folder: presentation-en # The folder the action should deploy
+          clean: true
+```
+
+]
+]
+
+---
+
+## __GitHub Actions__: Deployment
 
 .pull-left[
 
-TEXT HERE
+To deploy your output, you will need to:
+- Create a new branch on your repository, called `gh-pages`.
+- Write the [Deploy to GitHub Pages](https://github.com/JamesIves/github-pages-deploy-action) Action into your workflow
 
+This action will take care of deploying the artifact you have created to a [GitHub Page*](https://pages.github.com/). It can be used for many types of outputs!
+
+*GitHub Pages are websites that are hosted directly from your repository. 
+
+]
+
+.pull-right[
+
+[
+```{r, echo = FALSE, eval = TRUE, out.width = "90%", fig.align='center'}
+knitr::include_graphics("imgs/deploy-ghpage.png")
+```
+](https://github.com/JamesIves/github-pages-deploy-action)
 ]
 
 ---
