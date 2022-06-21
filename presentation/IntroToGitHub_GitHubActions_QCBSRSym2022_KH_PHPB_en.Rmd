@@ -16,7 +16,7 @@ output:
       ratio: '16:9'
       beforeInit: ["macro.js", "https://platform.twitter.com/widgets.js"]
       navigation:
-        scroll: true   # disable slide transitions by scrolling
+        scroll: false   # disable slide transitions by scrolling
     includes:
       in_header: header.html
 ---
@@ -69,28 +69,7 @@ class: middle
 ---
 class: center, middle
 
-## Why should I learn this?
-
----
-class: inverse
-### GitHub & GitHub Actions are powerful tools for collaboration and open science
-
-GitHub is increasingly used by researchers as a tool to work on their research in an __open__ and __reproducible__ way. Like our science, GitHub is especially powerful in __collaborative__ contexts. 
-
-Today's workshop will discuss:
-
-- How GitHub can help you do open, transparent, and collaborative science (_briefly_)
-
-- How to use GitHub Actions to automate some common tasks in research, to keep your work up to date as you (and your collaborators) contribute to a project
-  - **Code checking** on a different system than your local computer
-  - **Performing** analyses and making visualizations  
-  - **Rendering** and __deploying__ documents (presentations, webpages, Shiny apps) 
-  
-- How to __troubleshoot__ GitHub Actions when they don't work!
-
-???
-
-> _.small[Today, we will spend less time on _how to use GitHub_ - but don't worry! There are many resources available freely online to learn about GitHub (e.g. [Happy Git and GitHub for the useR](https://happygitwithr.com/) by Jennifer Bryan). ]_
+## What is GitHub and why should I use it?
 
 ---
 class: inverse
@@ -101,7 +80,7 @@ class: inverse
 .pull-left[
 #### Version Control
 
-GitHub keeps tracks of the _changes_ you make to your documents, and allows you to flip back to previous versions if you need to.
+GitHub keeps tracks of the _changes_ you make to your documents, and allowing you to flip between versions.
 
 #### Transparent & Open
 
@@ -111,11 +90,11 @@ You can work privately, but GitHub also allows you to open your repository (i.e.
 .pull-right[
 #### Collaborative Workflow
 
-Features like branching, issues, and pull requests help to coordinate collaborations dynamically, so you can keep track of all contributions to a project in one place.
+Track and integrate contributions from collaborators dynamically, in one place.
 
 #### Automating Tasks 🌟
 
-GitHub Actions automate tasks like code checks, document rendering, deploying webpages, and more. This becomes powerful quickly, particularly when you need to continuously integrate contributions to your project. 
+GitHub Actions automate tasks in a continuously integrated workflow.
 ]
 
 ???
@@ -125,13 +104,13 @@ Actions can also protect your project, by ensuring that changes are only integra
 ---
 class: center, middle
 
-## Q: Do you use GitHub for your research?
+## Q: How can GitHub make research more open and collaborative?
 
 GitHub is becoming popular among researchers in biodiversity but it is still not widely adopted.
 
-Have you encountered obstacles when learning how to use it? <br>
-What are some reasons you would recommend it to others? <br>
-Why do you think it is not widely adopted in biodiversity research?
+Why do you think it is not widely adopted in biodiversity research? <br>
+What are some obstacles to using GitHub? <br>
+What are some reasons you want to learn it, or would recommend it to others? <br>
 
 ---
 class: center, middle
@@ -1125,9 +1104,7 @@ Rscript -e 'code here'
 
 ---
 
----
-
-## __GitHub Actions__: artifacts
+## __GitHub Actions__: Artifacts
 
 .pull-left[
 
@@ -1194,3 +1171,11 @@ TEXT HERE
 
 ---
 
+## __GitHub Actions__: Deployment
+
+
+.pull-left[
+
+TEXT HERE
+
+]
