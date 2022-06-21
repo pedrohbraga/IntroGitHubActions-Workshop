@@ -120,22 +120,31 @@ a:active {
 
 .pull-left-65 {
   float: left;
-  width: 65%;
+  width: 63%;
 }
 .pull-right-35 {
   float: right;
-  width: 35%;
+  width: 34%;
 }
-
 
 .pull-left-35 {
   float: left;
-  width: 63%;
+  width: 33%;
 }
 .pull-right-65 {
   float: right;
-  width: 32%;
+  width: 62%;
 }
+
+.pull-left-25 {
+  float: left;
+  width: 23%;
+}
+.pull-right-75 {
+  float: right;
+  width: 73%;
+}
+
 
 
 /* use to position text at the bottom */
