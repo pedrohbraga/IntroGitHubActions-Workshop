@@ -111,7 +111,7 @@ You can think of Git as a tool that allows you to _track the changes_ you make i
 Git also allows you to apply any changes that have been made on the GitHub repository (also called the _remote_) to the documents on your local computer.
 
 ---
-class: center, middle
+class: center, middle, inverse
 
 ## The GitHub workflow: A basic example
 
@@ -142,7 +142,7 @@ tests, and more
 ---
 ### Step 1: Setting up a repository.
 
-You can also _clone_ or _fork_ a repository from GitHub to your local computer. 
+You can also _clone_ a repository from GitHub to your local computer, which stays linked to the remote repository. _Forking_ a repository copies the repository without staying linked to the remote. 
 
 &lt;img src="imgs/github_workflow/1.png" width="75%" /&gt;
 
@@ -206,49 +206,30 @@ This is very helpful to manage contributions from different collaborators who ar
 Let's walk through an example of this workflow.
 
 ---
-## Step 1: Make a new branch
+### Step 1: Make a new branch
 
 &lt;img src="imgs/github_workflow/7.png" width="75%" /&gt;
 
 ---
-## Step 2: Commit changes in the files
+### Step 2: Commit changes in the files
 
 &lt;img src="imgs/github_workflow/9.png" width="75%" /&gt;
 
 ---
-## Step 3: Make a pull request
+### Step 3: Make a pull request
 
 &lt;img src="imgs/github_workflow/10.png" width="75%" /&gt;
 
 ---
-## Step 4: Merge the branch into the remote repository
+### Step 4: Merge the branch into the remote repository
 
 &lt;img src="imgs/github_workflow/11.png" width="75%" /&gt;
 
 ---
-## Exercise: Set up a GitHub repository
+class: middle, center, inverse 
+## Exercise 1: Creating a new GitHub repository
 
-Let's make a repository that we will use to play with GitHub Actions later in this workshop!
-
-[Link to webpage with exercise]
-
-.pull-left[
-### If you are new to GitHub:
-
-1. Create a GitHub account.
-2. Install GitHub Desktop.
-2. Create a repository.
-3. Commit a change and push to web.
-
-]
-
-.pull-right[
-### If you already use GitHub:
-
-1. Create a repository.
-2. Commit a change and push to web.
-]
-
+### Let's make a GitHub repository that we will use to play with GitHub Actions later in this workshop!
 
 ---
 class: center, middle, inverse
@@ -1017,11 +998,27 @@ Actions help to _simplify_ your workflow.
 
 ]
 
-???
+---
 
-You can also [create](https://docs.github.com/en/actions/creating-actions/about-custom-actions?learn=create_actions&amp;learnProduct=actions) your own Action, but you can usually find Actions that do what you need them to do!
+## __GitHub Actions__ perform tasks 
 
-https://github.com/r-lib/actions
+.pull-left-35[
+
+A __GitHub Action__ is an application that performs a task. 
+
+This task is usually something that is __repeated__ often, such as setting up an environment to build your documents, installing R, and building documents like presentations or websites.
+
+Actions help to _simplify_ your workflow.
+
+]
+
+.pull-right-65[
+.shout[The [__r-lib/actions__](https://github.com/r-lib/actions) repository also lists several Actions for R.]
+
+![](imgs/rlib_actions.png)
+
+]
+
 ---
 
 ## __GitHub Actions__: checkout
