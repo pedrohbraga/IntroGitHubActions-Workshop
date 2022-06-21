@@ -594,7 +594,9 @@ class: center, middle, inverse
 .pull-left[
 To make a workflow, you write a __YAML__ file that is stored in your repository, in a directory called `.github/workflows`.
 
-YAML (originally, **y**et **a**nother **m**arkup **l**anguage) is a human-readable programming language. It is important to remember that _indentation matters_ in YAML!
+YAML (originally, **y**et **a**nother **m**arkup **l**anguage) is a human-readable programming language.
+
+It is important to remember that _indentation matters_ in YAML!
 
 ]
 
@@ -685,7 +687,7 @@ Workflows run when they are __triggered__ by an event.
 To trigger a workflow, you can:
 
 - __Manually__ start the workflow
-- Define triggers `on` __events__ in your repository (e.g. _pushes_ to your `main` repository branch, a _pull request_, a new _issue_, etc.)
+- Define triggers `on` __events__ in your repository (_e.g._, _pushes_ to your `main` repository branch, a _pull request_, a new _issue_)
 - Set a __schedule__ to regularly trigger the workflow.
 
 ]
@@ -773,9 +775,11 @@ jobs:
 .pull-left[
 A workflow is an automated process that runs one or more __jobs__. 
 
-Jobs include one or more _steps_ to achieve some objective (checking code, producing a document, etc.).
+Jobs include one or more _steps_ to achieve an objective (checking code, producing a document, etc.).
 
-Jobs can run sequentially or in parallel. Here, we specify that our second job `needs: presentation-en-job` to make the jobs run sequentially. More on this later!
+Jobs can run sequentially or in parallel. 
+
+Here, we specify that our second job `needs: presentation-en-job` to sequentially run the jobs. _More on this later!_
 
 ]
 
@@ -863,14 +867,107 @@ name: render-presentation-en
 
 ---
 
-## Jobs are run by __runners__.
+## Workflows are run by __runners__.
 
 .pull-left[
-A _runner_ is a server that runs your workflows in a __*fresh* virtual machine__ each time it is triggered. 
+A _runner_ is a server that runs your workflows (&lt;= 31 days) in a __*fresh* virtual machine__ (VM) each time it is triggered. 
 
-Each runner runs one job at a time.
+Each runner runs one job at a time (&lt;= 6h).
 
-GitHub offers __Ubuntu Linux, Microsoft Windows, and macOS__ runners. This means you can test your scripts and documents on different systems, to ensure your files work the same for everyone else!
+GitHub offers VM with the latest __Ubuntu Linux, Microsoft Windows__, and __macOS__ distributions. This means you can test your scripts and documents on different systems and ensure your processes work cross-platforms!
+
+Win/Linux: 2-core CPU, 7 GB RAM, 14 GB SSD
+macOS: 3-core CPU, 14 GB RAM, 14 GB SSD
+
+]
+
+.pull-right[
+.scroll-box-20[
+
+```r
+on: 
+  push: 
+     branches: 
+       - main
+
+name: render-presentation-en
+
+jobs:
+  presentation-en-job:
+    name: Render the presentation for this workshop
+*   runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: presentation/
+    env:
+      GITHUB_PAT: ${{ secrets.ACCESS_TOKEN }}
+      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}  
+
+    steps:
+      - name: 🛎️ Checkout repository
+        uses: actions/checkout@v2
+
+      - name: 💻 Setup R 
+        uses: r-lib/actions/setup-r@v1
+        with:
+          r-version: latest
+        
+       - name: 💻 Install R packages and dependencies if needed
+        run: |
+          Rscript -e 'install.packages("palmerpenguins", dependencies = TRUE)'
+        
+        - name: 🧶 Render presentation
+        run: Rscript -e 'rmarkdown::render("IntroToGitHub_GitHubActions_QCBSRSym2022_KH_PHPB_en.Rmd")'
+        
+        - name: 🔺 Upload artifact containing the presentation
+        uses: actions/upload-artifact@v3
+        with:
+          name: presentation-en
+          path: presentation
+
+  checkout-and-deploy:
+   name: Checkout and deploy the presentation within the gh-pages repository
+*   runs-on: ubuntu-latest
+   needs: presentation-en-job
+   
+   steps:
+      - name: 🛎️ Checkout again
+        uses: actions/checkout@v2.3.1 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
+        with:
+          persist-credentials: false
+          
+     - name: 🔻 Download artifact containing the presentation
+        uses: actions/download-artifact@v1
+        with:
+         # Artifact name
+         name: presentation-en # optional
+         # Destination path
+         path: presentation/ # optional
+
+      - name: 💎 Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          token: ${{ secrets.ACCESS_TOKEN }}
+          branch: gh-pages # The branch the action should deploy to.
+          folder: presentation/
+          target-folder: presentation-en # The folder the action should deploy
+          clean: true
+```
+
+]
+]
+
+
+---
+
+## Workflows are run by __runners__.
+
+.pull-left[
+**What if GitHub-hosted runners are too limiting for my purposes?**
+
+No problem! 
+
+You can install GitHub's REST API in your preferred machine (cloud-based, institutional or own server), assign it to your repository, and use GitHub Actions with fewer usage limitations.
 
 ]
 
@@ -954,9 +1051,11 @@ jobs:
 ## __Jobs__ run in a working directory
 
 .pull-left[
-Each job is run in a specific __working directory__.
+Jobs can run in specific __working directories__.
 
 Here, our __working directory__ is the `presentation` folder in our repository, where we are storing the RMarkdown document that generates this presentation.
+
+When you do not specify a working directory, the job runs in the root of your repository.
 
 ]
 
@@ -1044,7 +1143,7 @@ Environment variables store information that can be referenced in a step of your
 
 Here, we have two environment variables, which are both __encrypted tokens__ that give the workflow permission to access and write files in our repository. 
 
-You could set API keys as environment variables in a workflow that routinely pulls a dataset using an API, for example. 
+You could set API _credentials_ as environment variables in a workflow that routinely pulls a data set using an API, for example. 
 
 _More on environment variables on [GitHub Docs](https://docs.github.com/en/actions/learn-github-actions/environment-variables)._
 ]
@@ -1131,7 +1230,7 @@ jobs:
 .pull-left[
 You usually need to combine several _steps_ to complete a job.
 
-A step can run a _script_ that you write or can run an _action_. 
+A step can **run** a _script_ that you write or can **use** an existing _action_ to achieve an objective. 
 ]
 
 .pull-right[
@@ -1279,7 +1378,7 @@ Actions help to _simplify_ your workflow.
 
 ---
 
-## __GitHub Actions__: checkout
+## __GitHub Actions__: `actions/checkout`
 
 .pull-left[For example, the first step in our workflow is to __checkout the repository__. To do this, we `use` the [checkout](https://github.com/actions/checkout) action.
 
@@ -1348,7 +1447,7 @@ This action takes care of checking out your repository under `$GITHUB_WORKSPACE`
 
 ---
 
-## __GitHub Actions__: Set up R
+## __GitHub Actions__: Set up `R`
 
 .pull-left[
 
@@ -1431,6 +1530,10 @@ For simpler tasks, you can run __R code__ directly in your workflow using this s
 ```r
 Rscript -e 'code here'
 ```
+`-e` stands for R "expression".
+
+You can also run a file containing `R` code (`.R` extension) by omitting the `-e` and providing its directory.
+
 
 ]
 
@@ -1498,7 +1601,13 @@ Rscript -e 'code here'
 
 .pull-left[
 
-TEXT HERE
+__Artifacts__ allows data to persist after a job has completed, and share that data with another job in the same workflow.
+
+By default, GitHub stores build logs and artifacts for 90 days (customizable).
+
+To share data between jobs, you must:
+- Upload artifacts **using** `actions/upload-artifact`
+- Download artifacts **using** `actions/download-artifact`
 
 ]
 
