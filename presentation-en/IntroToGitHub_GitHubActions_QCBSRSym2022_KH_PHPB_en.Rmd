@@ -292,6 +292,8 @@ class: middle, center, inverse
 
 ### Let's make a GitHub repository that we will use to play with GitHub Actions later in this workshop!
 
+[__Click here to open the exercise!__](https://pedrohbraga.github.io/IntroGitHubActions-Workshop/exercises/Exercise1.html#1)
+
 ---
 class: center, middle, inverse
 
@@ -648,7 +650,7 @@ To trigger a workflow, you can:
 
 .pull-right[
 .scroll-box-20[
-```{yaml, eval = FALSE}
+```{r, eval = FALSE}
 {{on: }}
 {{  push: }}
 {{     branches: }}
@@ -697,7 +699,7 @@ Jobs can run sequentially or in parallel.
 
 .pull-right[
 .scroll-box-20[
-```{yaml, eval = FALSE}
+```{r, eval = FALSE}
 on: 
   push: 
      branches: 
@@ -750,7 +752,7 @@ GitHub offers __Ubuntu Linux, Microsoft Windows, and macOS__ runners. This means
 
 .pull-right[
 .scroll-box-20[
-```{yaml, eval = FALSE}
+```{r, eval = FALSE}
 on: 
   push: 
      branches: 
@@ -833,7 +835,7 @@ Text here
 
 .pull-right[
 .scroll-box-20[
-```{yaml, eval = FALSE}
+```{r, eval = FALSE}
 on: 
   push: 
      branches: 
@@ -916,7 +918,7 @@ Environmental variables are then accessible for all steps within a job.
 
 .pull-right[
 .scroll-box-20[
-```{yaml, eval = FALSE}
+```{r, eval = FALSE}
 on: 
   push: 
      branches: 
@@ -1000,7 +1002,7 @@ A step can run a _script_ that you write or can run an _action_.
 
 .pull-right[
 .scroll-box-20[
-```{yaml, eval = FALSE}
+```{r, eval = FALSE}
 on: 
   push: 
      branches: 
@@ -1117,7 +1119,9 @@ Actions help to _simplify_ your workflow.
 .pull-right-65[
 .shout[You can look for Actions on [__GitHub Marketplace__](https://github.com/marketplace?category=&query=&type=actions&verification=).]
 
-![](imgs/github_marketplace.png)
+```{r, echo = FALSE, eval = TRUE, out.width="75%", fig.align = "center"}
+knitr::include_graphics("imgs/github_marketplace.png") 
+```
 
 ]
 
@@ -1154,7 +1158,7 @@ This action takes care of checking out your repository under `$GITHUB_WORKSPACE`
 
 .pull-right[
 .scroll-box-20[
-```{yaml, eval = FALSE}
+```{r, eval = FALSE}
 ...
    steps:
       - name: 🛎️ Checkout repository 
@@ -1224,7 +1228,7 @@ See [r-lib/actions](https://github.com/r-lib/actions) for more Actions for R.
 
 .pull-right[
 .scroll-box-20[
-```{yaml, eval = FALSE}
+```{r, eval = FALSE}
 ...
    steps:
       - name: 🛎️ Checkout repository 
@@ -1298,7 +1302,7 @@ Rscript -e 'code here'
 
 .pull-right[
 .scroll-box-20[
-```{yaml, eval = FALSE}
+```{r, eval = FALSE}
 ...
    steps:
       - name: 🛎️ Checkout repository 
@@ -1365,7 +1369,7 @@ TEXT HERE
 
 .pull-right[
 .scroll-box-20[
-```{yaml, eval = FALSE}
+```{r, eval = FALSE}
 ...
    steps:
       - name: 🛎️ Checkout repository 
