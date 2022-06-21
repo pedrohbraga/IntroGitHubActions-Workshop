@@ -1,6 +1,6 @@
 # Workshop: Introduction to GitHub and GitHub Actions
 
-[![badge](https://img.shields.io/static/v1?style=for-the-badge&label=Presentation&message=View&color=BF616A)](https://pedrohbraga.github.io/IntroGitHubActions-Workshop/presentation-en/IntroToGitHub_GitHubActions_QCBSRSym2022_KH_PHPB_en.html#1)
+[![badge](https://img.shields.io/static/v1?style=for-the-badge&label=Presentation&message=View&color=BF616A)](https://pedrohbraga.github.io/IntroGitHubActions-Workshop/presentation-en/IntroToGitHub_GitHubActions_QCBSRSym2022_KH_PHPB_en.html#1) [![badge](https://img.shields.io/static/v1?style=for-the-badge&label=Exercise&message=01&color=B48EAD)](https://pedrohbraga.github.io/IntroGitHubActions-Workshop/exercises/Exercise1.html#1)
 
 Collaborations are rarely static: when people work on projects together, it is a continuously developing process of contributing ideas, giving and getting feedback, and addressing this feedback with changes until a goal is achieved. These steps often overlap, with collaborators simultaneously changing files in the project. This dynamic makes it very challenging (and very confusing!) to work on documents that are passed around the group, with versions of changes being tracked by updating file names with initials, dates or “`document_final_version_number_23123`”. This is where GitHub comes in!
 
