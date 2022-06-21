@@ -14,18 +14,10 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-.title[
 # Introduction to GitHub and GitHub Actions
-]
-.author[
 ### <b>Pedro Henrique P. Braga</b> (Concordia University) <br><b>Katherine Hébert</b> (Université de Sherbrooke)<br><br>
-]
-.institute[
 ### 4th QCBS R Symposium<br>QCBS R Workshop Series <br>
-]
-.date[
 ### 2022-06-20<br> <span class="footnote"> Use arrow keys to navigate. Press <code>H</code> for help. </span>
-]
 
 ---
 
@@ -297,42 +289,135 @@ This process is rarely done just once in a project's lifetime: we add and remove
 _Include diagram._
 
 ]
+
+---
+class: inverse
+
+## Errors can be costly.
+
+.pull-left[
+.font90[
+Humans, even diligent, meticulous and highly trained professionals, make mistakes.
+
+Unsurprisingly, errors increase with lines of code [_e.g._, 15 to 50 errors to 1000 from professional software engineers; McConnell, 2044].
+
+A sign error, a missing semicolon, an off-by-one error in matching columns of data may render the results complete noise (_e.g._, Chang _et al_. 2006, retraction from Science).
+
+Rampant software errors may undermine scientific results (Soergel, 2015), cost money (_CITE_), and even imply in retractions (_CITE_).
+]
+]
+
+.pull-right[
+
+
+]
+
+---
+### Mitigating errors: no 'blind trust', and test early, test often
+
+.pull-left[
+Long-term recommendations (Joppa et al. 2013, Science):
+
+1. Formal training in statistics, computational methods, mathematics, and software engineering;
+2. Scientific publication of software and code, so it can be peer-reviewed.
+
+Practical recommendations:
+1. No 'blind trust': verify;
+2. Test, test, test, and test early.
+
+]
+
+.pull-right[
+![%](https://azevedorafaela.files.wordpress.com/2018/04/fire-your-qa-team-blog-post-3.png)
+]
+
+???
+
+In 2013, only 30% of researchers using SDMs reported that they used particular software because it had been "validated against other methods in peer-review publications. This rose to 57% for those who used "click-and-run" software with easy-to-manipulate user interfaces and dropped to 11% for those who used "syntax-driven" platforms. Further, 7, 9, and 18% of scientists cited "the developer is well-respected," "personal recommendation," and "recommendation from a close colleague," respectively, as reasons for using software. Only 8% claimed they had validated software against other methods as a primary reason for choice; 79% expressed a desire to learn additional software and programming skills.
+
+---
+### A structured computing workflow can help with reproducibility
+
+A **computing workflow** can help strategically reproducing results every time data or code is modified.
+
+.pull-left[
+#### Primary criterion 
+1. Reproducibility
+]
+
+.pull-right[
+#### Secondary criteria
+
+1. Accurate
+2. Efficient
+3. Scalable
+4. Adaptable
+5. Accessible
+
+]
+
+_Exemplify with GitHub_
+
+Automated data and software management can help reduce the time and effort required by researchers (Yenni _et al_., 2018).
+
+
 ---
 
 ### Adopting automated research workflows in ecology and evolution
 
-Continuous integration (CI) is a software development practice in which small adjustments to the underlying code in an application are tested every time a team member makes changes.
+**Continuous integration (CI)** is a software development practice in which small adjustments to code are tested every time modifications happen or at user-specified times.
+
+_Include diagram_
 
 CI decreases integration problems [3], ensures
 rapid feedback [4], increases software quality [2], and improves developer productivity [5].
 
 .footnote[
-Vasilescu _et al_. “Quality and productivity outcomes relating to continuous integration in GitHub,” in Proc. 2015 10th Joint Meet. on Found. of Soft. Engineering, 2015, pp. 805–816.
 
-Stahl _et al_., “Big bangs and small pops: on critical cyclomatic complexity and developer integration behavior,” in 2019 IEEE/ACM 41st Int. Conf. Software Engineering: Software Engineering in Practice (ICSE-SEIP). IEEE, 2019, pp. 81–90
+1. Vasilescu _et al_. “Quality and productivity outcomes relating to continuous integration in GitHub,” in Proc. 2015 10th Joint Meet. on Found. of Soft. Engineering, 2015, pp. 805–816.
 
-Rossi _et al_., “Continuous deployment of mobile software at facebook (showcase),” in Proceedings of the 2016 24th ACM SIGSOFT International
+2. Stahl _et al_., “Big bangs and small pops: on critical cyclomatic complexity and developer integration behavior,” in 2019 IEEE/ACM 41st Int. Conf. Software Engineering: Software Engineering in Practice (ICSE-SEIP). IEEE, 2019, pp. 81–90
+
+3. Rossi _et al_., “Continuous deployment of mobile software at facebook (showcase),” in Proceedings of the 2016 24th ACM SIGSOFT International
 Symposium on Foundations of Software Engineering, 2016, pp. 12–23
 
-M. Hilton, T. Tunnell, K. Huang, D. Marinov, and D. Dig, “Usage, costs, and benefits of continuous integration in open-source
-projects,” in 2016 31st IEEE/ACM International Conference on Automated Software Engineering (ASE). IEEE, 2016, pp. 426–437
+4. M. Hilton, T. Tunnell, K. Huang, D. Marinov, and D. Dig, “Usage, costs, and benefits of continuous integration in open-source projects,” in 2016 31st IEEE/ACM International Conference on Automated Software Engineering (ASE). IEEE, 2016, pp. 426–437
 
 ]
 
 
 ---
 
-# 
+#### Example 1: **[The Portal Project: a long-term study of a Chihuahuan desert ecosystem](https://www.biorxiv.org/content/10.1101/332783v3.full)**
+
+.pull-right-35[
+![](https://www.biorxiv.org/content/biorxiv/early/2020/06/13/332783/F1.large.jpg?width=800&amp;height=600&amp;carousel=1)
+.small[Location of 24 experimental plots from a long-term (1977-) ecological study of rodents, plants, and ants in Portal, AZ, USA.]
+]
+
+--
+
+.pull-left-65[
+
+![](https://www.biorxiv.org/content/biorxiv/early/2018/07/24/344804/F1.large.jpg?width=800&amp;height=600&amp;carousel=1)
+
+.small[[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6672075.svg)](https://doi.org/10.5281/zenodo.6672075)] : [weecology/PortalData](https://zenodo.org/record/6672075)
+
+]
 
 ---
-class: inverse
 
-## Test early, test often
+### Example 2: **Automated integration in collaborative manuscripts**
 
-Humans, even diligent, meticulous and highly trained professionals, make mistakes.
+.pull-left-35[
+**Manubot** 
 
-![](https://azevedorafaela.files.wordpress.com/2018/04/fire-your-qa-team-blog-post-3.png)
+]
 
+.pull-right-65[
+
+![](imgs/manubot-workflow.png)
+]
 
 
 ---
@@ -352,20 +437,12 @@ Automated website and presentation generation?
 
 ---
 
-class: center, middle
-
-# GitHub Actions: Workflows
-
-
----
-
-## Workflows are written in __YAML__.
+## GitHub Actions workflows: __YAML__
 
 .pull-left[
 To make a workflow, you write a __YAML__ file that is stored in your repository, in a directory called `.github/workflows`.
 
 YAML is a human-readable programming language. It is important to remember that _indentation matters_ in YAML!
-
 ]
 
 .pull-right[
@@ -377,308 +454,40 @@ YAML is a human-readable programming language. It is important to remember that 
 
 ---
 
-## __Events__ trigger the workflow.
+## GitHub Actions workflows: __Jobs__
 
-.pull-left[
+A workflow is an automated process that runs one or more __jobs__. 
+
+You can think of jobs as one or more tasks to complete, like running an R script to do some analysis, or building a PDF document from an RMarkdown file.
+
+You can run a single job, but often you will need to configure your workflow to run several jobs. Jobs can run sequentially or in parallel.
+
+---
+## GitHub Actions workflows: __Jobs__
+
+Each jobs runs inside its own _runner_ or container. Jobs include one or more _steps_ to achieve some objective (checking code, producing a document, etc.).
+
+These steps can run a _script_ that you write or define yourself, or can run an _action_. _Actions_ are reusable extensions that you can use to simplify your workflow.
+
+&lt;img src="imgs/overview-actions-simple.png" width="75%" style="display: block; margin: auto;" /&gt;
+
+.cite[image from [GitHub Docs]((https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions?learn=getting_started&amp;learnProduct=actions)]
+
+---
+
+## GitHub Actions workflows: __Triggers__
 
 Workflows run when they are __triggered__ by an event. 
 
 To trigger a workflow, you can:
 
 - __Manually__ start the workflow
-- Define triggers `on` __events__ in your repository (e.g. _pushes_ to your `main` repository branch, a _pull request_, a new _issue_, etc.)
+- Define certain __events__ as triggers in your repository (e.g. _pushes_ to your `main` repository branch, a submitted _pull request_, someone posting a new _issue_, etc.)
 - Set a __schedule__ to regularly trigger the workflow.
 
-]
-
-.pull-right[
-.scroll-box-20[
-
-```yaml
-*on: 
-*  push: 
-*     branches: 
-*       - main 
-
-name: render-presentation-en
-
-jobs:
-  presentation-en-job:
-    name: Render the presentation for this workshop
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: presentation/
-    env:
-      GITHUB_PAT: ${{ secrets.ACCESS_TOKEN }}
-      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}    
-        
-    steps:
-      - name: 🛎️ Checkout repository
-        uses: actions/checkout@v2
-
-      - name: 💻 Setup R
-        uses: r-lib/actions/setup-r@v1
-        with:
-          r-version: latest
-```
-
-]
-]
-
----
-
-## The workflow runs __jobs__.
-
-.pull-left[
-A workflow is an automated process that runs one or more __jobs__. 
-
-Jobs include one or more _steps_ to achieve some objective (checking code, producing a document, etc.).
-
-You can run a single job, but often you will need to configure your workflow to run several jobs. 
-
-Jobs can run sequentially or in parallel.
-
-]
-
-.pull-right[
-.scroll-box-20[
-
-```yaml
-on: 
-  push: 
-     branches: 
-       - main
-
-name: render-presentation-en
-
-*jobs:
-*  presentation-en-job:
-*    name: Render the presentation for this workshop
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: presentation/
-    env:
-      GITHUB_PAT: ${{ secrets.ACCESS_TOKEN }}
-      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}  
-
-    steps:
-      - name: 🛎️Checkout repository
-        uses: actions/checkout@v2
-
-      - name: 💻 Setup R
-        uses: r-lib/actions/setup-r@v1
-        with:
-          r-version: latest
-```
-
-]
-]
-
----
-
-## Jobs are run by __runners__.
-
-.pull-left[
-A _runner_ is a server that runs your workflows in a __*fresh* virtual machine__ each time it is triggered. 
-
-Each runner runs one job at a time.
-
-GitHub offers __Ubuntu Linux, Microsoft Windows, and macOS__ runners. This means you can test your scripts and documents on different systems, to ensure your files work the same for everyone else!
-
-]
-
-.pull-right[
-.scroll-box-20[
-
-```yaml
-on: 
-  push: 
-     branches: 
-       - main
-
-name: render-presentation-en
-
-jobs:
-  presentation-en-job:
-    name: Render the presentation for this workshop
-*   runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: presentation/
-    env:
-      GITHUB_PAT: ${{ secrets.ACCESS_TOKEN }}
-      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}  
-
-    steps:
-      - name: 🛎️ Checkout repository
-        uses: actions/checkout@v2
-
-      - name: 💻 Setup R
-        uses: r-lib/actions/setup-r@v1
-        with:
-          r-version: latest
-```
-
-]
-]
-
----
-## Jobs are run in a __working directory__.
-
-.pull-left[
-Text here
-
-]
-
-.pull-right[
-.scroll-box-20[
-
-```yaml
-on: 
-  push: 
-     branches: 
-       - main
-
-name: render-presentation-en
-
-jobs:
-  presentation-en-job:
-    name: Render the presentation for this workshop
-   runs-on: ubuntu-latest
-    defaults:
-      run:
-*        working-directory: presentation/
-    env:
-      GITHUB_PAT: ${{ secrets.ACCESS_TOKEN }}
-      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}  
-
-    steps:
-      - name: 🛎️ Checkout repository
-        uses: actions/checkout@v2
-
-      - name: 💻 Setup R
-        uses: r-lib/actions/setup-r@v1
-        with:
-          r-version: latest
-```
-
-]
-]
-
----
-## Jobs can use __environmental variables__. 
-
-.pull-left[
-Environmental variables are then accessible for all steps within a job.
-
-]
-
-.pull-right[
-.scroll-box-20[
-
-```yaml
-on: 
-  push: 
-     branches: 
-       - main
-
-name: render-presentation-en
-
-jobs:
-  presentation-en-job:
-    name: Render the presentation for this workshop
-   runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: presentation/
-*    env:
-*      GITHUB_PAT: ${{ secrets.ACCESS_TOKEN }}
-*      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-
-    steps:
-      - name: 🛎️ Checkout repository
-        uses: actions/checkout@v2
-
-      - name: 💻 Setup R
-        uses: r-lib/actions/setup-r@v1
-        with:
-          r-version: latest
-```
-
-]
-]
-
----
-
-## Each job runs a series of __steps__
-
-.pull-left[
-_Steps_
-
-Each step of a job can run a _script_ that you write or define yourself, or can run an _action_. 
-]
-
-.pull-right[
-.scroll-box-20[
-
-```yaml
-on: 
-  push: 
-     branches: 
-       - main
-
-name: render-presentation-en
-
-jobs:
-  presentation-en-job:
-    name: Render the presentation for this workshop
-   runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: presentation/
-    env:
-*      GITHUB_PAT: ${{ secrets.ACCESS_TOKEN }}
-*      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-
-*    steps:
-*      - name: 🛎️ Checkout repository
-        uses: actions/checkout@v2
-
-*      - name: 💻 Setup R 
-        uses: r-lib/actions/setup-r@v1
-        with:
-          r-version: latest
-```
-
-]
-]
-
 ---
 
 
-## GitHub Actions workflows: __Actions__
-
-
-An _action_ is an application that performs a task. 
-
-This task is usually something that is __repeated__ often, such as setting up an environment to build your documents, installing R, and building documents like presentations or websites.
-
-Actions help to _simplify_ your workflow.
-
-You can find Actions in the [__GitHub Marketplace__](https://github.com/marketplace?category=&amp;query=&amp;type=actions&amp;verification=). 
-
-.whisper[You can also [create](https://docs.github.com/en/actions/creating-actions/about-custom-actions?learn=create_actions&amp;learnProduct=actions) your own Action, but you can usually find Actions that do what you need them to do!]
-
-
-
----
-## GitHub Actions workflow: Recap
-
-&lt;img src="imgs/overview-actions-simple.png" width="75%" style="display: block; margin: auto;" /&gt;
-
-.cite[image from [GitHub Docs]((https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions?learn=getting_started&amp;learnProduct=actions)]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
@@ -732,19 +541,6 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
-// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
-// screen reader (see PR #262)
-(function(d) {
-  let res = {};
-  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
-    const t = tr.querySelector('td:nth-child(2)').innerText;
-    tr.querySelectorAll('td:first-child .key').forEach(key => {
-      const k = key.innerText;
-      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
-    });
-  });
-  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
-})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable
