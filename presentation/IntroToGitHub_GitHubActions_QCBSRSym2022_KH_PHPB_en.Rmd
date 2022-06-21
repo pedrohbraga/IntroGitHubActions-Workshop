@@ -67,12 +67,11 @@ class: middle
 ### b. How can my research benefit from GitHub Actions?
 
 ---
-class: center, middle
+class: center, middle, inverse
 
-## What is GitHub and why should I use it?
+# What is GitHub and why should I use it?
 
 ---
-class: inverse
 ### A brief introduction to GitHub 
 
 **GitHub** allows you to manage documents and code in a __transparent, collaborative, and traceable way__.
@@ -80,11 +79,11 @@ class: inverse
 .pull-left[
 #### Version Control
 
-GitHub keeps tracks of the _changes_ you make to your documents, and allowing you to flip between versions.
+GitHub keeps tracks of _changes_, allowing you to flip between versions.
 
 #### Transparent & Open
 
-You can work privately, but GitHub also allows you to open your repository (i.e. project folder) to the public. You can choose a [license](https://choosealicense.com/) to control how your documents can be used by others. 
+A public repository shows the complete history of contributions to your project, and opens access to your code or documents for use by others (tip: choose a [license](https://choosealicense.com/)). 
 ]
 
 .pull-right[
@@ -113,7 +112,7 @@ What are some obstacles to using GitHub? <br>
 What are some reasons you want to learn it, or would recommend it to others? <br>
 
 ---
-class: center, middle
+class: center, middle, inverse
 
 # Part I: A brief introduction to `GitHub`
 
@@ -295,7 +294,7 @@ Let's make a repository that we will use to play with GitHub Actions later in th
 
 
 ---
-class: center, middle
+class: center, middle, inverse
 
 # Part 2: Introduction to `GitHub Actions`
 
@@ -533,9 +532,6 @@ Example 3: Automated website content update
 
 class: center, middle
 
-# Discussion
-
-----
 ## What are some examples of some research tasks you would like to automate?
 
 ???
@@ -546,7 +542,7 @@ Automated website and presentation generation?
 
 ---
 
-class: center, middle
+class: center, middle, inverse
 
 # GitHub Actions: Workflows
 
@@ -1034,7 +1030,7 @@ knitr::include_graphics("imgs/overview-actions-simple.png")
 
 ---
 
-class: center, middle
+class: center, middle, inverse
 
 # How to use GitHub Actions
 
