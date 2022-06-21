@@ -1325,7 +1325,7 @@ knitr::include_graphics("imgs/rlib_actions.png")
 
 ---
 
-## __GitHub Actions__: checkout
+## __GitHub Actions__: `actions/checkout`
 
 .pull-left[For example, the first step in our workflow is to __checkout the repository__. To do this, we `use` the [checkout](https://github.com/actions/checkout) action.
 
@@ -1393,7 +1393,7 @@ This action takes care of checking out your repository under `$GITHUB_WORKSPACE`
 
 ---
 
-## __GitHub Actions__: Set up R
+## __GitHub Actions__: Set up `R`
 
 .pull-left[
 
@@ -1474,6 +1474,10 @@ For simpler tasks, you can run __R code__ directly in your workflow using this s
 ```{r, eval = FALSE}
 Rscript -e 'code here'
 ```
+`-e` stands for R "expression".
+
+You can also run a file containing `R` code (`.R` extension) by omitting the `-e` and providing its directory.
+
 
 ]
 
@@ -1540,7 +1544,13 @@ Rscript -e 'code here'
 
 .pull-left[
 
-TEXT HERE
+__Artifacts__ allows data to persist after a job has completed, and share that data with another job in the same workflow.
+
+By default, GitHub stores build logs and artifacts for 90 days (customizable).
+
+To share data between jobs, you must:
+- Upload artifacts **using** `actions/upload-artifact`
+- Download artifacts **using** `actions/download-artifact`
 
 ]
 
