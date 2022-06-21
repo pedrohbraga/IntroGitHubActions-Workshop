@@ -449,8 +449,9 @@ Ideally, we are looking for an efficient organization of data and code, that all
 
 ]
 
-
-Data + Code + Metadata --> VCS --> Analysis --> Report --> Submission
+.center[
+Data + Code + Metadata → VCS → Analysis → Report/Manuscript → Submission
+]
 
 --
 
@@ -464,22 +465,14 @@ Data + Code + Metadata --> VCS --> Analysis --> Report --> Submission
 **Continuous integration (CI)** is a software development practice in which small adjustments to code are tested every time modifications happen or at user-specified times.
 
 _Include diagram_
+<br>
 
-CI decreases integration problems [3], ensures
-rapid feedback [4], increases software quality [2], and improves developer productivity [5].
+<br>
+<br>
+<br>
 
-.footnote[
-
-1. Vasilescu _et al_. “Quality and productivity outcomes relating to continuous integration in GitHub,” in Proc. 2015 10th Joint Meet. on Found. of Soft. Engineering, 2015, pp. 805–816.
-
-2. Stahl _et al_., “Big bangs and small pops: on critical cyclomatic complexity and developer integration behavior,” in 2019 IEEE/ACM 41st Int. Conf. Software Engineering: Software Engineering in Practice (ICSE-SEIP). IEEE, 2019, pp. 81–90
-
-3. Rossi _et al_., “Continuous deployment of mobile software at facebook (showcase),” in Proceedings of the 2016 24th ACM SIGSOFT International
-Symposium on Foundations of Software Engineering, 2016, pp. 12–23
-
-4. M. Hilton, T. Tunnell, K. Huang, D. Marinov, and D. Dig, “Usage, costs, and benefits of continuous integration in open-source projects,” in 2016 31st IEEE/ACM International Conference on Automated Software Engineering (ASE). IEEE, 2016, pp. 426–437
-
-]
+CI decreases integration problems, ensures
+rapid feedback, increases software quality, and improves developer productivity (Vasilescu _et al_., 2015; Stahl _et al_., 2019; Rossi _et al_. 2016; Hilton _et al_. 2016).
 
 ---
 class: middle
@@ -509,7 +502,7 @@ class: middle
 
 .pull-left-35[
 
-**Manubot** allows the writing of your manuscript in **markdown**, track it with `git`, automatically convert it to `.html`, `.pdf`, or `.docx`, and deploy it to your destination of choice.
+[**Manubot**](manubot.org) allows the writing of your manuscript in **markdown**, track it with `git`, automatically convert it to `.html`, `.pdf`, or `.docx`, and deploy it to your destination of choice.
 
 ]
 
@@ -529,7 +522,7 @@ class: middle
 
 .center[
 
-![:scale 50%](https://raw.githubusercontent.com/fmsabatini/sPlotOpen_Manuscript/2d00686bd18d1c84ae1e73857bcadbbac982f502/content/images/sPlotOpen_thumbnail.png) 
+![:scale 50%](https://raw.githubusercontent.com/fmsabatini/sPlotOpen_Manuscript/2d00686bd18d1c84ae1e73857bcadbbac982f502/content/images/sPlotOpen_thumbnail.png)
 
 [sPlotOpen – An environmentally-balanced, open-access, global dataset of vegetation plots](https://fmsabatini.github.io/sPlotOpen_Manuscript/)
 
@@ -576,25 +569,48 @@ class: middle
 ]
 
 ---
-Example 3: Automated website content update
+class: middle
 
-.pull-left-65[
-[Example]()
+### Example 3: Automated website content update
+
+[![](imgs/qcbs-r-workshop-series-website-snapshot.png)](https://r.qcbs.ca/)
+
+---
+class: middle
+
+### Example 3: Automated website content update
+
+.pull-left[
+[![templateWorkshops](https://socialify.git.ci/QCBSRworkshops/templateWorkshops/image?description=1&descriptionEditable=Presentation%20and%20book%20templates%20for%20the%20QCBS%20R%20Workshop%20Series%20&forks=1&issues=1&name=1&owner=1&pattern=Solid&stargazers=1&theme=Light)](https://r.qcbs.ca/)
 ]
 
-.pull-right-35[
+.pull-right[
+.pull-left[
+![workshop01](https://socialify.git.ci/QCBSRworkshops/workshop01/image?description=1&descriptionEditable=Workshop%201%20-%20Introduction%20to%20R&forks=1&issues=1&logo=https%3A%2F%2Favatars.githubusercontent.com%2Fu%2F43730873%3Fs%3D400%26u%3De93bc0de065c2cd6b2fa97684fb32e15c659c0c1%26v%3D4&name=1&owner=1&pattern=Solid&stargazers=1&theme=Light)
 
+![workshop03](https://socialify.git.ci/QCBSRworkshops/workshop03/image?description=1&descriptionEditable=Workshop%203%20-%20Data%20Visualization%20in%20R&forks=1&issues=1&logo=https%3A%2F%2Favatars.githubusercontent.com%2Fu%2F43730873%3Fs%3D400%26u%3De93bc0de065c2cd6b2fa97684fb32e15c659c0c1%26v%3D4&name=1&owner=1&pattern=Solid&stargazers=1&theme=Light)
 ]
+
+.pull-right[
+![workshop05](https://socialify.git.ci/QCBSRworkshops/workshop05/image?description=1&descriptionEditable=Workshop%205%20-%20Programming%20in%20R&forks=1&issues=1&logo=https%3A%2F%2Favatars.githubusercontent.com%2Fu%2F43730873%3Fs%3D400%26u%3De93bc0de065c2cd6b2fa97684fb32e15c659c0c1%26v%3D4&name=1&owner=1&pattern=Solid&stargazers=1&theme=Light)
+
+![workshop10](https://socialify.git.ci/QCBSRworkshops/workshop10/image?description=1&descriptionEditable=Workshop%2010%20-%20Advanced%20Multivariate%20Analysis%20in%20R&forks=1&issues=1&logo=https%3A%2F%2Favatars.githubusercontent.com%2Fu%2F43730873%3Fs%3D400%26u%3De93bc0de065c2cd6b2fa97684fb32e15c659c0c1%26v%3D4&name=1&owner=1&pattern=Solid&stargazers=1&theme=Light)
+]
+]
+
+???
 
 .pull-left-35[
+
+.small[`render-book-template` -> `checkout-and-deploy-book-template` -> `dispatch-to-workshops` -> `ping_book`]
 
 ]
 
 .pull-right-65[
-[https://r.qcbs.ca/](QCBS R Workshop Series)
+
+`on: repository_dispatch: [ping_book, ping_presentation]` -> `dispatch-received` -> `download-changes-and-push` -> `dispatch-to-workflows` -> `render-book` -> `checkout-and-deploy-book`
 
 ]
-
 
 ---
 
@@ -622,7 +638,7 @@ class: center, middle, inverse
 .pull-left[
 To make a workflow, you write a __YAML__ file that is stored in your repository, in a directory called `.github/workflows`.
 
-YAML is a human-readable programming language. It is important to remember that _indentation matters_ in YAML!
+YAML (originally, **y**et **a**nother **m**arkup **l**anguage) is a human-readable programming language. It is important to remember that _indentation matters_ in YAML!
 
 ]
 
@@ -1592,3 +1608,7 @@ TEXT HERE
 TEXT HERE
 
 ]
+
+---
+
+References
