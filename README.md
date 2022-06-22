@@ -16,4 +16,4 @@ Dans cet atelier, nous allons démontrer et discuter comment GitHub - une platef
 
 Contributed by / Elaboré par Pedro Henrique P. Braga (Concordia University) & Katherine Hébert (Université de Sherbrooke)
 
-[![render-presentation-en](https://github.com/pedrohbraga/IntroGitHubActions-Workshop/actions/workflows/deploy_pres_en.yml/badge.svg)](https://github.com/pedrohbraga/IntroGitHubActions-Workshop/actions/workflows/deploy_pres_en.yml)
+[![render-presentation-en](https://github.com/pedrohbraga/IntroGitHubActions-Workshop/actions/workflows/deploy_pres_en.yml/badge.svg)](https://github.com/pedrohbraga/IntroGitHubActions-Workshop/actions/workflows/deploy_pres_en.yml) [![render-exercise01](https://github.com/pedrohbraga/IntroGitHubActions-Workshop/actions/workflows/deploy_exercise1.yml/badge.svg)](https://github.com/pedrohbraga/IntroGitHubActions-Workshop/actions/workflows/deploy_exercise1.yml)
