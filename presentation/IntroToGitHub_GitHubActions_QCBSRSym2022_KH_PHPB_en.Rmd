@@ -1870,5 +1870,40 @@ knitr::include_graphics("imgs/deploy-ghpage.png")
 ]
 
 ---
+class: middle, center, inverse
+
+# Part 3: Example workflows
+
+---
+
+## Example 1: Running an R script
+
+
+[![](https://socialify.git.ci/katherinehebert/demo-runRscript/image?description=1&descriptionEditable=Demo%3A%20Running%20an%20R%20script%20with%20GitHub%20Actions&language=1&name=1&owner=1&pattern=Solid&theme=Light)](https://github.com/katherinehebert/demo-runRscript)
+
+
+---
+
+## Example 2: Deploying a Shiny app
+
+
+[![](https://socialify.git.ci/katherinehebert/demo-deployshiny/image?description=1&descriptionEditable=Demo%3A%20Using%20GitHub%20Actions%20to%20deploy%20a%20Shiny%20app&language=1&name=1&owner=1&pattern=Solid&theme=Light)](https://github.com/katherinehebert/demo-deployshiny)
+
+
+---
+
+## Example 3: Rendering and deploying a `blogdown` website
+
+
+[![](https://socialify.git.ci/QCBSRworkshops/QCBSRworkshops.github.io/image?description=1&language=1&name=1&owner=1&pattern=Solid&stargazers=1&theme=Light)](https://github.com/QCBSRworkshops/QCBSRworkshops.github.io)
+
+
+---
+class: middle, center, inverse
+
+# Exercise 2: Break and fix an Action workflow
+
+
+---
 
 References
