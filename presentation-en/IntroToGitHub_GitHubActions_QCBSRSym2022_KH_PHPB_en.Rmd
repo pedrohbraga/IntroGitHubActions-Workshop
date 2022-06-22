@@ -3,7 +3,7 @@ title: "Introduction to GitHub and GitHub Actions"
 subtitle:
 author: '<b>Pedro Henrique P. Braga</b> (Concordia University) <br><b>Katherine Hébert</b> (Université de Sherbrooke)<br><br>'
 institute: "4th QCBS R Symposium<br>QCBS R Workshop Series <br>"
-date: "`r Sys.Date()`<br> <span class=footnote> Use arrow keys to navigate. Press `H` for help. </span>"
+date: "`r Sys.Date()`"
 output:
   xaringan::moon_reader:
     css: ["default",  "css/phpb-fonts.css", "css/phpb-theme.css"]
@@ -32,9 +32,7 @@ knitr::opts_chunk$set(
 )
 
 
-required.libraries <- c("ggplot2", "plotly", "RColorBrewer", # for visualisation
-                        "devtools", "reticulate", "png", "knitr", "JuliaCall", "here"
-)
+required.libraries <- c("devtools", "knitr", "here")
 
 needed.libraries <- required.libraries[!(required.libraries %in%
                                            installed.packages()[ ,"Package"])]
@@ -47,11 +45,8 @@ lapply(required.libraries, library, character.only = TRUE, quietly = TRUE)
 
 # Include packages to be loaded below here:
 library(knitr)    # For knitting document and include_graphics function
-library(ggplot2)  # For plotting
-library(JuliaCall)
-library(reticulate)
-library(ggplot2)
-library(png)      # For grabbing the dimensions of png files
+library(devtools)
+library(here)
 ```
 
 class: middle
