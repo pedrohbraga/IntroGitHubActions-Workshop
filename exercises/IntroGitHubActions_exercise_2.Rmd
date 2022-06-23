@@ -84,7 +84,7 @@ library(dplyr)
 library(tidyr)
 library(ggplot2)
 
-penguins <- read.csv("data/palmerpenguins_dataset.csv")
+penguins <- read.csv("data/palmerpenguins_updated_dataset.csv")
 
 ggplot(data = penguins, 
        aes(x = flipper_length_mm,
