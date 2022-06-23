@@ -12,11 +12,11 @@ output:
 ---
 
 ```{r setup, include = FALSE}
-install.packages(knitr)
-install.packages(rmdformats)
-install.packages(dplyr)
-install.packages(tidyr)
-install.packages(ggplot2)
+install.packages("knitr")
+install.packages("rmdformats")
+install.packages("dplyr")
+install.packages("tidyr")
+install.packages("ggplot2")
 
 library(knitr)
 library(rmdformats)
