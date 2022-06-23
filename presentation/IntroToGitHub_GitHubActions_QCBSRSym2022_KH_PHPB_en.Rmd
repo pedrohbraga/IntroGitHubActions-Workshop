@@ -408,7 +408,31 @@ In 2013, only 30% of researchers using SDMs reported that they used particular s
 
 ### Traditional and modern research(ers)*
 
---
+.center[![](imgs/T-Shaped-People.png)]
+
+Source
+
+---
+
+
+### Traditional and modern research(ers)*
+
+.column-left[
+.center[
+.bolder[.font400[τ]]
+]
+- broad knowledge: cross-discipline, collaboration
+- deep knowledge (skills and expersite):
+  - domain: _ecology_
+]
+
+<br><br><br>
+
+.center[![](https://miro.medium.com/max/888/1*vVaOjA-Ty1rPRccNsHCb2w.png)]
+
+---
+
+### Traditional and modern research(ers)*
 
 .column-left[
 .center[
@@ -1947,17 +1971,6 @@ class: middle, center, inverse
 [![](https://socialify.git.ci/QCBSRworkshops/QCBSRworkshops.github.io/image?description=1&language=1&name=1&owner=1&pattern=Solid&stargazers=1&theme=Light)](https://github.com/QCBSRworkshops/QCBSRworkshops.github.io)
 
 
-
----
-
-class: middle, center, inverse
-
-## Exercise 2: Troubleshooting a GitHub Action
-
-### Let's play with a GitHub Actions workflow!
-
-[__Click here to open the exercise!__](https://pedrohbraga.github.io/IntroGitHubActions-Workshop/exercises/IntroGitHubActions_exercise_2.html)
-
 ---
 class: middle, center, inverse
 
@@ -2113,6 +2126,17 @@ knitr::include_graphics("imgs/workflow_failure_log.png")
 ```
 
 ]
+
+---
+
+class: middle, center, inverse
+
+## Exercise 2: Troubleshooting a GitHub Action
+
+### Let's play with a GitHub Actions workflow!
+
+[__Click here to open the exercise!__](https://pedrohbraga.github.io/IntroGitHubActions-Workshop/exercises/IntroGitHubActions_exercise_2.html)
+
 
 ---
 class: middle, center, inverse
