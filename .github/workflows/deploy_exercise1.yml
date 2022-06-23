@@ -4,8 +4,7 @@ on:
        - main
      paths:
        - exercises/**
-       -.github/workflows/deploy_exercise1.yml
-
+       - .github/workflows/deploy_exercise1.yml
 
 name: render-exercise01
 
