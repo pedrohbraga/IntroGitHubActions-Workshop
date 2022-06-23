@@ -289,7 +289,7 @@ class: middle, center, inverse
 ---
 class: center, middle, inverse
 
-## Break 
+## Break
 # ☕ 🥐
 
 ---
@@ -468,7 +468,7 @@ from PagerDuty
 ]
 
 ---
-### .center[Integration _versus_ Delivery _versus_ Deployment] 
+### .center[Integration _versus_ Delivery _versus_ Deployment]
 
 .center[
 ![](imgs/ci_cd_cd.png)
@@ -623,6 +623,12 @@ class: center, middle
 Changing data collected in the second season in the field and automatically updating documents and analyses;
 Automated literature mining ?;
 Automated website and presentation generation?
+
+---
+class: center, middle, inverse
+
+## Break
+# ☕ 🥐
 
 ---
 
@@ -1647,7 +1653,7 @@ __Artifacts__ are temporary files (or several files) generated during a workflow
 
 You can __share__ artifacts between jobs within a workflow, by:
 - Uploading artifacts **using** `actions/upload-artifact`
-- Downloading artifacts **using** `actions/download-artifact` 
+- Downloading artifacts **using** `actions/download-artifact`
 
 By default, GitHub stores build logs and artifacts for 90 days (customizable).
 ]
@@ -1912,14 +1918,168 @@ class: middle, center, inverse
 
 
 ---
-class: middle, center, inverse
-## Exercise 2: Using, breaking and repairing a GitHub Action
 
-[__Click here to open the exercise!__](https://pedrohbraga.github.io/IntroGitHubActions-Workshop/exercises/Exercise1.html#1)
+class: middle, center, inverse
+
+## Exercise 2: Troubleshooting a GitHub Action
+
+### Let's play with a GitHub Actions workflow!
+
+[__Click here to open the exercise!__](https://pedrohbraga.github.io/IntroGitHubActions-Workshop/exercises/IntroGitHubActions_exercise_2.html)
+
+---
+class: middle, center, inverse
+
+# Troubleshooting tips
 
 ---
 
-# References
+## Common errors and how to fix them
+
+.pull-left[
+As with any programming, you will encounter errors as you set up and edit your workflows - and that's ok!
+
+We have some tips of where to look if you have an Action that is failing.
+]
+
+.pull-right[
+&lt;img src="imgs/workflow_errors_example.png" width="2749" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Common errors and how to fix them
+### Syntax errors
+
+.pull-left[
+
+In YAML, indentation and spacing _really_ matters.
+
+If you're missing a space or have an extra space somewhere, Actions will let you know.
+
+]
+
+.pull-right[
+&lt;img src="imgs/workflow_error_syntax.png" width="3768" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Common errors and how to fix them
+### `Process completed with exit code 1.`
+
+.pull-left[
+
+1. Which step of the Actions workflow is failing?
+
+We are having trouble rendering the RMarkdown document.
+
+]
+
+.pull-right[
+
+&lt;img src="imgs/workflow_failure_step.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+## Common errors and how to fix them
+### `Process completed with exit code 1.`
+
+.pull-left[
+
+First, try rendering it on your local computer to see if any errors are flagged in the RMarkdown document (or running your R script, building your website, etc.).
+
+If it renders correctly, you know an R coding error is not the problem.
+
+
+```r
+rmarkdown::render("problematic_file_here.Rmd")
+```
+
+]
+
+.pull-right[
+
+&lt;img src="imgs/workflow_failure_step.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+## Common errors and how to fix them
+### `Process completed with exit code 1.`
+
+.pull-left[
+
+1. Which step of the Actions workflow is failing?
+2. Check the error log.
+
+]
+
+.pull-right[
+
+&lt;img src="imgs/workflow_failure_log.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+## Common errors and how to fix them
+### `Process completed with exit code 1.`
+
+.pull-left[
+
+1. Which step of the Actions workflow is failing?
+2. Check the error log.
+3. Check the R version! Set it to the `latest` version.
+
+]
+
+.pull-right[
+
+
+```r
+- name: 💻 Setup R
+        uses: r-lib/actions/setup-r@v1
+        with:
+*          r-version: latest 
+```
+
+
+]
+
+---
+
+# Common errors and how to fix them
+### `Process completed with exit code 1.`
+
+.pull-left[
+1. Which step of the Actions workflow is failing?
+2. Check the error log.
+3. Check the R version! Set it to the `latest` version.
+
+Still getting an error?
+
+4. Check that all of the R packages used in your files are being installed in your workflow (or in the document itself).
+]
+
+.pull-right[
+
+
+```r
+- name: 💻 Install R packages and dependencies if needed (simplified)
+        run: |
+*          Rscript -e 'install.packages(c("rmarkdown", "bookdown", "rmdformats", "tidyr", "dplyr", "ggplot2", "knitr"))'
+```
+
+]
+
+---
+class: middle, center, inverse
+
+Thank you!
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
