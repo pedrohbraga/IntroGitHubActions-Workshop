@@ -1990,7 +1990,7 @@ knitr::include_graphics("imgs/workflow_errors_example.png")
 ## Common errors and how to fix them
 ### Syntax errors
 
-.pull-left[
+.pull-left-35[
 
 In YAML, indentation and spacing _really_ matters.
 
@@ -1998,7 +1998,7 @@ If you're missing a space or have an extra space somewhere, Actions will let you
 
 ]
 
-.pull-right[
+.pull-right-65[
 ```{r, echo = FALSE, eval = TRUE, fig.align='center'}
 knitr::include_graphics("imgs/workflow_error_syntax.png")
 ```
@@ -2007,7 +2007,7 @@ knitr::include_graphics("imgs/workflow_error_syntax.png")
 ---
 
 ## Common errors and how to fix them
-### `Process completed with exit code 1.`
+**.center[.font110[`Process completed with exit code 1.`]]**
 
 .pull-left[
 
@@ -2028,7 +2028,7 @@ knitr::include_graphics("imgs/workflow_failure_step.png")
 ---
 
 ## Common errors and how to fix them
-### `Process completed with exit code 1.`
+**.center[.font110[`Process completed with exit code 1.`]]**
 
 .pull-left[
 
@@ -2053,7 +2053,7 @@ knitr::include_graphics("imgs/workflow_failure_step.png")
 ---
 
 ## Common errors and how to fix them
-### `Process completed with exit code 1.`
+**.center[.font110[`Process completed with exit code 1.`]]**
 
 .pull-left[
 
@@ -2073,13 +2073,13 @@ knitr::include_graphics("imgs/workflow_failure_log.png")
 ---
 
 ## Common errors and how to fix them
-### `Process completed with exit code 1.`
+**.center[.font110[`Process completed with exit code 1.`]]**
 
 .pull-left[
 
 1. Which step of the Actions workflow is failing?
 2. Check the error log.
-3. Check the R version! Set it to the `latest` version.
+3. Check the R version! Set it to the `latest` version (or to the version that works best for you).
 
 ]
 
@@ -2098,14 +2098,14 @@ knitr::include_graphics("imgs/workflow_failure_log.png")
 ---
 
 # Common errors and how to fix them
-### `Process completed with exit code 1.`
+**.center[.font110[`Process completed with exit code 1.`]]**
 
 .pull-left[
 1. Which step of the Actions workflow is failing?
 2. Check the error log.
 3. Check the R version! Set it to the `latest` version.
 
-Still getting an error?
+  .onfire[Still getting an error?]
 
 4. Check that all of the R packages used in your files are being installed in your workflow (or in the document itself).
 ]
@@ -2123,4 +2123,4 @@ Still getting an error?
 ---
 class: middle, center, inverse
 
-Thank you!
+## Thank you!
