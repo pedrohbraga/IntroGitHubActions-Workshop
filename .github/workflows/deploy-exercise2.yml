@@ -4,7 +4,9 @@ on:
        - main
      paths:
        - exercises/**
-       - .github/workflows/deploy_exercise2.yml
+       - '.github/workflows/deploy_exercise2.yml' 
+  schedule:
+       - cron: '0 0 * * *'
        
 name: render-exercise02
 
@@ -14,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: exercises/    
+        working-directory: exercises
     env:
       GITHUB_PAT: ${{ secrets.ACCESS_TOKEN }}
       ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
