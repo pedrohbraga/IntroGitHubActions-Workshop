@@ -12,8 +12,17 @@ output:
 ---
 
 ```{r setup, include = FALSE}
+install.packages(knitr)
+install.packages(rmdformats)
+install.packages(dplyr)
+install.packages(tidyr)
+install.packages(ggplot2)
+
 library(knitr)
 library(rmdformats)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
 
 ## Global options
 options(max.print = "75")
