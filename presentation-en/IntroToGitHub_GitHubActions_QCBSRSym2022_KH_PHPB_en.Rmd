@@ -505,8 +505,11 @@ from PagerDuty
 ]
 
 ---
-# 
+### .center[Integration _versus_ Delivery _versus_ Deployment] 
 
+.center[
+![](imgs/ci_cd_cd.png)
+]
 
 ---
 class: middle
@@ -612,7 +615,7 @@ class: middle
 ---
 class: middle
 
-### Example 4: Between projects content updates
+### Example 4: Between-project content updates
 
 .pull-left[
 [![templateWorkshops](https://socialify.git.ci/QCBSRworkshops/templateWorkshops/image?description=1&descriptionEditable=Presentation%20and%20book%20templates%20for%20the%20QCBS%20R%20Workshop%20Series%20&forks=1&issues=1&name=1&owner=1&pattern=Solid&stargazers=1&theme=Light)](https://r.qcbs.ca/)
@@ -650,7 +653,7 @@ class: middle
 
 class: center, middle
 
-## What are some examples of some research tasks you would like to automate?
+## What are some examples of some research tasks you think you could automate?
 
 ???
 
@@ -663,7 +666,6 @@ Automated website and presentation generation?
 class: center, middle, inverse
 
 # GitHub Actions: Workflows
-
 
 ---
 
@@ -1947,4 +1949,4 @@ class: middle, center, inverse
 
 ---
 
-References
+# References
