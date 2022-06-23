@@ -1,6 +1,6 @@
 ---
 title: "Exercise #2"
-subtitle: "Introduction to GitHub and GitHub Actions"
+subtitle: "Introduction to GitHub and GitHub Actions!"
 date: "`r Sys.Date()`"
 output:
   rmdformats::downcute:
