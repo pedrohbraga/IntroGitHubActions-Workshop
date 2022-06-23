@@ -1,6 +1,6 @@
 # Workshop: Introduction to GitHub and GitHub Actions
 
-[![badge](https://img.shields.io/static/v1?style=for-the-badge&label=Presentation&message=View&color=BF616A)](https://pedrohbraga.github.io/IntroGitHubActions-Workshop/presentation-en/IntroToGitHub_GitHubActions_QCBSRSym2022_KH_PHPB_en.html#1) [![badge](https://img.shields.io/static/v1?style=for-the-badge&label=Exercise&message=01&color=B48EAD)](https://pedrohbraga.github.io/IntroGitHubActions-Workshop/exercises/Exercise1.html#1) [![badge](https://img.shields.io/static/v1?style=for-the-badge&label=Exercise&message=02&color=B48EAD)](https://pedrohbraga.github.io/IntroGitHubActions-Workshop/exercises/Exercise1.html#1)
+[![badge](https://img.shields.io/static/v1?style=for-the-badge&label=Presentation&message=Open&color=BF616A)](https://pedrohbraga.github.io/IntroGitHubActions-Workshop/presentation-en/IntroToGitHub_GitHubActions_QCBSRSym2022_KH_PHPB_en.html#1) [![badge](https://img.shields.io/static/v1?style=for-the-badge&label=Exercise&message=01&color=B48EAD)](https://pedrohbraga.github.io/IntroGitHubActions-Workshop/exercises/Exercise1.html#1) [![badge](https://img.shields.io/static/v1?style=for-the-badge&label=Exercise&message=02&color=8FBCBB)](https://pedrohbraga.github.io/IntroGitHubActions-Workshop/exercises/IntroGitHubActions_exercise_2.html)
 
 Collaborations are rarely static: when people work on projects together, it is a continuously developing process of contributing ideas, giving and getting feedback, and addressing this feedback with changes until a goal is achieved. These steps often overlap, with collaborators simultaneously changing files in the project. This dynamic makes it very challenging (and very confusing!) to work on documents that are passed around the group, with versions of changes being tracked by updating file names with initials, dates or “`document_final_version_number_23123`”. This is where GitHub comes in!
 
@@ -16,4 +16,8 @@ Dans cet atelier, nous allons démontrer et discuter comment GitHub - une platef
 
 Contributed by / Elaboré par Pedro Henrique P. Braga (Concordia University) & Katherine Hébert (Université de Sherbrooke)
 
-[![render-presentation-en](https://github.com/pedrohbraga/IntroGitHubActions-Workshop/actions/workflows/deploy_pres_en.yml/badge.svg)](https://github.com/pedrohbraga/IntroGitHubActions-Workshop/actions/workflows/deploy_pres_en.yml) [![render-exercise01](https://github.com/pedrohbraga/IntroGitHubActions-Workshop/actions/workflows/deploy_exercise1.yml/badge.svg)](https://github.com/pedrohbraga/IntroGitHubActions-Workshop/actions/workflows/deploy_exercise1.yml)
+## GitHub Actions workflows
+
+These are the workflows we use to render and deploy the material for this workshop:
+
+[![render-presentation-en](https://github.com/pedrohbraga/IntroGitHubActions-Workshop/actions/workflows/deploy_pres_en.yml/badge.svg)](https://github.com/pedrohbraga/IntroGitHubActions-Workshop/actions/workflows/deploy_pres_en.yml) [![render-exercise01](https://github.com/pedrohbraga/IntroGitHubActions-Workshop/actions/workflows/deploy_exercise1.yml/badge.svg)](https://github.com/pedrohbraga/IntroGitHubActions-Workshop/actions/workflows/deploy_exercise1.yml) [![render-exercise02](https://github.com/pedrohbraga/IntroGitHubActions-Workshop/actions/workflows/deploy-exercise2.yml/badge.svg)](https://github.com/pedrohbraga/IntroGitHubActions-Workshop/actions/workflows/deploy-exercise2.yml)
