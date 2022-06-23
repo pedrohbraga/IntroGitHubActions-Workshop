@@ -2097,7 +2097,7 @@ knitr::include_graphics("imgs/workflow_failure_log.png")
 
 ---
 
-# Common errors and how to fix them
+## Common errors and how to fix them
 **.center[.font110[`Process completed with exit code 1.`]]**
 
 .pull-left[
