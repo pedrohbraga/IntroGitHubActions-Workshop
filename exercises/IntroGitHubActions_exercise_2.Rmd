@@ -14,17 +14,20 @@ output:
 ```{r setup, include = FALSE}
 library(knitr)
 library(rmdformats)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
 
 ## Global options
 options(max.print = "75")
 opts_chunk$set(echo = FALSE,
-	             cache = TRUE,
+               cache = TRUE,
                prompt = FALSE,
                tidy = TRUE,
                comment = NA,
                message = FALSE,
                warning = FALSE)
-opts_knit$set(width=75)
+opts_knit$set(width = 75)
 ```
 
 ###### tags: `Github` `Ecology` `Evolution` `Additional resources` `GitHub Actions`
@@ -84,20 +87,21 @@ library(ggplot2)
 penguins <- read.csv("data/palmerpenguins_dataset.csv")
 
 ggplot(data = penguins, 
-                       aes(x = flipper_length_mm,
-                           y = body_mass_g,
-                           group = species,
-                           colour = species)) +
+       aes(x = flipper_length_mm,
+           y = body_mass_g,
+           group = species,
+           colour = species)) +
   geom_point(aes(shape = species),
              size = 2,
              alpha = 0.2) +
   geom_smooth(method = "lm",
               se = FALSE) +
   theme_minimal() +
-  scale_color_manual(values = c("darkorange",
-                                "purple",
-                                "cyan4")
-                     ) +
+  scale_color_manual(
+    values = c("darkorange",
+               "purple",
+               "cyan4")
+  ) +
   labs(title = "Penguin size, Palmer Station LTER",
        subtitle = "Flipper length and body mass for Adelie, Chinstrap and Gentoo Penguins",
        x = "Flipper length (mm)",
@@ -107,7 +111,7 @@ ggplot(data = penguins,
   theme_minimal()
 ```
 
-##### Information on this dataset
+#### Information on this dataset
 
 This very simple exercise uses a subset of the `palmerpenguins` `R` dataset. Original data comes from Dr. Kristen Gorman and the Palmer Station, Antarctica LTER, a member of the Long Term Ecological Research Network.
 

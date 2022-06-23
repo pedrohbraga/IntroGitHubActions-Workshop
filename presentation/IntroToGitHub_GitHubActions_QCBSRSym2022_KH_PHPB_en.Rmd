@@ -1,9 +1,9 @@
 ---
 title: "Introduction to GitHub and GitHub Actions"
 subtitle:
-author: '<b>Pedro Henrique P. Braga</b> (Concordia University) <br><b>Katherine Hébert</b> (Université de Sherbrooke)<br><br>'
+author: '<b>Katherine Hébert</b> (Université de Sherbrooke)<br><b>Pedro Henrique P. Braga</b> (Concordia University)<br><br>'
 institute: "4th QCBS R Symposium<br>QCBS R Workshop Series <br>"
-date: "`r Sys.Date()`<br> <span class=footnote> Use arrow keys to navigate. Press `H` for help. </span>"
+date: "`r Sys.Date()`"
 output:
   xaringan::moon_reader:
     css: ["default",  "css/phpb-fonts.css", "css/phpb-theme.css"]
@@ -32,9 +32,7 @@ knitr::opts_chunk$set(
 )
 
 
-required.libraries <- c("ggplot2", "plotly", "RColorBrewer", # for visualisation
-                        "devtools", "reticulate", "png", "knitr", "JuliaCall", "here"
-)
+required.libraries <- c("devtools", "knitr", "here")
 
 needed.libraries <- required.libraries[!(required.libraries %in%
                                            installed.packages()[ ,"Package"])]
@@ -47,11 +45,8 @@ lapply(required.libraries, library, character.only = TRUE, quietly = TRUE)
 
 # Include packages to be loaded below here:
 library(knitr)    # For knitting document and include_graphics function
-library(ggplot2)  # For plotting
-library(JuliaCall)
-library(reticulate)
-library(ggplot2)
-library(png)      # For grabbing the dimensions of png files
+library(devtools)
+library(here)
 ```
 
 class: middle
@@ -67,9 +62,39 @@ class: middle
 ### b. How can my research benefit from GitHub Actions?
 
 ---
+class: middle, center
+
+![IntroGitHubActions-Workshop](https://socialify.git.ci/pedrohbraga/IntroGitHubActions-Workshop/image?owner=1&theme=Light)
+
+---
 class: center, middle, inverse
 
 # What is GitHub and why should I use it?
+
+---
+
+.pull-left-65[
+
+### How GitHub works (in a nutshell)
+
+__GitHub__ is a web-platform for hosting and collaborating on __Git__ repositories.
+
+Git is a __version-control system__ that _tracks changes_ made to documents hosted in your local computer, and apply them to the same documents hosted in a _repository_ on GitHub.
+
+Git also allows you to __pull__ any changes that have been made on the GitHub _remote_ repository to the documents on your local computer.
+
+_More on these terms soon!_
+
+]
+
+.pull-right-35[
+
+.center[
+![](imgs/ad_hoc_versioning.png)
+
+![](imgs/git_versioning.png)
+]
+]
 
 ---
 ### A brief introduction to GitHub
@@ -85,6 +110,8 @@ GitHub keeps tracks of _changes_, allowing you to flip between versions.
 
 A public repository shows the complete history of contributions to your project, and opens access to your code or documents for use by others (tip: choose a [license](https://choosealicense.com/)).
 ]
+
+--
 
 .pull-right[
 #### Collaborative Workflow
@@ -103,13 +130,17 @@ Actions can also protect your project, by ensuring that changes are only integra
 ---
 class: center, middle
 
-## Q: How can GitHub make research more open and collaborative?
+## _Q_: How can GitHub make research more open and collaborative?
 
 GitHub is becoming popular among researchers in biodiversity but it is still not widely adopted.
 
 Why do you think it is not widely adopted in biodiversity research? <br>
 What are some obstacles to using GitHub? <br>
 What are some reasons you want to learn it, or would recommend it to others? <br>
+
+???
+
+Reluctance? Time constraints? Complexity? Lack of training?
 
 ---
 class: center, middle, inverse
@@ -183,8 +214,6 @@ You can also _clone_ a repository from GitHub to your local computer, which stay
 ```{r, echo = FALSE, eval = TRUE, out.width="75%"}
 knitr::include_graphics("imgs/github_workflow/1.png")
 ```
-
-
 
 ---
 ### Step 2: Pull the _remote_ repository to your local computer.
@@ -280,7 +309,7 @@ knitr::include_graphics("imgs/github_workflow/10.png")
 ```
 
 ---
-## .font80[Step 4: Merge the branch into the remote repository]
+### Step 4: Merge the branch into the remote repository
 
 ```{r, echo = FALSE, eval = TRUE, out.width="75%"}
 knitr::include_graphics("imgs/github_workflow/11.png")
@@ -293,6 +322,12 @@ class: middle, center, inverse
 ### Let's make a GitHub repository that we will use to play with GitHub Actions later in this workshop!
 
 [__Click here to open the exercise!__](https://pedrohbraga.github.io/IntroGitHubActions-Workshop/exercises/Exercise1.html#1)
+
+---
+class: center, middle, inverse
+
+## Break
+# ☕ 🥐
 
 ---
 class: center, middle, inverse
@@ -321,14 +356,12 @@ This process is rarely done just once in a project's lifetime: we add and remove
 ]
 
 ---
-
----
 class: middle
 
 ## Errors can be costly.
 
 .pull-left[
-.font90[
+.font80[
 Humans, even diligent, meticulous and highly trained professionals, make mistakes.
 
 Unsurprisingly, errors increase with lines of code [_e.g._, 15 to 50 errors to 1000 from professional software engineers; McConnell, 2044].
@@ -363,7 +396,9 @@ Practical recommendations:
 ]
 
 .pull-right[
+.center[
 ![%](https://azevedorafaela.files.wordpress.com/2018/04/fire-your-qa-team-blog-post-3.png)
+]
 ]
 
 ???
@@ -411,9 +446,7 @@ In 2013, only 30% of researchers using SDMs reported that they used particular s
   - **ninja**
 ]
 
-
-.footnote[.tiny[Metaphor from fields in organizational development; _e.g._ [Lee & Choi, 2003](doi.org/10.1080/07421222.2003.11045756)]]
-
+.footnote[.small[Metaphor from fields in organizational development; _e.g._ [Lee & Choi, 2003](doi.org/10.1080/07421222.2003.11045756)]]
 
 ---
 ### A structured computing workflow can help with reproducibility.
@@ -458,17 +491,25 @@ Data + Code + Metadata → VCS → Analysis → Report/Manuscript → Submission
 
 ### Adopting automated research workflows in ecology and evolution
 
+.pull-left[
 **Continuous integration (CI)** is a software development practice in which small adjustments to code are tested every time modifications happen or at user-specified times.
 
-_Include diagram_
-<br>
+CI decreases integration problems, ensures rapid feedback, increases software quality, and improves developer productivity (Vasilescu _et al_., 2015; Stahl _et al_., 2019; Rossi _et al_. 2016; Hilton _et al_. 2016).
+]
 
-<br>
-<br>
-<br>
+.pull-right[
+.center[
+![](https://www.pagerduty.com/wp-content/uploads/2020/01/continuous-integration-2.png)
+from PagerDuty
+]
+]
 
-CI decreases integration problems, ensures
-rapid feedback, increases software quality, and improves developer productivity (Vasilescu _et al_., 2015; Stahl _et al_., 2019; Rossi _et al_. 2016; Hilton _et al_. 2016).
+---
+### .center[Integration _versus_ Delivery _versus_ Deployment]
+
+.center[
+![](imgs/ci_cd_cd.png)
+]
 
 ---
 class: middle
@@ -574,7 +615,7 @@ class: middle
 ---
 class: middle
 
-### Example 3: Automated website content update
+### Example 4: Between-project content updates
 
 .pull-left[
 [![templateWorkshops](https://socialify.git.ci/QCBSRworkshops/templateWorkshops/image?description=1&descriptionEditable=Presentation%20and%20book%20templates%20for%20the%20QCBS%20R%20Workshop%20Series%20&forks=1&issues=1&name=1&owner=1&pattern=Solid&stargazers=1&theme=Light)](https://r.qcbs.ca/)
@@ -612,7 +653,7 @@ class: middle
 
 class: center, middle
 
-## What are some examples of some research tasks you would like to automate?
+## What are some examples of some research tasks you think you could automate?
 
 ???
 
@@ -632,7 +673,6 @@ class: center, middle, inverse
 
 # GitHub Actions: Workflows
 
-
 ---
 
 ## Workflows are written in __YAML__.
@@ -640,7 +680,9 @@ class: center, middle, inverse
 .pull-left[
 To make a workflow, you write a __YAML__ file that is stored in your repository, in a directory called `.github/workflows`.
 
-YAML (originally, **y**et **a**nother **m**arkup **l**anguage) is a human-readable programming language. It is important to remember that _indentation matters_ in YAML!
+YAML (originally, **y**et **a**nother **m**arkup **l**anguage) is a human-readable programming language.
+
+It is important to remember that _indentation matters_ in YAML!
 
 ]
 
@@ -730,7 +772,7 @@ Workflows run when they are __triggered__ by an event.
 To trigger a workflow, you can:
 
 - __Manually__ start the workflow
-- Define triggers `on` __events__ in your repository (e.g. _pushes_ to your `main` repository branch, a _pull request_, a new _issue_, etc.)
+- Define triggers `on` __events__ in your repository (_e.g._, _pushes_ to your `main` repository branch, a _pull request_, a new _issue_)
 - Set a __schedule__ to regularly trigger the workflow.
 
 ]
@@ -817,9 +859,11 @@ jobs:
 .pull-left[
 A workflow is an automated process that runs one or more __jobs__.
 
-Jobs include one or more _steps_ to achieve some objective (checking code, producing a document, etc.).
+Jobs include one or more _steps_ to achieve an objective (checking code, producing a document, etc.).
 
-Jobs can run sequentially or in parallel. Here, we specify that our second job `needs: presentation-en-job` to make the jobs run sequentially. More on this later!
+Jobs can run sequentially or in parallel.
+
+Here, we specify that our second job `needs: presentation-en-job` to sequentially run the jobs. _More on this later!_
 
 ]
 
@@ -909,11 +953,103 @@ name: render-presentation-en
 ## Jobs are run by __runners__.
 
 .pull-left[
-A _runner_ is a server that runs your workflows in a __*fresh* virtual machine__ each time it is triggered.
+A _runner_ is a server that runs your workflows (<= 31 days) in a __*fresh* virtual machine__ (VM) each time it is triggered.
 
-Each runner runs one job at a time.
+Each runner runs one job at a time (<= 6h).
 
-GitHub offers __Ubuntu Linux, Microsoft Windows, and macOS__ runners. This means you can test your scripts and documents on different systems, to ensure your files work the same for everyone else!
+GitHub offers VM with the latest __Ubuntu Linux, Microsoft Windows__, and __macOS__ distributions. This means you can test your scripts and documents on different systems and ensure your processes work cross-platforms!
+
+Win/Linux: 2-core CPU, 7 GB RAM, 14 GB SSD
+macOS: 3-core CPU, 14 GB RAM, 14 GB SSD
+
+]
+
+.pull-right[
+.scroll-box-20[
+```{r, eval = FALSE}
+on:
+  push:
+     branches:
+       - main
+
+name: render-presentation-en
+
+jobs:
+  presentation-en-job:
+    name: Render the presentation for this workshop
+{{   runs-on: ubuntu-latest}}
+    defaults:
+      run:
+        working-directory: presentation/
+    env:
+      GITHUB_PAT: ${{ secrets.ACCESS_TOKEN }}
+      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+
+    steps:
+      - name: 🛎️ Checkout repository
+        uses: actions/checkout@v2
+
+      - name: 💻 Setup R
+        uses: r-lib/actions/setup-r@v1
+        with:
+          r-version: latest
+
+       - name: 💻 Install R packages and dependencies if needed
+        run: |
+          Rscript -e 'install.packages("palmerpenguins", dependencies = TRUE)'
+
+        - name: 🧶 Render presentation
+        run: Rscript -e 'rmarkdown::render("IntroToGitHub_GitHubActions_QCBSRSym2022_KH_PHPB_en.Rmd")'
+
+        - name: 🔺 Upload artifact containing the presentation
+        uses: actions/upload-artifact@v3
+        with:
+          name: presentation-en
+          path: presentation
+
+  checkout-and-deploy:
+   name: Checkout and deploy the presentation within the gh-pages repository
+{{   runs-on: ubuntu-latest}}
+   needs: presentation-en-job
+
+   steps:
+      - name: 🛎️ Checkout again
+        uses: actions/checkout@v2.3.1 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
+        with:
+          persist-credentials: false
+
+     - name: 🔻 Download artifact containing the presentation
+        uses: actions/download-artifact@v1
+        with:
+         # Artifact name
+         name: presentation-en # optional
+         # Destination path
+         path: presentation/ # optional
+
+      - name: 💎 Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          token: ${{ secrets.ACCESS_TOKEN }}
+          branch: gh-pages # The branch the action should deploy to.
+          folder: presentation/
+          target-folder: presentation-en # The folder the action should deploy
+          clean: true
+```
+
+]
+]
+
+
+---
+
+## Jobs are run by __runners__.
+
+.pull-left[
+**What if GitHub-hosted runners are too limiting for my purposes?**
+
+No problem!
+
+You can install GitHub's REST API in your preferred machine (cloud-based, institutional or own server), assign it to your repository, and use GitHub Actions with fewer usage limitations.
 
 ]
 
@@ -996,9 +1132,11 @@ jobs:
 ## __Jobs__ run in a working directory
 
 .pull-left[
-Each job is run in a specific __working directory__.
+Jobs can run in specific __working directories__.
 
 Here, our __working directory__ is the `presentation` folder in our repository, where we are storing the RMarkdown document that generates this presentation.
+
+When you do not specify a working directory, the job runs in the root of your repository.
 
 ]
 
@@ -1085,7 +1223,7 @@ Environment variables store information that can be referenced in a step of your
 
 Here, we have two environment variables, which are both __encrypted tokens__ that give the workflow permission to access and write files in our repository.
 
-You could set API keys as environment variables in a workflow that routinely pulls a dataset using an API, for example.
+You could set API _credentials_ as environment variables in a workflow that routinely pulls a data set using an API, for example.
 
 _More on environment variables on [GitHub Docs](https://docs.github.com/en/actions/learn-github-actions/environment-variables)._
 ]
@@ -1171,7 +1309,7 @@ jobs:
 .pull-left[
 You usually need to combine several _steps_ to complete a job.
 
-A step can run a _script_ that you write or can run an _action_.
+A step can **run** a _script_ that you write or can **use** an existing _action_ to achieve an objective.
 ]
 
 .pull-right[
@@ -1324,7 +1462,7 @@ knitr::include_graphics("imgs/rlib_actions.png")
 
 ---
 
-## __GitHub Actions__: checkout
+## __GitHub Actions__: `actions/checkout`
 
 .pull-left[For example, the first step in our workflow is to __checkout the repository__. To do this, we `use` the [checkout](https://github.com/actions/checkout) action.
 
@@ -1392,7 +1530,7 @@ This action takes care of checking out your repository under `$GITHUB_WORKSPACE`
 
 ---
 
-## __GitHub Actions__: Set up R
+## __GitHub Actions__: Set up `R`
 
 .pull-left[
 
@@ -1473,6 +1611,10 @@ For simpler tasks, you can run __R code__ directly in your workflow using this s
 ```{r, eval = FALSE}
 Rscript -e 'code here'
 ```
+`-e` stands for R "expression".
+
+You can also run a file containing `R` code (`.R` extension) by omitting the `-e` and providing its directory.
+
 
 ]
 
@@ -1538,15 +1680,13 @@ Rscript -e 'code here'
 ## __GitHub Actions__: Artifacts
 
 .pull-left[
+__Artifacts__ are temporary files (or several files) generated during a workflow run, that persist after a job has completed.
 
-__Artifacts__ are temporary files (or several files) generated during a workflow run.
+You can __share__ artifacts between jobs within a workflow, by:
+- Uploading artifacts **using** `actions/upload-artifact`
+- Downloading artifacts **using** `actions/download-artifact`
 
-You can __share__ artifacts between jobs within a workflow.
-
-For example, you can build an output, save the artifact, and pass it into a job that tests it.
-
-GitHub stores workflow artifacts for __90 days__ by default.
-
+By default, GitHub stores build logs and artifacts for 90 days (customizable).
 ]
 
 .pull-right[
@@ -1977,8 +2117,3 @@ Still getting an error?
 class: middle, center, inverse
 
 Thank you!
-
-
----
-
-References
