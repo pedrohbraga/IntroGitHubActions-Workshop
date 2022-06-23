@@ -326,12 +326,6 @@ class: middle, center, inverse
 ---
 class: center, middle, inverse
 
-## Break
-# ☕ 🥐
-
----
-class: center, middle, inverse
-
 # Part 2: Introduction to **GitHub Actions**
 
 ---
