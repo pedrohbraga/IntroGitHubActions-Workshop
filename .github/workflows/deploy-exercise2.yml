@@ -2,8 +2,9 @@ on:
   push:
      branches:
        - main
-     path:
-       - exercises/
+     paths:
+       - exercises/**
+       - .github/workflows/deploy_exercise2.yml
        
 name: render-exercise02
 
@@ -25,13 +26,17 @@ jobs:
       - name: 💻 Setup R
         uses: r-lib/actions/setup-r@v1
         with:
-          r-version: 4.0.3
+          r-version: latest
         
       - name: 💾 Cache R packages
         uses: actions/cache@v2
         with:
           path: ${{ env.R_LIBS_USER }}
           key:  r-${{ hashFiles('DESCRIPTION') }}
+
+      - name: Install cURL Headers, UNITS, SSL, SSH2, PQ, 1g, Units, Magick, snapd
+        run: |
+          sudo apt-get install -y libssl-dev libcurl4-openssl-dev zlib1g-dev libproj-dev libgdal-dev gdal-bin libssh2-1-dev libpq-dev libudunits2-0 libudunits2-dev libmagick++-dev snapd
 
       - name: 💻 Install pandoc and pandoc citeproc
         uses: r-lib/actions/setup-pandoc@v1

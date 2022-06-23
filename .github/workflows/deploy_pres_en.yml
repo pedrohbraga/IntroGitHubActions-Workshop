@@ -3,7 +3,8 @@ on:
      branches:
        - main
      path:
-       - presentation/
+       - presentation/**
+       - .github/workflows/deploy_pres_en.yml
 
 name: render-presentation-en
 
