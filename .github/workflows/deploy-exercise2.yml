@@ -4,7 +4,7 @@ on:
        - main
      paths:
        - exercises/**
-       - '.github/workflows/deploy_exercise2.yml' 
+      - '.github/workflows/deploy_exercise2.yml' 
   schedule:
        - cron: '0 0 * * *'
        
@@ -18,8 +18,8 @@ jobs:
       run:
         working-directory: exercises
     env:
-      GITHUB_PAT: ${{ secrets.ACCESS_TOKEN }}
-      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      GITHUB_POT: ${{ secrets.ACCESS_TOKEN }}
+      ACCESS_TAKEN: ${{ secrets.ACCESS_TOKEN }}
         
     steps:
       - name: 🛎️ Checkout repository
@@ -63,9 +63,9 @@ jobs:
         run: Rscript -e 'rmarkdown::render("IntroGitHubActions_exercise_2.Rmd")'
 
       - name: 🔺 Upload artifact containing the report
-        uses: actions/upload-artifact@v1
+        run: actions/upload-artifact@v1
         with:
-          name: exercise02
+          name: exercise01
           path: exercises/  # uploads any file with this prefix in the root directory
   
 # Requires the creation of an empty gh-pages branch
