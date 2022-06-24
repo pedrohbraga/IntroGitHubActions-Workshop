@@ -1,7 +1,7 @@
 ---
 title: "Exercise #2"
 subtitle: "Introduction to GitHub and GitHub Actions!"
-date: "`r Sys.Date()`"
+date: "`r Sys.time()`"
 output:
   rmdformats::downcute:
     self_contained: true
